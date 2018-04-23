@@ -1,8 +1,7 @@
 console.log('got to controller users.js');
 
 var mongoose = require('mongoose');
-var User = mongoose.model('User'),
-    bodyParser = require('body-parser')
+var User = mongoose.model('User');
 // var multer = require('multer'),
 //     storage = multer.diskStorage({
 //     destination: function(req, file, cb){
@@ -34,16 +33,20 @@ module.exports = {
       res.status(200).json(user);
 },
   replaceUser: async(req, res, next) => {
+    //enforce that req.body must contain all the fields
     const userId = req.params.userId;
     const newUser = req.body;
     console.log('userId is: ', userId);
     console.log('newUser is: ', newUser);
-
-   const result = await User.findByIdAndUpdate(userId, newUser);
-   console.log('result: ', result);
-   res.status(200).json({success: true , result})
+    const result = await User.findByIdAndUpdate(userId, newUser);
+    console.log('result: ', result);
+    res.status(200).json({success: true , result})
 },
   updateUser: async(req, res, next) => {
-
+    // req.body may contain any number of fields
+    const userId = req.params.userId;
+    const newUser = req.body;
+    const result = await User.findByIdAndUpdate(userId, newUser);
+    res.status(200).json({success: true , result})
 },
 }
