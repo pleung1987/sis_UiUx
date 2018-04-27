@@ -45,12 +45,13 @@ module.exports = {
     },
     show: function(req, res){
         console.log('Visit Id retrieved: ', req.params.id);
-        Visit.findOne({_id: req.params.id}, function(err, result) {
+        Visit.findOne({_id: req.params.id})
+        .populate('_visitor')
+        .exec( function(err, result) {
             if(err){
                 res.json({message: "Error happened", error: err});
             } else {
                 console.log("single Visit retrieved:", result);
-               
                 res.json({message:"Success", result: result}); 
             }
         })
@@ -59,14 +60,8 @@ module.exports = {
         // console.log('req.file:', req.file)
         const newUser = new User({
             _id: new mongoose.Types.ObjectId(),
-            byte_stream: req.body.byte_stream,
-            first_name: req.body.first_name,
-            last_name: req.body.last_name,
-            gender: req.body.gender,
-            comment: req.body.comment,
+            byte_stream: req.body.byte_stream
             // image: req.file.path,
-            telephone: req.body.telephone,
-            email: req.body.email
         }, {usePushEach: true})
         const newVisit = new Visit({
             _id: new mongoose.Types.ObjectId(),

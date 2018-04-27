@@ -10,6 +10,11 @@ const mongoose = require('mongoose'),
      
 
 module.exports = function(app){
+    app.get('/visits/:id', function(req,res){
+        console.log('got to visits/:id route');
+        visits.show(req,res)
+    });
+
     app.get('/visits', function(req,res){
         console.log('got to the /visit route');
         
@@ -20,9 +25,6 @@ module.exports = function(app){
         visits.create(req,res)
     });
     
-    app.get('visits/:Id', function(req,res){
-        console.log('got to visits/:id route');
-        visits.show(req,res)
-    });
+    
     
 };  
