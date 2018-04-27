@@ -7,7 +7,9 @@ const mongoose = require('mongoose'),
     router = require('express-promise-router')(),
 //getter -gets the model
     User = mongoose.model('User') ,
-    users = require('./../controllers/users')
+    Visit = require('../models/visit'),
+    users = require('./../controllers/users'),
+    visits = require('./../controllers/visits'),
     multer = require('multer'),
     storage = multer.diskStorage({
         destination: function(req, file, cb){
@@ -68,5 +70,6 @@ router.route('/:userId')
     .get(users.show)   
     .put(users.replaceUser)
     .patch(users.updateUser)
+
 
 module.exports = router; 

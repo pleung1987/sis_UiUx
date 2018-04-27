@@ -1,7 +1,7 @@
 var express = require('express'),
+router = express.Router(),
 bodyParser = require('body-parser'),
 mongoose = require('mongoose'),
-// router = require('express-promise-router')(),
 path = require('path'),
 port = 3000,
 logger = require('morgan')
@@ -28,6 +28,9 @@ require('./server/config/mongoose.js')
     //users routes
 const users = require('./server/config/usersRoute');
 app.use('/users', users);
+    //visit routes
+const visits = require('./server/config/visitsRoute')(app);
+// app.use('/visits', visits);
 
 // END OF ROUTING...
 

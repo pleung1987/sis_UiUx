@@ -1,12 +1,13 @@
 console.log("got to mongoose.js");
 // require mongoose
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 // require the fs module for loading model files
-var fs = require('fs');
+const fs = require('fs');
 // require path for getting the models path
-var path = require('path');
+const path = require('path');
+const mongoURI = 'mongodb://127.0.0.1/Sis_app'
 
-mongoose.connect('mongodb://127.0.0.1/Sis_app');
+mongoose.connect(mongoURI, {useMongoClient: true});
 // create a variable that points to the path where all of the models live
 
 var models_path = path.join(__dirname, './../models');

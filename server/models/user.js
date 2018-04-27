@@ -1,11 +1,13 @@
 console.log('inside user.js models');
 var mongoose = require('mongoose');
 var Email = require('mongoose-type-mail')
+var uniqueValidator = require('mongoose-unique-validator');
 var Schema = mongoose.Schema;
 
 
 var UserSchema = new mongoose.Schema({
- first_name: {type: String}, // the type of object id -> this will be count when returned back as an array at findOne
+ byte_stream: { type: Array, required:true },
+ first_name: {type: String},
  last_name:  {type: String},
  gender: {type: String},
  comment:{type: String},
@@ -19,6 +21,7 @@ var UserSchema = new mongoose.Schema({
 }, {timestamps: true});
 
 //setter-> sets the rename model
+// UserSchema.plugin(uniqueValidator, { message: 'Error, expected {PATH} to be unique.' })
 const User = mongoose.model('User', UserSchema);
 module.exports = User;
 

@@ -11,9 +11,9 @@ var visitSchema = new mongoose.Schema({
         type: Schema.Types.ObjectId,
         ref: 'camera'
     },
-    visited: { type: Date, default: Date.now}
-});
+    visited: { type: Date }
+}, { usePushEach: true });
 
-const Visit = mongoose.model('visit', visitSchema);
+const Visit = mongoose.model('Visit', visitSchema);
 
-module.exports = Visit;
+module.exports = Visit; 

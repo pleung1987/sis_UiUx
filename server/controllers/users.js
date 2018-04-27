@@ -2,6 +2,7 @@ console.log('got to controller users.js');
 
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
+
 // var multer = require('multer'),
 //     storage = multer.diskStorage({
 //     destination: function(req, file, cb){
@@ -49,4 +50,6 @@ module.exports = {
     const result = await User.findByIdAndUpdate(userId, newUser);
     res.status(200).json({success: true , result})
 },
+  
+
 }
