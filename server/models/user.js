@@ -16,9 +16,9 @@ var UserSchema = new mongoose.Schema({
  email: { type: Email, minlength: 2},
  _visits: [{
      type: Schema.Types.ObjectId, 
-     ref: 'visit'
+     ref: 'Visit',
     }]
-}, {timestamps: true});
+}, {timestamps: true}, {usePushEach: true});
 
 //setter-> sets the rename model
 // UserSchema.plugin(uniqueValidator, { message: 'Error, expected {PATH} to be unique.' })

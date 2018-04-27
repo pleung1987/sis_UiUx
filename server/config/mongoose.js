@@ -7,7 +7,7 @@ const fs = require('fs');
 const path = require('path');
 const mongoURI = 'mongodb://127.0.0.1/Sis_app'
 
-mongoose.connect(mongoURI, {useMongoClient: true});
+mongoose.connect(mongoURI);
 // create a variable that points to the path where all of the models live
 
 var models_path = path.join(__dirname, './../models');

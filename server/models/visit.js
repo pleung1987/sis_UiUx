@@ -5,11 +5,11 @@ var Schema = mongoose.Schema;
 var visitSchema = new mongoose.Schema({
     _visitor : {
         type: Schema.Types.ObjectId,
-        ref: 'user'
+        ref: 'User'
     },
     _camera: {
         type: Schema.Types.ObjectId,
-        ref: 'camera'
+        ref: 'Camera'
     },
     visited: { type: Date }
 }, { usePushEach: true });

@@ -33,7 +33,9 @@ upload = multer({
 
 module.exports = {
     getVisitor:  function(req,res) {
-       Visit.find({}, function(err,results){
+    Visit.find({})
+    .populate('_visitor')
+    .exec( function(err,results){
         if(err){
             res.json({message: "Error happened", error: err});
         } else {
@@ -41,8 +43,19 @@ module.exports = {
          }
        })
     },
-    
-    create:  function(req,res, next) {
+    show: function(req, res){
+        console.log('Visit Id retrieved: ', req.params.id);
+        Visit.findOne({_id: req.params.id}, function(err, result) {
+            if(err){
+                res.json({message: "Error happened", error: err});
+            } else {
+                console.log("single Visit retrieved:", result);
+               
+                res.json({message:"Success", result: result}); 
+            }
+        })
+    },
+    create:  function(req,res) {
         // console.log('req.file:', req.file)
         const newUser = new User({
             _id: new mongoose.Types.ObjectId(),
@@ -54,12 +67,12 @@ module.exports = {
             // image: req.file.path,
             telephone: req.body.telephone,
             email: req.body.email
-        })
+        }, {usePushEach: true})
         const newVisit = new Visit({
             _id: new mongoose.Types.ObjectId(),
             _visitor: newUser._id,
             visited: new Date()
-        });
+        }, {usePushEach: true});
        
         User.findOne({byte_stream: newUser.byte_stream}, (err,user) => {
             // console.log('finding existing user = ', user);
@@ -89,40 +102,27 @@ module.exports = {
                     })
                  
                 }else{
-                    console.log('this is the new Visit pushing in to existing User: ', newVisit);
-                    
-
-                    res.json({message:"Successfully added new visit to exisiting user: ", user})
+                    user._visits.push(newVisit._id)
+                    user.save(function(err, pushVisit){
+                        if(err){
+                            console.log('error pushing visit: ', err);
+                            res.json({message: "Error happened", error: err});
+                        }else{
+                            console.log('Successfully pushing Visit : ', pushVisit);
+                            Visit.create({_id:newVisit._id, _visitor: user._id, visited:newVisit.visited}, (err,result) =>{
+                                if(err){
+                                    console.log('error creating new visit: ', err);
+                                    res.json({message:"error creating new visit", error: err})
+                                } else{
+                                    console.log('Successfully created visit: ', result, pushVisit);
+                                    res.json({message:"Successfully created new visit: ", result, pushVisit})
+                                }
+                            })
+                        }
+                    })
                 }
             }
         })
-
-        // newUser.save()
-        //         .then(user => {
-        //             console.log('Success creating user:', user);
-        //             res.status(201).json({
-        //                 message: 'Success creating user',
-        //                 user: user
-        //             })
-        //         })
-        //         .catch(err =>{
-        //             console.log('error happened', err);
-        //             next(err)
-        //         })
-        // newVisit
-        //         .save()
-        //         .then(visit => {
-        //             console.log('Success creating visit:', visit);
-        //             res.status(201).json({
-        //                 message: 'Success creating visit',
-        //                 visit: visit
-        //             })
-        //         })
-        //         .catch(err =>{
-        //             console.log('error happened', err);
-        //             next(err)
-        //         })
-        //         newUser._visits.push(newVisit)
-        
     },
+
 }
