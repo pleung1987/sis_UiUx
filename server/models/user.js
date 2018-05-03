@@ -11,7 +11,7 @@ var UserSchema = new mongoose.Schema({
  last_name:  {type: String},
  gender: {type: String},
  comment:{type: String},
- image: [{ type: String}],
+ faceImage: [{ type: String}],
  telephone: { type: Number},
  email: { type: Email, minlength: 2},
  _visits: [{
@@ -24,6 +24,3 @@ var UserSchema = new mongoose.Schema({
 // UserSchema.plugin(uniqueValidator, { message: 'Error, expected {PATH} to be unique.' })
 const User = mongoose.model('User', UserSchema);
 module.exports = User;
-
-//renameSchema is the DB you are putting your information in
-

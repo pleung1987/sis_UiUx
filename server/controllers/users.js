@@ -17,21 +17,33 @@ var User = mongoose.model('User');
 
 module.exports = {
   index: async (req,res,next) => {
-    try{
-        const users = await User.find({});
-        console.log('found users:', users);
-        res.status(200).json(users);
-    }catch(err) {
-        console.log('error happened', err);
-        next(err)
-    }
+        const users = await User.find({})
+            .populate('_visits')
+            .exec((err, users) => {
+                if(err){
+                    console.log('error happened', err);
+                    next(err)
+                } else {
+                    console.log('found users:', users);
+                    res.status(200).json(users);
+                }
+            })
 },
   show: async (req, res, next) => {
       const userId = req.params.userId;
       console.log('req.params:', req.params);
 
-      const user = await User.findById(userId);
-      res.status(200).json(user);
+      const user = await User.findById(userId)
+        .populate('_visits')
+        .exec((err, users) => {
+            if(err){
+                console.log('error happened', err);
+                next(err)
+            } else {
+                console.log('found users:', users);
+                res.status(200).json(users);
+            }
+        })
 },
   replaceUser: async(req, res, next) => {
     //enforce that req.body must contain all the fields

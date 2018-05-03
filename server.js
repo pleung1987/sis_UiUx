@@ -28,6 +28,11 @@ require('./server/config/mongoose.js')
     //users routes
 const users = require('./server/config/usersRoute');
 app.use('/users', users);
+
+//camera routes
+const cameras = require('./server/config/camerasRoute');
+app.use('/cameras', cameras);
+
     //visit routes
 const visits = require('./server/config/visitsRoute')(app);
 // app.use('/visits', visits);

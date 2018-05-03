@@ -2,122 +2,226 @@ console.log('got to controller visits.js');
 
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
-var Visit = mongoose.model('Visit')
+var Visit = mongoose.model('Visit');
+var Camera = mongoose.model('Camera');
+var fs = require('fs');
 
-multer = require('multer'),
-storage = multer.diskStorage({
+//Multer for Client Image/file upload:
+const multer = require('multer') 
+const storage = multer.diskStorage({
     destination: function(req, file, cb){
         cb(null,'./uploads');
     }, 
     filename: function(req, file, cb){
-        cb(null, new Date().toISOString() + file.originalname);
+        const ext = file.mimetype.split('/')[1];
+        cb(null, new Date().toISOString() + '.' + ext);
     }
-}),
-fileFilter = (req, file, cb) => {
+}) 
+const fileFilter = (req, file, cb) => {
     //reject file
     if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png'){
         cb(null, true);
     } else {
         cb(null, false);
     }
-},
-upload = multer({
-    storage : storage, 
-    limits: {
-        fileSize: 1024 * 1024 * 5
-    },
-    fileFilter: fileFilter
-});
+} 
+const upload = multer({
+    storage : storage
+}).single('faceImage');
 
-// (upload.single('image') : middleware for multer upload
 
 module.exports = {
     getVisitor:  function(req,res) {
     Visit.find({})
-    .populate('_visitor')
+    .populate('_visitor _camera')
     .exec( function(err,results){
         if(err){
             res.json({message: "Error happened", error: err});
         } else {
-            res.json({message:"Success", result: results});
+            res.json({message:"Success", data: results});
          }
        })
     },
     show: function(req, res){
         console.log('Visit Id retrieved: ', req.params.id);
         Visit.findOne({_id: req.params.id})
-        .populate('_visitor')
+        .populate('_visitor _camera')
         .exec( function(err, result) {
             if(err){
                 res.json({message: "Error happened", error: err});
             } else {
                 console.log("single Visit retrieved:", result);
-                res.json({message:"Success", result: result}); 
+                res.json({message:"Success", data: result}); 
             }
         })
     },
     create:  function(req,res) {
+        var image = req.body.faceImage;
+        var bitmap = Buffer.from(image, 'base64')
+        var path = `uploads/${new Date().toISOString()}-face.jpg`
+        fs.writeFileSync(path, bitmap,{ encoding:'base64'})
+        console.log('this is the path: ', path)
+        // upload(req,res, (er) => {
+        //     if(err){
+        //         console.log('error uploading image: ', err);
+        //         res.json({message:"error uploading image", error: err})
+        //     }else{
+        //         console.log('image uploaded: ', req.file);
+        //     }
+        // })
+
+        const newCamera = new Camera({
+            _id: new mongoose.Types.ObjectId(),
+            mac_addr: req.body.mac_addr
+        }, {usePushEach: true})
         // console.log('req.file:', req.file)
         const newUser = new User({
             _id: new mongoose.Types.ObjectId(),
-            byte_stream: req.body.byte_stream
-            // image: req.file.path,
+            byte_stream: req.body.byte_stream,
+            faceImage: path,
         }, {usePushEach: true})
         const newVisit = new Visit({
             _id: new mongoose.Types.ObjectId(),
             _visitor: newUser._id,
+            _camera: newCamera._id,
             visited: new Date()
         }, {usePushEach: true});
-       
-        User.findOne({byte_stream: newUser.byte_stream}, (err,user) => {
-            // console.log('finding existing user = ', user);
+
+        //validate Camera before creating or updating
+        Camera.findOne({mac_addr: newCamera.mac_addr}, (err,camera) => {
+            console.log('finding if camera exist = ', camera);
             if(err){
-                console.log('no existing user error: ', err)
-                res.json({message:"Error finding user", error: err})
+                console.log('no existing camera error: ', err)
+                res.json({message:"Error finding camera", error: err})
             } else {
-                //handling new User
-                if(user === null){
-                    console.log('found no existing users....');
-                    User.create({_id:newUser._id, byte_stream: newUser.byte_stream, _visits: newVisit._id}, (err, result) => {
+                if(camera === null){
+                    console.log('found no existing camera....');
+                    //create new Camera (event 2)
+                    Camera.create({_id:newCamera._id, mac_addr: newCamera.mac_addr, _visits: newVisit._id}, (err, result) => {
                         if(err){ 
-                            console.log('error creating new user: ', err);
-                            res.json({message:"error creating new User", error: err})
+                            console.log('error creating new camera: ', err);
+                            res.json({message:"error creating new Camera", error: err})
                         } else{
-                            console.log('Successfully created User : ', result);
-                            Visit.create({_id:newVisit._id, _visitor:newUser._id, visited:newVisit.visited}, (err,result) =>{
+                            console.log('Successfully created Camera : ', result);
+                            //check if User Exist:
+                            User.findOne({byte_stream: newUser.byte_stream}, (err,user) => {
                                 if(err){
-                                    console.log('error creating new visit: ', err);
-                                    res.json({message:"error creating new visit", error: err})
-                                } else{
-                                    console.log('Successfully created visit: ', result);
-                                    res.json({message:"Successfully created new visit: ", result})
+                                    console.log('no existing user error: ', err)
+                                    res.json({message:"Error finding user", error: err})
+                                } else {
+                                    if(user === null){
+                                        console.log('found no existing users....');
+                                        //creating new User (event 6):
+                                        User.create({_id:newUser._id, byte_stream: newUser.byte_stream, faceImage: newUser.faceImage, _visits: newVisit._id}, (err, result) => {
+                                            if(err){ 
+                                                console.log('error creating new user: ', err);
+                                                res.json({message:"error creating new User", error: err})
+                                            }else{
+                                                console.log('Successfully created User : ', result);
+                                                //creating new Visit for new user && new camera (event 10)
+                                                Visit.create({_id:newVisit._id, _visitor:newUser._id, _camera:newCamera._id, visited:newVisit.visited}, (err,result) =>{
+                                                    if(err){
+                                                        console.log('error creating new visit: ', err);
+                                                        res.json({message:"error creating new visit", error: err})
+                                                    } else{
+                                                        console.log('Successfully created new visit: ', result);
+                                                    }
+                                                })
+                                            }
+                                        })
+                                    }else{
+                                        //handing existing user (event 5)
+                                        user._visits.push(newVisit._id)
+                                        user.faceImage.push(newUser.faceImage)
+                                        user.save(function(err, pushVisit){
+                                            if(err){
+                                                console.log('error pushing visit: ', err);
+                                                res.json({message: "Error happened", error: err});
+                                            }else{
+                                                console.log('Successfully pushing Visit for User : ', pushVisit);
+                                                // // Create new Visit for old user new camera (event 9)
+                                                Visit.create({_id:newVisit._id, _visitor:newUser._id, _camera: newCamera._id, visited:newVisit.visited}, (err,result) => {
+                                                    if(err){
+                                                        console.log('error creating new visit: ', err);
+                                                        res.json({message:"error creating new Visit", error: err})
+                                                    } else{
+                                                        console.log('Successfully created new Visit: ', result);
+                                                    }
+                                                })
+                                            }
+                                        })
+                                    }
                                 }
                             })
+
                         }
                     })
-                 
                 }else{
-                    user._visits.push(newVisit._id)
-                    user.save(function(err, pushVisit){
+                //updating from existing camera
+                    console.log('pushing newVisit._Id into _visit: ', newVisit._id);
+                    // updating old camera (event 1):
+                    camera._visits.push(newVisit._id)
+                    camera.save(function(err, pushVisit){
                         if(err){
                             console.log('error pushing visit: ', err);
-                            res.json({message: "Error happened", error: err});
+                            res.json({message:"error creating new Camera through push", error: err})
                         }else{
-                            console.log('Successfully pushing Visit : ', pushVisit);
-                            Visit.create({_id:newVisit._id, _visitor: user._id, visited:newVisit.visited}, (err,result) =>{
+                            console.log('Successfully saving camera with newVisit._id pushed: ', pushVisit);
+                            //check if User exist:
+                            User.findOne({byte_stream: newUser.byte_stream}, (err,user) => {
                                 if(err){
-                                    console.log('error creating new visit: ', err);
-                                    res.json({message:"error creating new visit", error: err})
-                                } else{
-                                    console.log('Successfully created visit: ', result, pushVisit);
-                                    res.json({message:"Successfully created new visit: ", result, pushVisit})
+                                    console.log('no existing user error: ', err)
+                                    res.json({message:"Error finding user", error: err})
+                                } else {
+                                    if(user === null){
+                                        console.log('found no existing users....');
+                                        //creating new User (event 4):
+                                        User.create({_id:newUser._id, byte_stream: newUser.byte_stream, faceImage: newUser.faceImage, _visits: newVisit._id}, (err, result) => {
+                                            if(err){ 
+                                                console.log('error creating new user: ', err);
+                                                res.json({message:"error creating new User", error: err})
+                                            }else{
+                                                console.log('Successfully created User : ', result);
+                                                //creating new Visit for old camera new user (event 7)
+                                                Visit.create({_id:newVisit._id, _visitor:newUser._id, _camera:camera._id, visited:newVisit.visited}, (err,result) =>{
+                                                    if(err){
+                                                        console.log('error creating new visit: ', err);
+                                                        res.json({message:"error creating new visit", error: err})
+                                                    } else{
+                                                        console.log('Successfully created new visit: ', result);
+                                                    }
+                                                })
+                                            }
+                                        })
+                                    }else{
+                                        //handing existing user (event 5)
+                                        user._visits.push(newVisit._id)
+                                        user.faceImage.push(newUser.faceImage)
+                                        user.save(function(err, pushVisit){
+                                            if(err){
+                                                console.log('error pushing visit: ', err);
+                                                res.json({message: "Error happened", error: err});
+                                            }else{
+                                                console.log('Successfully pushing Visit for User : ', pushVisit);
+                                                // // Create new Visit for old user old camera (event 7)
+                                                Visit.create({_id:newVisit._id, _visitor:newUser._id, _camera: camera._id, visited:newVisit.visited}, (err,result) => {
+                                                    if(err){
+                                                        console.log('error creating new visit: ', err);
+                                                        res.json({message:"error creating new Visit", error: err})
+                                                    } else{
+                                                        console.log('Successfully created new Visit: ', result);
+                                                    }
+                                                })
+                                            }
+                                        })
+                                    }
                                 }
                             })
                         }
                     })
                 }
             }
-        })
+        })        
     },
 
 }

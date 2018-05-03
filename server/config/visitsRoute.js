@@ -7,17 +7,14 @@ const mongoose = require('mongoose'),
     Visit = require('../models/visit'),
     users = require('./../controllers/users'),
     visits = require('./../controllers/visits')
-     
+    
 
 module.exports = function(app){
     app.get('/visits/:id', function(req,res){
-        console.log('got to visits/:id route');
         visits.show(req,res)
     });
 
     app.get('/visits', function(req,res){
-        console.log('got to the /visit route');
-        
         visits.getVisitor(req,res)
     });
 
