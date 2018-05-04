@@ -3,18 +3,6 @@ console.log('got to controller users.js');
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 
-// var multer = require('multer'),
-//     storage = multer.diskStorage({
-//     destination: function(req, file, cb){
-//         cb(null,'./uploads');
-//     }, 
-//     filename: function(req, file, cb){
-//         cb(null, new Date().toISOString() + file.originalname);
-//         }
-//     }),
-//     upload = multer({storage : storage});
-
-
 module.exports = {
   index: async (req,res,next) => {
         const users = await User.find({})
@@ -32,7 +20,6 @@ module.exports = {
   show: async (req, res, next) => {
       const userId = req.params.userId;
       console.log('req.params:', req.params);
-
       const user = await User.findById(userId)
         .populate('_visits')
         .exec((err, users) => {
@@ -45,22 +32,49 @@ module.exports = {
             }
         })
 },
-  replaceUser: async(req, res, next) => {
-    //enforce that req.body must contain all the fields
-    const userId = req.params.userId;
-    const newUser = req.body;
-    console.log('userId is: ', userId);
-    console.log('newUser is: ', newUser);
-    const result = await User.findByIdAndUpdate(userId, newUser);
-    console.log('result: ', result);
-    res.status(200).json({success: true , result})
+//updating user details for people coming in
+  updateUser: (req, res, next) => {
+    const userId = req.params.userId
+    console.log('userId handing: ', userId);
+    console.log('form data to update: ', req.body)
+    User.findOne({_id: userId}, (err,user) => {
+        user.first_name = req.body.first_name,
+        user.last_name = req.body.last_name,
+        user.gender = req.body.gender,
+        user.comment = req.body.comment,
+        user.telephone = req.body.telephone,
+        user.email = req.body.email,
+        user.vip = req.body.vip,
+        user.blacklist = req.body.blacklist,
+        user.save( (err, result) => {
+            if(err){
+                console.log('error happened: ', err);
+                next(err)
+            }else {
+                console.log('Success updating user:', result);
+                res.status(201).json({message: 'Success updating user', user: user})
+            }
+        })
+    })
 },
-  updateUser: async(req, res, next) => {
-    // req.body may contain any number of fields
-    const userId = req.params.userId;
-    const newUser = req.body;
-    const result = await User.findByIdAndUpdate(userId, newUser);
-    res.status(200).json({success: true , result})
+// just setting VIP or Blacklist Status
+  setUser:  (req, res, next) => {
+    const userId = req.params.userId
+    console.log('userId handing: ', userId);
+    console.log('form data to update: ', req.body)
+    User.findOne({_id: userId}, (err,user) => {
+        user.vip = req.body.vip,
+        user.blacklist = req.body.blacklist,
+        user.save( (err, result) => {
+            if(err){
+                console.log('error happened: ', err);
+                next(err)
+            }else {
+                console.log('Success updating user:', result);
+                res.status(201).json({message: 'Success updating user', user: user})
+            }
+        })
+    })
 },
   
 

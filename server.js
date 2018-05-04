@@ -24,7 +24,7 @@ require('./server/config/mongoose.js')
 
 // ROUTES:
     //angular routes
-// require('./server/config/routes')(app);     
+// require('./server/config/angularRoutes')(app);     
     //users routes
 const users = require('./server/config/usersRoute');
 app.use('/users', users);
@@ -32,10 +32,13 @@ app.use('/users', users);
 //camera routes
 const cameras = require('./server/config/camerasRoute');
 app.use('/cameras', cameras);
+//shop routes
+const shops = require('./server/config/shopsRoute');
+app.use('/shops', shops);
 
-    //visit routes
+//visit routes
 const visits = require('./server/config/visitsRoute')(app);
-// app.use('/visits', visits);
+
 
 // END OF ROUTING...
 

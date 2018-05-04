@@ -1,4 +1,4 @@
-console.log('got to the userRoute.js file');
+console.log('got to the shopRoutes.js file');
 
 const mongoose = require('mongoose'),
     path = require('path'),
@@ -6,15 +6,15 @@ const mongoose = require('mongoose'),
     // router = express.Router(),
     router = require('express-promise-router')(),
 //getter -gets the model
-    User = mongoose.model('User') ,
-    users = require('./../controllers/users')
+    Shop = mongoose.model('Shop') ,
+    shops = require('./../controllers/shops')
     
 router.route('/')
-    .get(users.index)
+    .get(shops.index)
 
-router.route('/:userId')
-    .get(users.show)   
-    .patch(users.updateUser)
-    .put(users.setUser)
+router.route('/:shopId')
+    .get(shops.show)   
+    .patch(shops.updateShop)
+    .put(shops.setShop)
 
 module.exports = router; 

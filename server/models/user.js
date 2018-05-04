@@ -14,6 +14,8 @@ var UserSchema = new mongoose.Schema({
  faceImage: [{ type: String}],
  telephone: { type: Number},
  email: { type: Email, minlength: 2},
+ vip: { type: Boolean, default: false},
+ blacklist: {type: Boolean , default: false},
  _visits: [{
      type: Schema.Types.ObjectId, 
      ref: 'Visit',
@@ -21,6 +23,5 @@ var UserSchema = new mongoose.Schema({
 }, {timestamps: true}, {usePushEach: true});
 
 //setter-> sets the rename model
-// UserSchema.plugin(uniqueValidator, { message: 'Error, expected {PATH} to be unique.' })
 const User = mongoose.model('User', UserSchema);
 module.exports = User;

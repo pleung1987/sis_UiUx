@@ -1,4 +1,4 @@
-console.log('got to the routes.js file');
+console.log('got to the angularRoutes.js file');
 
 var mongoose = require('mongoose'),
     path = require('path'),
@@ -8,7 +8,13 @@ var mongoose = require('mongoose'),
     // router = require('express-promise-router')(),
 //getter -gets the model
     User = mongoose.model('User') ,
-    users = require('./../controllers/users')
+    users = require('./../controllers/users'),
+    Visit = require('../models/visit'),
+    visits = require('./../controllers/visits'),
+    Camera = mongoose.model('Camera') ,
+    cameras = require('./../controllers/cameras'),
+    Shop = mongoose.model('Shop') ,
+    shops = require('./../controllers/shops')
 
 
 module.exports = function(app){

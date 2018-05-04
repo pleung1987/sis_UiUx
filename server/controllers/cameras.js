@@ -20,35 +20,55 @@ module.exports = {
   show: async (req, res, next) => {
       const cameraId = req.params.cameraId;
       console.log('req.params:', req.params);
-
       const camera = await Camera.findById(cameraId)
         .populate('_visits')
-        .exec((err, cameras) => {
+        .exec((err, camera) => {
             if(err){
                 console.log('error happened', err);
                 next(err)
             } else {
-                console.log('found cameras:', cameras);
-                res.status(200).json(cameras);
+                console.log('found camera:', camera);
+                res.status(200).json(camera);
             }
         })
 },
-    replaceCamera: async(req, res, next) => {
-    //enforce that req.body must contain all the fields
-    // const cameraId = req.params.cameraId;
-    // const newCamera = req.body;
-    // console.log('cameraId is: ', cameraId);
-    // console.log('newCamera is: ', newCamera);
-    // const result = await Camera.findByIdAndUpdate(cameraId, newCamera);
-    // console.log('result: ', result);
-    // res.status(200).json({success: true , result})
+//updating camera details for people coming in
+updateCamera: (req, res, next) => {
+    const cameraId = req.params.cameraId
+    console.log('cameraId handing: ', cameraId);
+    console.log('form data to update: ', req.body)
+    Camera.findOne({_id: cameraId}, (err,camera) => {
+        camera.first_name = req.body.first_name,
+        camera.last_name = req.body.last_name,
+        camera.save( (err, result) => {
+            if(err){
+                console.log('error happened: ', err);
+                next(err)
+            }else {
+                console.log('Success updating camera:', result);
+                res.status(201).json({message: 'Success updating camera', camera: camera})
+            }
+        })
+    })
 },
-    updateCamera: async(req, res, next) => {
-    // // req.body may contain any number of fields
-    // const cameraId = req.params.cameraId;
-    // const newCamera = req.body;
-    // const result = await Camera.findByIdAndUpdate(cameraId, newCamera);
-    // res.status(200).json({success: true , result})
+// just setting VIP or Blacklist Status
+  setCamera:  (req, res, next) => {
+    const cameraId = req.params.cameraId
+    console.log('cameraId handing: ', cameraId);
+    console.log('form data to update: ', req.body)
+    Camera.findOne({_id: cameraId}, (err,camera) => {
+        camera.vip = req.body.vip,
+        camera.blacklist = req.body.blacklist,
+        camera.save( (err, result) => {
+            if(err){
+                console.log('error happened: ', err);
+                next(err)
+            }else {
+                console.log('Success updating camera:', result);
+                res.status(201).json({message: 'Success updating camera', camera: camera})
+            }
+        })
+    })
 },
   
 

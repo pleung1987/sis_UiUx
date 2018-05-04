@@ -9,14 +9,12 @@ var CameraSchema = new mongoose.Schema({
  _visits: [{
      type: Schema.Types.ObjectId, 
      ref: 'Visit'
-    }]
-//  _shop: {
-//     type: Schema.Types.ObjectId, 
-//     ref: 'Shop'
-//    }
+    }],
+ _shop: {
+    type: Schema.Types.ObjectId, 
+    ref: 'Shop'
+   }
 }, {timestamps: true}, {usePushEach: true});
 
-//setter-> sets the rename model
-// UserSchema.plugin(uniqueValidator, { message: 'Error, expected {PATH} to be unique.' })
 const Camera = mongoose.model('Camera', CameraSchema);
 module.exports = Camera;

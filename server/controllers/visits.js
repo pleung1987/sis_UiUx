@@ -72,7 +72,7 @@ module.exports = {
             byte_stream: req.body.byte_stream,
             faceImage: path,
         }, {usePushEach: true})
-        
+
         const newVisit = new Visit({
             _id: new mongoose.Types.ObjectId(),
             _visitor: newUser._id,
@@ -148,11 +148,10 @@ module.exports = {
                                     }
                                 }
                             })
-
                         }
                     })
                 }else{
-                //updating from existing camera
+                    //updating from existing camera
                     console.log('pushing newVisit._Id into _visit: ', newVisit._id);
                     // updating old camera (event 1):
                     camera._visits.push(newVisit._id)
@@ -220,5 +219,4 @@ module.exports = {
             }
         })        
     },
-
 }

@@ -12,7 +12,6 @@ var ShopSchema = new mongoose.Schema({
     }]
 }, {timestamps: true}, {usePushEach: true});
 
-//setter-> sets the rename model
-// UserSchema.plugin(uniqueValidator, { message: 'Error, expected {PATH} to be unique.' })
+
 const Shop = mongoose.model('Shop', ShopSchema);
 module.exports = Shop;
