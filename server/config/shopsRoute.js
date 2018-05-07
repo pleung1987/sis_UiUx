@@ -11,6 +11,7 @@ const mongoose = require('mongoose'),
     
 router.route('/')
     .get(shops.index)
+    .post(shops.createShop)
 
 router.route('/:shopId')
     .get(shops.show)   

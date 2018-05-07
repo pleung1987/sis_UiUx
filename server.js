@@ -28,20 +28,18 @@ require('./server/config/mongoose.js')
     //users routes
 const users = require('./server/config/usersRoute');
 app.use('/users', users);
-
 //camera routes
 const cameras = require('./server/config/camerasRoute');
 app.use('/cameras', cameras);
 //shop routes
 const shops = require('./server/config/shopsRoute');
 app.use('/shops', shops);
-
 //visit routes
 const visits = require('./server/config/visitsRoute')(app);
 
 
 // END OF ROUTING...
 
-app.listen(port, function() {
+app.listen(port, ()=> {
     console.log("listening on port: ", port);
     });
