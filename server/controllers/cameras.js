@@ -7,7 +7,7 @@ var Shop = mongoose.model('Shop')
 module.exports = {
   index: async (req,res,next) => {
         const cameras = await Camera.find({})
-            .populate('_visits')
+            .populate('_visits _shop')
             .exec((err, cameras) => {
                 if(err){
                     console.log('error happened', err);
@@ -22,7 +22,7 @@ module.exports = {
       const cameraId = req.params.cameraId;
       console.log('req.params:', req.params);
       const camera = await Camera.findById(cameraId)
-        .populate('_visits')
+        .populate('_visits _shop')
         .exec((err, camera) => {
             if(err){
                 console.log('error happened', err);
@@ -62,32 +62,49 @@ updateCamera: (req, res, next) => {
             console.log('error happened: ', err)
             res.json({message:'error occured finding shop to set', error: err})
         }else{
+            //shop will be found because exact String will be provided from DOM form select
             console.log('found shop: ', shop)
-            shop._cameras.push(cameraId)
-            shop.save((err,pushCamera)=>{
+            //validation: query into DB to see if camerId exist at _cameras:
+            Shop.findOne({_cameras: cameraId}, (err, camResult) =>{
                 if(err){
-                    console.log('error pushing camera: ', err);
-                    res.json({message: "Error happened", error: err});
-                }else{
-                    console.log('Successfully pushed camera to Shop: ', pushCamera)
-                    Camera.findOne({_id: cameraId}, (err,camera) => {
-                        if(err){
-                            console.log('error finding camera: ', err)
-                            res.json({message: "Error finding camera", error: err});
-                        }else{
-                            camera._shop = shop._id
-                            camera.save( (err, camResult) => {
-                                if(err){
-                                    console.log('error happened: ', err);
-                                    next(err)
-                                }else {
-                                    console.log('Success updating camera:', camResult);
-                                    res.status(201).json({message: 'Success updating camera', camera: camResult, shop: pushCamera})
-                                }
-                            })
-                        }
-                    })
+                    console.log('error happened: ', err)
+                    res.json({message: 'error happened ', error: err})
                 }
+                console.log('camResult returns: ', camResult)
+                //if camera doesn't exist and it can be pushed into _cameras
+                if(camResult === null){
+                shop._cameras.push(cameraId)
+                shop.save((err,pushCamera)=>{
+                    if(err){
+                        console.log('error pushing camera: ', err);
+                        res.json({message: "Error happened", error: err});
+                    }else{
+                        console.log('Successfully pushed camera to Shop: ', pushCamera)
+                        //find Camera's _shop to write data
+                        Camera.findOne({_id: cameraId}, (err,camera) => {
+                            if(err){
+                                console.log('error finding camera: ', err)
+                                res.json({message: "Error finding camera", error: err});
+                            }else{
+                                //overwrites camera._shop to shop._id
+                                camera._shop = shop._id
+                                camera.save( (err, saveShopInCam) => {
+                                    if(err){
+                                        console.log('error happened: ', err);
+                                        next(err)
+                                    }else {
+                                        console.log('Success updating camera:', camResult);
+                                        res.status(201).json({message: 'Success updating camera', camera: saveShopInCam, shop: pushCamera})
+                                    }
+                                })
+                            }
+                        })
+                    }
+                })
+               } else {
+                   console.log('camera already taken by shop: ', camResult.branch,'-',camResult.address)
+                    res.json({message: `camera already taken by shop: ${camResult.brand}'s ${camResult.branch} at ${camResult.address}, please remove camera at specific shop if allocated wrongly!`})
+               }
             })
         }
     })

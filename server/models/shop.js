@@ -10,12 +10,10 @@ var ShopSchema = new mongoose.Schema({
  address: { type: String, minlength: 2},
  _cameras: [{
      type: Schema.Types.ObjectId, 
-     ref: 'Camera',
-     unique: true,
-     sparse: true
+     ref: 'Camera'
     }]
 }, {timestamps: true}, {usePushEach: true});
 
-ShopSchema.plugin(arrayUniquePlugin);
+
 const Shop = mongoose.model('Shop', ShopSchema);
 module.exports = Shop;
