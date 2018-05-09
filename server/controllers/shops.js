@@ -70,8 +70,9 @@ updateShop: (req, res, next) => {
     console.log('shopId handing: ', shopId);
     console.log('form data to update: ', req.body)
     Shop.findOne({_id: shopId}, (err,shop) => {
-        shop.first_name = req.body.first_name,
-        shop.last_name = req.body.last_name,
+        shop.brand = req.body.brand,
+        shop.branch = req.body.branch,
+        shop.address = req.body.address
         shop.save( (err, result) => {
             if(err){
                 console.log('error happened: ', err);
@@ -83,25 +84,45 @@ updateShop: (req, res, next) => {
         })
     })
 },
-// setting camera to shop
-setShop:  (req, res, next) => {
-    const shopId = req.body.shopId
-    console.log('shopId handing: ', shopId);
-    const cameraId = req.params.cameraId
+removeCam: (req, res, next) => {
+    const shopId = req.params.shopId,
+    //Cam will be found because exact String will be provided from DOM form select
+    selectCamMac = req.body.mac_addr
     Shop.findOne({_id: shopId}, (err,shop) => {
-        shop.vip = req.body.vip,
-        shop.blacklist = req.body.blacklist,
-        shop.save( (err, result) => {
-            if(err){
-                console.log('error happened: ', err);
-                next(err)
-            }else {
-                console.log('Success updating shop:', result);
-                res.status(201).json({message: 'Success updating shop', shop: shop})
-            }
-        })
+        if(err){
+            console.log('error happened finding shop: ', err);
+            next(err)
+        } else {
+            console.log('found shop: ', shop)
+            Camera.findOne({mac_addr: selectCamMac}, (err, camera) => {
+                //back-check if paramters given retunrs back camera,in DOM form we will provide exact String
+                if(err){
+                    console.log('error happened finding camera to update: ', err);
+                    next(err)
+                } else {
+                    shop._cameras.pull(camera._id)
+                    shop.save((err, updateShop) =>{
+                        if(err){
+                            console.log('error happened updating shop: ', err)
+                            next(err)
+                        } else {
+                            console.log('Successfully removed and updated shop camera: ', updateShop)
+                            camera._shop = undefined;
+                            camera.save( (err, updateCamera) =>{
+                                if(err){
+                                    console.log('error happened updating camera: ', err);
+                                    next(err)
+                                } else {
+                                    console.log('Successfully remove _shop from Camera: ', updateCamera)
+                                    res.json({message:'Successfully remove camera from shop association', shop: updateShop, camera: updateCamera})
+                                }
+                            })
+                        }
+                    })
+                }
+            })
+        }
     })
 },
-  
 
 }

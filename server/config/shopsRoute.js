@@ -16,6 +16,6 @@ router.route('/')
 router.route('/:shopId')
     .get(shops.show)   
     .patch(shops.updateShop)
-    .put(shops.setShop)
+    .put(shops.removeCam)
 
 module.exports = router; 

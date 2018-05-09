@@ -34,7 +34,7 @@ module.exports = {
         })
 },
 //updating camera details ie. location
-updateCamera: (req, res, next) => {
+  updateCamera: (req, res, next) => {
     const cameraId = req.params.cameraId
     console.log('cameraId handing: ', cameraId);
     console.log('form data to update: ', req.body)
