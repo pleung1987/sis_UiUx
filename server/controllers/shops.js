@@ -64,7 +64,7 @@ module.exports = {
     })
 },
 
-//updating shop details
+//updating shop details ie. brand, branch, address
 updateShop: (req, res, next) => {
     const shopId = req.params.shopId
     console.log('shopId handing: ', shopId);
@@ -121,6 +121,19 @@ removeCam: (req, res, next) => {
                     })
                 }
             })
+        }
+    })
+},
+deleteShop: (req, res, next) =>{
+    const shopId = req.params.shopId
+    console.log('shopId to remove: ', shopId)
+    Shop.findOneAndRemove({_id:shopId}, (err, shop) =>{
+        if(err){
+            console.log('error happened removing shop: ', err)
+            next(err)
+        } else {
+            console.log('Successfully removed: ', shop)
+            res.json({message:'Success removing shop', shop: shop})
         }
     })
 },

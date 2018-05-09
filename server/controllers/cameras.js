@@ -55,9 +55,10 @@ module.exports = {
   setCamera:  (req, res, next) => {
     const cameraId = req.params.cameraId
     console.log('cameraId handing: ', cameraId);
-    selectShop = req.body.branch
-    console.log('passing form data to update: ', selectShop)
-    Shop.findOne({branch: selectShop}, (err,shop) =>{ 
+    selectBranch = req.body.branch
+    selectAddress = req.body.address
+    console.log('passing form data to update: ', selectBranch, selectAddress)
+    Shop.findOne({branch: selectBranch, address:selectAddress}, (err,shop) =>{ 
         if(err){
             console.log('error happened: ', err)
             res.json({message:'error occured finding shop to set', error: err})
