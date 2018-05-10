@@ -9,7 +9,7 @@ import { HttpService } from '../http.service';
 export class BuyCoinsComponent implements OnInit {
 
   buyNum = 0;
-  numbers: number;
+  numbers: any;
   coins: number;
   message = '';
   insufficient = false;
@@ -22,7 +22,7 @@ export class BuyCoinsComponent implements OnInit {
   }
 
   getNumbers() {
-    this.numbers = this._httpService.shareNumbers();
+    this.numbers = this._httpService.shareVisits();
     this.coins = this._httpService.shareCoins();
   }
 

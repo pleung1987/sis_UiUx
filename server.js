@@ -23,9 +23,7 @@ mongoose.Promise = global.Promise;
 require('./server/config/mongoose.js')
 
 // ROUTES:
-    //angular routes
-// require('./server/config/angularRoutes')(app);     
-    //users routes
+//users routes
 const users = require('./server/config/usersRoute');
 app.use('/users', users);
 //camera routes
@@ -36,7 +34,8 @@ const shops = require('./server/config/shopsRoute');
 app.use('/shops', shops);
 //visit routes
 const visits = require('./server/config/visitsRoute')(app);
-
+//angular routes
+const angular = require('./server/config/angularRoutes')(app);     
 
 // END OF ROUTING...
 

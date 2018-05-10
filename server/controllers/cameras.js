@@ -57,13 +57,13 @@ module.exports = {
     console.log('cameraId handing: ', cameraId);
     selectBranch = req.body.branch
     selectAddress = req.body.address
+    //shop will be found because exact String will be provided from DOM form select
     console.log('passing form data to update: ', selectBranch, selectAddress)
     Shop.findOne({branch: selectBranch, address:selectAddress}, (err,shop) =>{ 
         if(err){
             console.log('error happened: ', err)
             res.json({message:'error occured finding shop to set', error: err})
         }else{
-            //shop will be found because exact String will be provided from DOM form select
             console.log('found shop: ', shop)
             //validation: query into DB to see if camerId exist at _cameras:
             Shop.findOne({_cameras: cameraId}, (err, camResult) =>{

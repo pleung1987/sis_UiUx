@@ -1,18 +1,24 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Http, Headers, RequestOptions } from '@angular/http';
+import { BehaviorSubject } from 'Rxjs';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class HttpService {
 
   constructor(private _http: HttpClient) { }
-
+  userObserver = new BehaviorSubject([]);
+  result: any;
   value = 0;
   coins = 0;
   alltransactions = [];
 
-  shareNumbers() {
-      return this.value;
+  shareVisits() {
+    const visitsObservable = this._http.get('/visits');
+    return visitsObservable.subscribe(data => console.log('got your visits: ', data));
   }
+
   shareCoins() {
     return this.coins;
   }

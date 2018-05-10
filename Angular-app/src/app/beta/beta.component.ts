@@ -8,7 +8,7 @@ import { AlphaComponent } from '../alpha/alpha.component';
   styleUrls: ['./beta.component.css']
 })
 export class BetaComponent implements OnInit {
-  numbers: number;
+  numbers: any;
   constructor(private _httpService: HttpService) { }
 
   ngOnInit() {
@@ -16,7 +16,7 @@ export class BetaComponent implements OnInit {
   }
 
   getNumbers() {
-    this.numbers = this._httpService.shareNumbers();
+    this.numbers = this._httpService.shareVisits();
   }
 
 }

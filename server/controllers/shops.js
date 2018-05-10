@@ -132,8 +132,11 @@ deleteShop: (req, res, next) =>{
             console.log('error happened removing shop: ', err)
             next(err)
         } else {
+            if(shop === null){
+                res.json({message:`Shop ID no longer exist`})
+            }
             console.log('Successfully removed: ', shop)
-            res.json({message:'Success removing shop', shop: shop})
+            res.json({message:`Success removing ${shop}`})
         }
     })
 },

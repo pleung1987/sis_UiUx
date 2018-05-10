@@ -8,7 +8,7 @@ import { HttpService } from '../../http.service';
 })
 export class BMainComponent implements OnInit {
 
-  numbers: number;
+  numbers: any;
   // tslint:disable-next-line:max-line-length
   questions: string[] =  ['What is the 7th Fibonacci Sequence Number?', 'What is the 2nd question?' , 'What is the 3rd question?', 'What is the 4th question?', 'What is the 5th question?', 'What is the 6th question?', 'What is the 7th question?', 'What is the 8th question?'];
   randNum: number = Math.floor(this.questions.length * Math.random());
@@ -35,7 +35,7 @@ export class BMainComponent implements OnInit {
   }
 
   getNumbers() {
-    this.numbers = this._httpService.shareNumbers();
+    this.numbers = this._httpService.shareVisits();
   }
 
   mine() {

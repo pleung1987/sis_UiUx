@@ -13,7 +13,7 @@ module.exports = {
                     next(err)
                 } else {
                     console.log('found users:', users);
-                    res.status(200).json(users);
+                    res.json({users:users});
                 }
             })
 },
@@ -28,7 +28,7 @@ module.exports = {
                 next(err)
             } else {
                 console.log('found users:', users);
-                res.status(200).json(users);
+                res.status(200).json({users:users});
             }
         })
 },

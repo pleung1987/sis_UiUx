@@ -7,15 +7,15 @@ import { HttpService } from '../http.service';
   styleUrls: ['./alpha.component.css']
 })
 export class AlphaComponent implements OnInit {
-  numbers: any;
+  data: any = {};
+
   constructor(private _httpService: HttpService) { }
 
   ngOnInit() {
-    this.getNumbers();
-    console.log('at the Alpha(home) componenet getting numbers:', this.numbers);
+    this.getVisits();
   }
 
-  getNumbers() {
-    this.numbers = this._httpService.shareNumbers();
+  getVisits() {
+    this._httpService.shareVisits();
   }
 }

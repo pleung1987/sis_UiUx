@@ -18,7 +18,7 @@ var mongoose = require('mongoose'),
 
 
 module.exports = function(app){
-    app.all("*", (req,res,next) => {
+    app.all("**", (req,res,next) => {
         res.sendFile(path.resolve('./Angular-app/dist/index.html'))
     });
 }

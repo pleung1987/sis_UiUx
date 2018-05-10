@@ -11,8 +11,9 @@ import { BMainComponent } from './beta/b-main/b-main.component';
 import { BuyCoinsComponent } from './buy-coins/buy-coins.component';
 import { SellCoinsComponent } from './sell-coins/sell-coins.component';
 import { BrowseLedgerComponent } from './browse-ledger/browse-ledger.component';
-import { HttpService } from './http.service';
 import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
+import { HttpService } from './http.service';
 import { FormsModule } from '@angular/forms';
 
 
@@ -31,7 +32,8 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    HttpModule
   ],
   providers: [HttpService],
   bootstrap: [AppComponent]
