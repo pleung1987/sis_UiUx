@@ -1,7 +1,6 @@
 console.log('inside user.js models');
 var mongoose = require('mongoose');
 var Email = require('mongoose-type-mail')
-var uniqueValidator = require('mongoose-unique-validator');
 var Schema = mongoose.Schema;
 
 

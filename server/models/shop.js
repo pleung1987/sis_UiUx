@@ -1,7 +1,6 @@
 console.log('inside shop.js models');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-const arrayUniquePlugin = require('mongoose-unique-array');
 
 
 var ShopSchema = new mongoose.Schema({
