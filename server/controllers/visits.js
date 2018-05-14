@@ -6,29 +6,6 @@ var Visit = mongoose.model('Visit');
 var Camera = mongoose.model('Camera');
 var fs = require('fs');
 
-//Multer for Client Image/file upload:
-// const multer = require('multer') 
-// const storage = multer.diskStorage({
-//     destination: function(req, file, cb){
-//         cb(null,'./uploads');
-//     }, 
-//     filename: function(req, file, cb){
-//         const ext = file.mimetype.split('/')[1];
-//         cb(null, new Date().toISOString() + '.' + ext);
-//     }
-// }) 
-// const fileFilter = (req, file, cb) => {
-//     //reject file
-//     if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png'){
-//         cb(null, true);
-//     } else {
-//         cb(null, false);
-//     }
-// } 
-// const upload = multer({
-//     storage : storage
-// }).single('faceImage');
-
 
 module.exports = {
     getVisitor:  function(req,res) {
@@ -57,10 +34,10 @@ module.exports = {
     },
     create:  function(req,res) {
         var image = req.body.faceImage;
-        var bitmap = Buffer.from(image, 'base64')
-        var path = `uploads/${new Date().toISOString()}-face.jpg`
-        fs.writeFileSync(path, bitmap,{ encoding:'base64'})
-        console.log('this is the path: ', path)
+        // var bitmap = Buffer.from(image, 'base64')
+        // var path = `uploads/${new Date().toISOString()}-face.jpg`
+        // fs.writeFileSync(path, bitmap,{ encoding:'base64'})
+        // console.log('this is the path: ', path)
 
         const newCamera = new Camera({
             _id: new mongoose.Types.ObjectId(),
@@ -70,7 +47,7 @@ module.exports = {
         const newUser = new User({
             _id: new mongoose.Types.ObjectId(),
             byte_stream: req.body.byte_stream,
-            faceImage: path,
+            faceImage: image,   //change this back to Path for debug
         }, {usePushEach: true})
 
         const newVisit = new Visit({
