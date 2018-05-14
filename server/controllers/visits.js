@@ -34,10 +34,10 @@ module.exports = {
     },
     create:  function(req,res) {
         var image = req.body.faceImage;
-        // var bitmap = Buffer.from(image, 'base64')
-        // var path = `uploads/${new Date().toISOString()}-face.jpg`
-        // fs.writeFileSync(path, bitmap,{ encoding:'base64'})
-        // console.log('this is the path: ', path)
+        var bitmap = Buffer.from(image, 'base64')
+        var path = `uploads/${new Date().toISOString()}-face.jpg`
+        fs.writeFileSync(path, bitmap,{ encoding:'base64'})
+        console.log('this is the path: ', path)
 
         const newCamera = new Camera({
             _id: new mongoose.Types.ObjectId(),
@@ -47,7 +47,7 @@ module.exports = {
         const newUser = new User({
             _id: new mongoose.Types.ObjectId(),
             byte_stream: req.body.byte_stream,
-            faceImage: image,   //change this back to Path for debug
+            faceImage: path,   //change this back to Path for debug
         }, {usePushEach: true})
 
         const newVisit = new Visit({
