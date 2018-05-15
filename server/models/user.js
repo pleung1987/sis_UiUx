@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 
 
 var UserSchema = new mongoose.Schema({
- byte_stream: { type: Array },
+ byte_stream: { type: Array, required:true },
  first_name: {type: String},
  last_name:  {type: String},
  gender: {type: String},

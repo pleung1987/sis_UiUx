@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 
 
 var CameraSchema = new mongoose.Schema({
- mac_addr: {type:String},
+ mac_addr: {type:String, required: true},
  location: { type: String, minlength: 2},
  _visits: [{
      type: Schema.Types.ObjectId, 
