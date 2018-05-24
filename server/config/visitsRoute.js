@@ -17,9 +17,5 @@ module.exports = function(app){
     app.post('/visits', function(req,res){
         visits.create(req,res)
     });
-    //trial for indicating if user exists through array distance:
-    app.post('/visitor',function(req,res){
-        console.log('got to the /visitor route')
-        visits.userCreate(req,res)
-    });       
+    
 };  
