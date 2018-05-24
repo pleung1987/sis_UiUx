@@ -39,7 +39,7 @@ module.exports = {
         //create image file
         var image = req.body.faceImage;
         var bitmap = Buffer.from(image, 'base64');
-        var path = `uploads/${new Date().toISOString()}-face.jpg`
+        var path = `../uploads/${new Date().toISOString()}-face.jpg`
         fs.writeFileSync(path, bitmap,{ encoding:'base64'});
         console.log('this is the path: ', path)
         //helper var and functions for finding user
