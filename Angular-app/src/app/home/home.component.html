@@ -1,0 +1,15 @@
+
+<div class="jumbotron">
+  <h2>
+    Black Book
+  </h2>
+  <h4>
+    Welcome to Black-Book, a tool by Sense in Silico, which helps you recognize important customers entering your stores.
+  </h4>
+</div>
+<div>
+  <h3>Visit Logs</h3>
+  <p *ngFor= "let visit of visits" > User: ' <a [routerLink]="['user-detail', visit._visitor._id]">{{visit._visitor.byte_stream}} </a>' has entered camera location: <a [routerLink]="['camera-detail', visit._camera._id]"> {{visit._camera.mac_addr}}</a>  on {{visit.visited | date:'y, MMM dd,  h:mm:ss a'}} </p>
+</div>
+
+<router-outlet></router-outlet>

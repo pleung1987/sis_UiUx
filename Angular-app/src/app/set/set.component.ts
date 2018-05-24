@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service';
-import { AlphaComponent } from '../alpha/alpha.component';
+import { HomeComponent } from '../home/home.component';
 
 @Component({
-  selector: 'app-beta',
-  templateUrl: './beta.component.html',
-  styleUrls: ['./beta.component.css']
+  selector: 'app-set',
+  templateUrl: './set.component.html',
+  styleUrls: ['./set.component.css']
 })
-export class BetaComponent implements OnInit {
+export class SetComponent implements OnInit {
   numbers: any;
   constructor(private _httpService: HttpService) { }
 

@@ -15,12 +15,15 @@ export class HttpService {
   alltransactions = [];
 
   shareVisits() {
-    const visitsObservable = this._http.get('/visits');
-    return visitsObservable.subscribe(data => console.log('got your visits: ', data));
+    return this._http.get('/visits');
   }
 
-  shareCoins() {
-    return this.coins;
+  shareCameras() {
+    return this._http.get('/cameras');
+  }
+
+  shareUsers() {
+    return this._http.get('/users');
   }
 
   showTransactions() {

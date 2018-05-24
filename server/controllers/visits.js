@@ -5,11 +5,13 @@ var User = mongoose.model('User');
 var Visit = mongoose.model('Visit');
 var Camera = mongoose.model('Camera');
 var fs = require('fs');
+var async = require("async");
 
 
 module.exports = {
-    getVisitor:  function(req,res) {
+    getVisitor:  (req,res)=> {
     Visit.find({})
+    .sort('-visited')
     .populate('_visitor _camera')
     .exec( function(err,results){
         if(err){
@@ -19,11 +21,12 @@ module.exports = {
          }
        })
     },
-    show: function(req, res){
+    show: (req, res) =>{
         console.log('Visit Id retrieved: ', req.params.id);
         Visit.findOne({_id: req.params.id})
+        .sort('-visited')
         .populate('_visitor _camera')
-        .exec( function(err, result) {
+        .exec( (err, result)=> {
             if(err){
                 res.json({message: "Error happened", error: err});
             } else {
@@ -32,7 +35,7 @@ module.exports = {
             }
         })
     },
-    create:  function(req,res) {
+    create:  (req,res) => {
         var image = req.body.faceImage;
         var bitmap = Buffer.from(image, 'base64')
         var path = `uploads/${new Date().toISOString()}-face.jpg`
@@ -104,7 +107,7 @@ module.exports = {
                                         //handing existing user (event 5)
                                         user._visits.push(newVisit._id)
                                         user.faceImage.push(newUser.faceImage)
-                                        user.save(function(err, pushVisit){
+                                        user.save((err, pushVisit) => {
                                             if(err){
                                                 console.log('error pushing visit: ', err);
                                                 res.json({message: "Error happened", error: err});
@@ -132,7 +135,7 @@ module.exports = {
                     console.log('pushing newVisit._Id into _visit: ', newVisit._id);
                     // updating old camera (event 1):
                     camera._visits.push(newVisit._id)
-                    camera.save(function(err, pushCamVisit){
+                    camera.save((err, pushCamVisit) =>{
                         if(err){
                             console.log('error pushing visit: ', err);
                             res.json({message:"error creating new Camera through push", error: err})
@@ -169,7 +172,7 @@ module.exports = {
                                         //handing existing user (event 5)
                                         user._visits.push(newVisit._id)
                                         user.faceImage.push(newUser.faceImage)
-                                        user.save(function(err, pushUserVisit){
+                                        user.save((err, pushUserVisit)=> {
                                             if(err){
                                                 console.log('error pushing visit: ', err);
                                                 res.json({message: "Error happened", error: err});
@@ -196,4 +199,48 @@ module.exports = {
             }
         })        
     },
+    userCreate: (req,res)=>{
+        
+        var faces = [];
+        var new_face = req.body.byte_stream;
+
+        function innerLoop(a,b){
+            var distance = 0;
+            for( var j = 0; j < a.length; j ++ ){
+                distance += Math.pow(a[j]- b[j], 2)
+            }
+            return Math.sqrt(distance)
+        }
+        
+        function validateUser(callback){
+            User.find({}, (err, users)=>{
+                if(err){
+                    console.log('error occured: ', err)
+                    res.json({error:err})
+                } else {
+                    for(i in users){
+                        faces.push(users[i].byte_stream)
+                    }
+                    for(var i = 0; i < faces.length; i++){
+                        var old_face = faces[i];
+                        var distance = innerLoop(new_face, old_face);
+                        console.log(`this is the distance of face(${faces[i]}): `, distance);
+                        if(distance <= 0.6){
+                            return callback(faces[i])
+                        }
+                    }
+                    return callback(0)
+                }    
+            })
+        }
+        validateUser(function(user){
+           if(user === 0){
+            console.log('no user found:', user)
+            //create user
+           } else {
+            console.log('user found:', user)
+            //update user by findOne byte_stream
+           }
+        });
+    }
 }

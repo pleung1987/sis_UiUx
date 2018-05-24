@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service';
 
 @Component({
-  selector: 'app-sell-coins',
-  templateUrl: './sell-coins.component.html',
-  styleUrls: ['./sell-coins.component.css']
+  selector: 'app-frequent',
+  templateUrl: './frequent.component.html',
+  styleUrls: ['./frequent.component.css']
 })
-export class SellCoinsComponent implements OnInit {
+export class FrequentComponent implements OnInit {
 
   numbers: any;
   coins: number;
@@ -22,7 +22,6 @@ export class SellCoinsComponent implements OnInit {
 
   getNumbers() {
     this.numbers = this._httpService.shareVisits();
-    this.coins = this._httpService.shareCoins();
   }
 
   sell() {

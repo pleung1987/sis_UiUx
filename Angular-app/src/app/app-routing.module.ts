@@ -1,20 +1,39 @@
-import { AlphaComponent } from './alpha/alpha.component';
-import { BetaComponent } from './beta/beta.component';
-import { BuyCoinsComponent } from './buy-coins/buy-coins.component';
-import { SellCoinsComponent } from './sell-coins/sell-coins.component';
-import { BrowseLedgerComponent } from './browse-ledger/browse-ledger.component';
+import { HomeComponent } from './home/home.component';
+import { SetComponent } from './set/set.component';
+import { InquireComponent } from './inquire/inquire.component';
+import { FrequentComponent } from './frequent/frequent.component';
+import { SettingsComponent } from './settings/settings.component';
+import { UserDetailComponent } from './user-detail/user-detail.component';
 
-import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+import { PagenotfoundComponent  } from './pagenotfound/pagenotfound.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { CameraDetailComponent } from './camera-detail/camera-detail.component';
 
 const routes: Routes = [
-  { path: 'home', component: AlphaComponent },
-  { path: 'mine', component: BetaComponent },
-  { path: 'buy', component: BuyCoinsComponent },
-  { path: 'sell', component: SellCoinsComponent },
-  { path: 'browse', component: BrowseLedgerComponent },
-  { path: '', pathMatch: 'full', redirectTo: '/alpha'},
+  {
+    path: 'home',
+    children: [
+      {
+        path: '',
+        component: HomeComponent
+      },
+      {
+        path: 'user-detail/:id',
+        component: UserDetailComponent
+      },
+      {
+        path: 'camera-detail/:id',
+        component: CameraDetailComponent
+      }
+    ]
+  },
+  { path: 'set', component: SetComponent },
+  { path: 'inquiring', component: InquireComponent },
+  { path: 'frequent', component: FrequentComponent },
+  { path: 'settings', component: SettingsComponent },
+  { path: 'user-detail/:id', component: UserDetailComponent },
+  { path: '', pathMatch: 'full', redirectTo: '/home'},
   { path: '**', component: PagenotfoundComponent }
 ];
 

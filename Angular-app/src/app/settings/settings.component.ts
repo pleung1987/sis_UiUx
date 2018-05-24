@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service';
 
 @Component({
-  selector: 'app-browse-ledger',
-  templateUrl: './browse-ledger.component.html',
-  styleUrls: ['./browse-ledger.component.css']
+  selector: 'app-settings',
+  templateUrl: './settings.component.html',
+  styleUrls: ['./settings.component.scss']
 })
-export class BrowseLedgerComponent implements OnInit {
+export class SettingsComponent implements OnInit {
 
   transactions: any;
   detailPressed = false;

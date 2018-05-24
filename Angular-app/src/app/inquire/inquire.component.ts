@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service';
 
 @Component({
-  selector: 'app-buy-coins',
-  templateUrl: './buy-coins.component.html',
-  styleUrls: ['./buy-coins.component.css']
+  selector: 'app-inquire',
+  templateUrl: './inquire.component.html',
+  styleUrls: ['./inquire.component.css']
 })
-export class BuyCoinsComponent implements OnInit {
+export class InquireComponent implements OnInit {
 
   buyNum = 0;
   numbers: any;
@@ -23,7 +23,6 @@ export class BuyCoinsComponent implements OnInit {
 
   getNumbers() {
     this.numbers = this._httpService.shareVisits();
-    this.coins = this._httpService.shareCoins();
   }
 
   buy() {
