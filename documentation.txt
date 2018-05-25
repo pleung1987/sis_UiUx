@@ -8,8 +8,4 @@ https://askubuntu.com/questions/703672/permission-denied-when-writing-a-file-to-
 https://github.com/sass/node-sass/issues/2178
 
     * We are at the Develop Branch
-<<<<<<< HEAD
-    -> adding new feature!
-=======
     -> added new feature!
->>>>>>> develop
