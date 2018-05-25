@@ -7,15 +7,5 @@ https://askubuntu.com/questions/703672/permission-denied-when-writing-a-file-to-
 2) allow npm to force install node-Sass:
 https://github.com/sass/node-sass/issues/2178
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-* We are at the Develop Branch
-testing
-=======
     * We are at the Develop Branch
     -> added new feature!
->>>>>>> feature/new-feature
-=======
-* We are at the Develop Branch
-testing
->>>>>>> feature/new-feature
