@@ -1,6 +1,11 @@
 1) fix problem when deploy on ubuntu allowing users to create filesystem permission:
 https://askubuntu.com/questions/703672/permission-denied-when-writing-a-file-to-new-filesystem
+-> go to level same as uploads folder and input:
+    sudo chown -R $USER:$USER ./uploads
+
 
 2) allow npm to force install node-Sass:
 https://github.com/sass/node-sass/issues/2178
 
+    * We are at the Develop Branch
+    -> adding new feature!
