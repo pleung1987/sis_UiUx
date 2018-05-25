@@ -8,8 +8,17 @@
       "root": "src",
       "outDir": "dist",
       "assets": [
-        "assets",
-        "favicon.ico"
+        {
+          "glob": "**/*",
+          "input": "../../../uploads/",
+          "output": "./assets/outside-asset",
+          "allowOutsideOutDir": true
+        },{
+          "glob": "favicon.ico",
+          "input": "./",
+          "output": "./",
+          "allowOutsideOutDir": true
+        }
       ],
       "index": "index.html",
       "main": "main.ts",

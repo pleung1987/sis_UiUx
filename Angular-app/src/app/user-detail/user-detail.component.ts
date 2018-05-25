@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-detail',
@@ -7,10 +8,24 @@ import { HttpService } from '../http.service';
   styleUrls: ['./user-detail.component.scss']
 })
 export class UserDetailComponent implements OnInit {
+  public userId;
+  user: any;
 
-  constructor(private _httpService: HttpService) { }
+  constructor(
+    private _route: ActivatedRoute,
+    private _router: Router,
+    private _httpService: HttpService
+  ) { }
 
   ngOnInit() {
-
+    const id = this._route.snapshot.params['id'];
+    this.userId = id;
+    console.log('this is the id page: ', this.userId);
+    const observable = this._httpService.getUser(id);
+    observable.subscribe( data => {
+      console.log('this is the data from service: ', data['users']);
+      this.user = data['users'];
+    });
   }
+
 }

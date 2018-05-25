@@ -25,7 +25,12 @@ export class HttpService {
   shareUsers() {
     return this._http.get('/users');
   }
+  getUser(userId) {
+    console.log('request from user-detail component:', userId);
+    return this._http.get('/users/' + userId);
+  }
 
+// old code to get rid of:
   showTransactions() {
     console.log('pulling all transactions: ', this.alltransactions);
     return this.alltransactions;

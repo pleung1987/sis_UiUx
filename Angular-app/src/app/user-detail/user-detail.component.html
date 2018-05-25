@@ -1,3 +1,13 @@
-<p>
-  user-detail works!
-</p>
+<h5>
+  user-detail:
+</h5>
+<div *ngFor = "let img of user.faceImage">
+  <img src= "../../../{{img}}" alt="faceimage">
+  {{img}}
+</div>
+
+<img src= "./assets/outside-asset/2018-05-24T06:51:32.108Z-face.jpg" alt="test">
+<h5>user_byte: {{user.byte_stream | slice:0:10}}</h5>
+
+<!-- <h5>Image: {{user.faceImage}}</h5>
+<h5>Image: {{user.faceImage}}</h5> -->
