@@ -1,3 +1,21 @@
-<p>
-  camera-detail works!
-</p>
+
+<div class="info">
+    <h4>Camera Details</h4>
+    <h5>ID: {{camera._id}}</h5>
+    <h5>functional since:  {{camera.createdAt | date:'y, MMM dd,  h:mm:ss a'}} </h5>
+    <h5>mac address: {{camera.mac_addr}}</h5>
+    <h5>location: {{camera.location}}</h5>
+    <h5> Records entered: {{camera._visits.length}} </h5>
+    <form (submit)="editShow(camera)">
+      <input type="submit" value="Add/Edit Location">
+    </form>
+</div>
+<br>
+<div *ngIf="camera.showEditForm">
+  <form (submit)="edit(camera)">
+      <label> Location:
+       <input type="text" name="editCamera.location" [(ngModel)]="camera.location">
+      </label>
+      <input type="submit" value="Save">
+  </form>
+</div>

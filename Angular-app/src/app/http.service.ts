@@ -14,6 +14,7 @@ export class HttpService {
   coins = 0;
   alltransactions = [];
 
+// fetch all
   shareVisits() {
     return this._http.get('/visits');
   }
@@ -25,6 +26,7 @@ export class HttpService {
   shareUsers() {
     return this._http.get('/users');
   }
+// users
   getUser(userId) {
     console.log('request from user-detail component:', userId);
     return this._http.get('/users/' + userId);
@@ -33,6 +35,16 @@ export class HttpService {
   editUser(editUser) {
     console.log('request to server: ', editUser);
     return this._http.patch('/users/' + editUser._id, editUser);
+  }
+// cameras
+  getCamera(cameraId) {
+    console.log('request from camera-detail component:', cameraId);
+    return this._http.get('/cameras/' + cameraId);
+  }
+
+  editCamera(editCamera) {
+    console.log('request to server: ', editCamera);
+    return this._http.patch('/cameras/' + editCamera._id, editCamera);
   }
 
 // old code to get rid of:
