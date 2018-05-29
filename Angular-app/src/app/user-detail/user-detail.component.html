@@ -1,13 +1,19 @@
-<h5>
-  user-detail:
-</h5>
+<h4>User Record</h4>
 <div *ngFor = "let img of user.faceImage">
   <img src= "../../uploads/{{img}}" alt="Cannot Find faceimage">
   <b> Entered at:</b> {{img | slice: 0:-14}}
 </div>
 
 <div class="info">
-  <h5>user_byte: {{user.byte_stream | slice:0:10}}</h5>
+  <h4>User Details</h4>
+  <h5>ID: {{user._id}}</h5>
+  <h5>first name:  {{user.first_name}} </h5>
+  <h5>last name: {{user.last_name}}</h5>
+  <h5>gender: {{user.gender}}</h5>
+  <h5>email: {{user.email}}</h5>
+  <h5>phone: {{user.telephone}}</h5>
+  <h5>comment: {{user.comment}}</h5>
+  <h5> Number of times entered: {{user._visits.length}} </h5>
   <form (submit)="editShow(user)">
     <input type="submit" value="Edit">
   </form>
