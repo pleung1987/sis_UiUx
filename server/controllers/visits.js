@@ -39,10 +39,13 @@ module.exports = {
         //create image file
         var image = req.body.faceImage;
         var bitmap = Buffer.from(image, 'base64');
-        var path = `../uploads/${new Date().toISOString()}-face.jpg`
-        fs.writeFileSync(path, bitmap,{ encoding:'base64'});
-        console.log('this is the path: ', path)
-        //helper var and functions for finding user
+       
+        //NOTE: Fix future bug, so that we don't need to create two image folders to serve front-end and server
+        var fileName = `${new Date().toISOString()}-face.jpg` //create the name of the file
+        fs.writeFileSync(`../uploads/${fileName}`, bitmap,{ encoding:'base64'});    //save it at path that is set up outside of project folder(back-up)
+
+        fs.writeFileSync(`./uploads/${fileName}`, bitmap,{ encoding:'base64'});    //save it at path that is set up inside project folder(used for serving front-end)
+
         var faces = [],
         new_face = req.body.byte_stream;
         //helper function(Euclidean distance)
@@ -84,7 +87,7 @@ module.exports = {
         const newUser = new User({
             _id: new mongoose.Types.ObjectId(),
             byte_stream: req.body.byte_stream,
-            faceImage: path,   //change this back to Path for debug
+            faceImage: fileName,   //file name is same as in saved folders
         }, {usePushEach: true})
 
         const newVisit = new Visit({

@@ -18,9 +18,13 @@ export class UserDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.getVisit();
+  }
+
+  getVisit() {
     const id = this._route.snapshot.params['id'];
-    this.userId = id;
     console.log('this is the id page: ', this.userId);
+    this.userId = id;
     const observable = this._httpService.getUser(id);
     observable.subscribe( data => {
       console.log('this is the data from service: ', data['users']);
@@ -28,4 +32,17 @@ export class UserDetailComponent implements OnInit {
     });
   }
 
+  editShow(user) {
+    console.log('this is the user to edit: ', user);
+    user.showEditForm = true;
+  }
+
+  edit(user) {
+    console.log('editing user submitting: ', user);
+    const observable = this. _httpService.editUser(user);
+    user.showEditForm = false;
+    observable.subscribe(data => {
+      console.log('Got data from editUser Service: ', data);
+    });
+  }
 }

@@ -2,12 +2,37 @@
   user-detail:
 </h5>
 <div *ngFor = "let img of user.faceImage">
-  <img src= "../../../{{img}}" alt="faceimage">
-  {{img}}
+  <img src= "../../uploads/{{img}}" alt="Cannot Find faceimage">
+  <b> Entered at:</b> {{img | slice: 0:-14}}
 </div>
 
-<img src= "./assets/outside-asset/2018-05-24T06:51:32.108Z-face.jpg" alt="test">
-<h5>user_byte: {{user.byte_stream | slice:0:10}}</h5>
-
-<!-- <h5>Image: {{user.faceImage}}</h5>
-<h5>Image: {{user.faceImage}}</h5> -->
+<div class="info">
+  <h5>user_byte: {{user.byte_stream | slice:0:10}}</h5>
+  <form (submit)="editShow(user)">
+    <input type="submit" value="Edit">
+  </form>
+</div>
+<br>
+<div *ngIf="user.showEditForm">
+  <form (submit)="edit(user)">
+      <label> First Name:
+       <input type="text" name="editUser.first_name" [(ngModel)]="user.first_name">
+      </label>
+      <label> Last Name: 
+        <input type="text" name="editUser.last_name" [(ngModel)]="user.last_name">
+      </label>
+      <label> Gender: 
+        <input type="text" name="editUser.gender" [(ngModel)]="user.gender">
+      </label>
+      <label> Email: 
+        <input type="text" name="editUser.email" [(ngModel)]="user.email">
+      </label>
+      <label> Phone: 
+        <input type="text" name="editUser.telephone" [(ngModel)]="user.telephone">
+      </label>
+      <label> Comment: 
+        <input type="text" name="editUser.comment" [(ngModel)]="user.comment">
+      </label>
+      <input type="submit" value="Save">
+  </form>
+</div>
