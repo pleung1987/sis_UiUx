@@ -9,7 +9,7 @@
 </div>
 <div>
   <h3>Visit Logs</h3>
-  <p *ngFor= "let visit of visits" > User: ' <a [routerLink]="['user-detail', visit._visitor._id]">{{visit._visitor.byte_stream}} </a>' has entered camera location: <a [routerLink]="['camera-detail', visit._camera._id]"> {{visit._camera.mac_addr}}</a>  on {{visit.visited | date:'y, MMM dd,  h:mm:ss a'}} </p>
+  <p *ngFor= "let visit of visits" > User: ' <a [routerLink]="['user-detail', visit._visitor._id]">{{visit._visitor.byte_stream | slice:0:20}} </a>' has entered camera location: <a [routerLink]="['camera-detail', visit._camera._id]"> {{visit._camera.mac_addr}}</a>  on {{visit.visited | date:'y, MMM dd,  h:mm:ss a'}} </p>
 </div>
 
 <router-outlet></router-outlet>

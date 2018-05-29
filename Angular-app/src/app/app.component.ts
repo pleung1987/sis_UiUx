@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this._route.params.subscribe((params: Params) => console.log(params['id'])); // to attain a parameter from the current URL
+    // this._route.params.subscribe((params: Params) => console.log(params['id'])); // to attain a parameter from the current URL
   }
 
   goHome() {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { HttpService } from '../http.service';
 
 @Component({
@@ -9,7 +10,11 @@ import { HttpService } from '../http.service';
 export class HomeComponent implements OnInit {
   visits: any;
 
-  constructor(private _httpService: HttpService) { }
+  constructor(
+    private _route: ActivatedRoute,
+    private _router: Router,
+    private _httpService: HttpService
+  ) { }
 
   ngOnInit() {
     this.getVisits();
@@ -21,5 +26,6 @@ export class HomeComponent implements OnInit {
       this.visits = data['data'];
       console.log('this is the data: ', this.visits);
     });
+    // this._route.params.subscribe((params: Params) => console.log(params['id']));
   }
 }
