@@ -9,6 +9,15 @@
 </div>
 <div>
   <h3>Visit Logs</h3>
+  <br>
+
+  <div>
+    <button *ngIf ="stopped ; else continue" type="button" class="btn btn-danger" (click)= "stop()">Stop Updates</button>
+    <ng-template #continue>
+      <button type="button" class="btn btn-primary" (click)= "resume()">Continue Updates</button>
+    </ng-template>
+  </div>
+
   <p *ngFor= "let visit of visits" > 
     User: ' 
     <a [routerLink]="['user-detail', visit._visitor._id]"> 

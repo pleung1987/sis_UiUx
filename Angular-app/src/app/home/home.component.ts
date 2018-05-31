@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { HttpService } from '../http.service';
+import { Observable } from 'rxjs/Rx';
+import 'rxjs/add/observable/throw';
 
 @Component({
   selector: 'app-home',
@@ -9,6 +11,9 @@ import { HttpService } from '../http.service';
 })
 export class HomeComponent implements OnInit {
   visits: any;
+  Refresh = Observable.interval(5000); // set refresh rate
+  subscription: any;
+  stopped: Boolean = true;
 
   constructor(
     private _route: ActivatedRoute,
@@ -18,6 +23,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.getVisits();
+    this.subscription = this.Refresh.subscribe(x => this.getVisits()); // auto updates
   }
 
   getVisits() {
@@ -26,6 +32,18 @@ export class HomeComponent implements OnInit {
       this.visits = data['data'];
       console.log('this is the data: ', this.visits);
     });
-    // this._route.params.subscribe((params: Params) => console.log(params['id']));
   }
+
+  stop() {
+    console.log('subscription stopped');
+    this.subscription.unsubscribe();
+    this.stopped = false;
+  }
+
+  resume() {
+    console.log('subscription continued');
+    this.subscription = this.Refresh.subscribe(x => this.getVisits());
+    this.stopped = true;
+  }
+
 }
