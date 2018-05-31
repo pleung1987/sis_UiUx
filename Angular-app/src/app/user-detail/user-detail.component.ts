@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-user-detail',
   templateUrl: './user-detail.component.html',
@@ -10,6 +11,9 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 export class UserDetailComponent implements OnInit {
   public userId;
   user: any;
+  success: any;
+  fail: any;
+  interval: any;
 
   constructor(
     private _route: ActivatedRoute,
@@ -36,6 +40,10 @@ export class UserDetailComponent implements OnInit {
     console.log('this is the user to edit: ', user);
     user.showEditForm = true;
   }
+  cancelShow(user) {
+    console.log('this is the user to edit: ', user);
+    user.showEditForm = false;
+  }
 
   edit(user) {
     console.log('editing user submitting: ', user);
@@ -43,6 +51,8 @@ export class UserDetailComponent implements OnInit {
     user.showEditForm = false;
     observable.subscribe(data => {
       console.log('Got data from editUser Service: ', data);
+      this.success = data['Success'];
+      this.fail = data['Fail'];
     });
   }
 }

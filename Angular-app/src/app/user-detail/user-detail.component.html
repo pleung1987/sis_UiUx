@@ -14,13 +14,22 @@
   <h5>phone: {{user.telephone}}</h5>
   <h5>comment: {{user.comment}}</h5>
   <h5> Number of times entered: {{user._visits.length}} </h5>
-  <form (submit)="editShow(user)">
-    <input type="submit" value="Edit">
-  </form>
+  <div class="buttons">
+    <form (submit)="editShow(user)">
+      <button type="submit" class="btn btn-secondary">Edit</button>
+    </form>
+  </div>
+    <br>
+  <div *ngIf="success" class="alert alert-success">
+    {{success}}
+  </div>
+  <div *ngIf="fail" class="alert alert-danger">
+    {{fail}}
+  </div>
 </div>
 <br>
 <div *ngIf="user.showEditForm">
-  <form (submit)="edit(user)">
+  <form (submit)="edit(user)" id="editForm">
       <label> First Name:
        <input type="text" name="editUser.first_name" [(ngModel)]="user.first_name">
       </label>
@@ -28,7 +37,11 @@
         <input type="text" name="editUser.last_name" [(ngModel)]="user.last_name">
       </label>
       <label> Gender: 
-        <input type="text" name="editUser.gender" [(ngModel)]="user.gender">
+        <select name="editUser.gender" [(ngModel)]="user.gender">
+          <option type="text" value="male">male</option>
+          <option type="text" value="female">female</option>
+          <option type="text" value="other">other</option>
+        </select>
       </label>
       <label> Email: 
         <input type="text" name="editUser.email" [(ngModel)]="user.email">
@@ -37,8 +50,15 @@
         <input type="text" name="editUser.telephone" [(ngModel)]="user.telephone">
       </label>
       <label> Comment: 
-        <input type="text" name="editUser.comment" [(ngModel)]="user.comment">
-      </label>
-      <input type="submit" value="Save">
+          <textarea rows="4" cols="50" name="editUser.comment" [(ngModel)]="user.comment"></textarea>
+        </label>
   </form>
+  <div class="row">
+      <div class="col-sm-12 text-center">
+          <button id="btnSave" type="submit" class="btn btn-primary btn-md center-block" form="editForm">Save</button> 
+          <form id="btnCancel" (submit)="cancelShow(user)">
+              <button type="submit" class="btn btn-danger btn-md center-block">Cancel</button>
+          </form> 
+       </div>
+  </div>
 </div>
