@@ -10,8 +10,8 @@ import { HomeComponent } from '../home/home.component';
 })
 export class SetComponent implements OnInit {
   users: any;
-  newStatus: any;
   choice: number;
+  visits: any;
 
   constructor(
     private _route: ActivatedRoute,
@@ -21,11 +21,6 @@ export class SetComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUsers();
-    this.newStatus = {
-      vip: false,
-      blacklist: false,
-      normal: false
-    };
   }
 
   getUsers() {

@@ -1,7 +1,6 @@
 
 <div class="container">
-  <h2>Set Visitor Class</h2>
-  <h4>Notify when specific visitor visit as VIP or blacklisted</h4>
+  <h2>Set Visitor Information</h2>
   <div class="table vertical-center">
     <table class="table">
       <thead class="thead-dark">
@@ -9,7 +8,7 @@
           <th scope="col">Picture</th>
           <th scope="col">Name</th>
           <th scope="col">Class</th>
-          <th scope="col">total entries</th>
+          <th scope="col">Total Entries</th>
           <th scope="col">Recent Entered Time</th>
           <th scope="col">Edit</th>
         </tr>
@@ -34,8 +33,8 @@
                   <span>Normal</span>
               </ng-template>
           </td>
-          <td> count total aggregate by day</td>
-          <td> last element in _visit array</td>
+          <td> {{user._visits.length}}</td>
+          <td> {{user._visits[user._visits.length-1].visited | date: 'y, MMM dd,  h:mm:ss a'}}</td>
           <td><button  [routerLink]="['user-detail', user._id]" id="btnEdit" class="btn btn-primary btn-md center-block" >Edit</button>
             <button id="btnDelete" class="btn btn-danger btn-md center-block">Delete</button></td>
         </tr>
