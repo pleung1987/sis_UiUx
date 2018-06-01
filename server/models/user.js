@@ -16,6 +16,7 @@ var UserSchema = new mongoose.Schema({
  vip: { type: Boolean, default: false},
  blacklist: {type: Boolean , default: false},
  showEditForm: {type: Boolean , default: false},
+ showEditForm: {type: Boolean , default: false},
  _visits: [{
      type: Schema.Types.ObjectId, 
      ref: 'Visit',

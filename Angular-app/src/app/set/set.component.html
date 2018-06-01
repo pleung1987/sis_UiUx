@@ -1,12 +1,39 @@
 
 <div class="container">
-  <h2>
-    Mine ShintoCoins
-  </h2>
-  <h4>
-    Here you can mine ShintoCoins by being the first to solve the algorithm:
-  </h4>
-  <app-b-main></app-b-main>
+  <h2>Set Visitor Class</h2>
+  <h4>Notify when specific visitor visit as VIP or blacklisted</h4>
+  <div class="table vertical-center">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Picture</th>
+          <th scope="col">Name</th>
+          <th scope="col">Class</th>
+          <th scope="col">total entries</th>
+          <th scope="col">Recent Entered Time</th>
+          <th scope="col">Edit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <th scope="row">
+            <a [routerLink]="['user-detail', user._id]">
+              <img src="../../uploads/{{user.faceImage[0]}}" alt="cannot find img">
+            </a>
+          </th>
+          <td>
+            <span *ngIf="user.first_name ; else other">{{user.first_name}} {{user.last_name}}</span>
+            <ng-template #other>{{user._id}}</ng-template>
+          </td>
+          <td> set by VIP or blacklist</td>
+          <td> count total aggregate by day</td>
+          <td> last element in _visit array</td>
+          <td><button  [routerLink]="['user-detail', user._id]" id="btnEdit" class="btn btn-primary btn-md center-block" >Edit</button>
+            <button id="btnDelete" class="btn btn-danger btn-md center-block">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
-
+<router-outlet></router-outlet>
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { HttpService } from '../http.service';
 import { Observable } from 'rxjs/Rx';
@@ -7,9 +7,9 @@ import 'rxjs/add/observable/throw';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   visits: any;
   Refresh = Observable.interval(5000); // set refresh rate
   subscription: any;
@@ -21,27 +21,31 @@ export class HomeComponent implements OnInit {
     private _httpService: HttpService
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.getVisits();
-    this.subscription = this.Refresh.subscribe(x => this.getVisits()); // auto updates
+    this.resume();
+    // this.subscription = this.Refresh.subscribe(x => this.getVisits()); // auto updates
+  }
+  ngOnDestroy(): void {
+    this.stop();
   }
 
-  getVisits() {
+  getVisits(): void {
     const visitsObservable = this._httpService.shareVisits();
     visitsObservable.subscribe(data => {
       this.visits = data['data'];
-      console.log('this is the data: ', this.visits);
+      // console.log('this is the data: ', this.visits);
     });
   }
 
-  stop() {
+  stop(): void {
     console.log('subscription stopped');
     this.subscription.unsubscribe();
     this.stopped = false;
   }
 
-  resume() {
-    console.log('subscription continued');
+  resume(): void {
+    console.log('subscription resumed');
     this.subscription = this.Refresh.subscribe(x => this.getVisits());
     this.stopped = true;
   }

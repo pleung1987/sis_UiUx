@@ -44,8 +44,6 @@ module.exports = {
         var fileName = `${new Date().toISOString()}-face.jpg` //create the name of the file
         fs.writeFileSync(`../uploads/${fileName}`, bitmap,{ encoding:'base64'});    //save it at path that is set up outside of project folder(back-up)
 
-        fs.writeFileSync(`./uploads/${fileName}`, bitmap,{ encoding:'base64'});    //save it at path that is set up inside project folder(used for serving front-end)
-
         var faces = [],
         new_face = req.body.byte_stream;
         //helper function(Euclidean distance)
