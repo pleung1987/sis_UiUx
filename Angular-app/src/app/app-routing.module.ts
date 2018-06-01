@@ -28,7 +28,18 @@ const routes: Routes = [
       }
     ]
   },
-  { path: 'set', component: SetComponent },
+  { path: 'set',
+  children: [
+      {
+        path: '',
+        component: SetComponent
+      },
+      {
+        path: 'user-detail/:id',
+        component: UserDetailComponent
+      }
+    ]
+  },
   { path: 'inquiring', component: InquireComponent },
   { path: 'frequent', component: FrequentComponent },
   { path: 'settings', component: SettingsComponent },

@@ -10,3 +10,5 @@ https://github.com/sass/node-sass/issues/2178
     * We are at the Develop Branch
     -> added new feature!
     -> spliting develop branch again
+
+3) create symbolic link from outside project folder uploads to inside project folder

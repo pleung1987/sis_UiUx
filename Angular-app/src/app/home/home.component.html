@@ -9,12 +9,10 @@
 </div>
 <div>
   <h3>Visit Logs</h3>
-  <br>
-
   <div>
     <button *ngIf ="stopped ; else continue" type="button" class="btn btn-danger" (click)= "stop()">Stop Updates</button>
     <ng-template #continue>
-      <button type="button" class="btn btn-primary" (click)= "resume()">Continue Updates</button>
+      <button type="button" class="btn btn-success" (click)= "resume()">Continue Updates</button>
     </ng-template>
   </div>
 

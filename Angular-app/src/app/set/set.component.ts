@@ -1,22 +1,43 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { HomeComponent } from '../home/home.component';
 
 @Component({
   selector: 'app-set',
   templateUrl: './set.component.html',
-  styleUrls: ['./set.component.css']
+  styleUrls: ['./set.component.scss']
 })
 export class SetComponent implements OnInit {
-  numbers: any;
-  constructor(private _httpService: HttpService) { }
+  users: any;
+  newStatus: any;
+  choice: number;
 
-  ngOnInit() {
-    this.getNumbers();
+  constructor(
+    private _route: ActivatedRoute,
+    private _router: Router,
+    private _httpService: HttpService
+  ) { }
+
+  ngOnInit(): void {
+    this.getUsers();
+    this.newStatus = {
+      vip: false,
+      blacklist: false,
+      normal: false
+    };
   }
 
-  getNumbers() {
-    this.numbers = this._httpService.shareVisits();
+  getUsers() {
+    const usersObservable = this._httpService.shareUsers();
+    usersObservable.subscribe(data => {
+      this.users = data['users'];
+      console.log('users from http: ', this.users);
+    });
+  }
+
+  setStatus(user) {
+    console.log(`detail submited for user ${user._id}: `, this.choice);
   }
 
 }
