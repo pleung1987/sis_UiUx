@@ -36,8 +36,4 @@ export class SetComponent implements OnInit {
     });
   }
 
-  setStatus(user) {
-    console.log(`detail submited for user ${user._id}: `, this.choice);
-  }
-
 }

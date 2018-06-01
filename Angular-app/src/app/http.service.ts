@@ -36,6 +36,11 @@ export class HttpService {
     console.log('request to server: ', editUser);
     return this._http.patch('/users/' + editUser._id, editUser);
   }
+  editStatus(editStatus) {
+    console.log('request to server: ', editStatus);
+    return this._http.put('/users/' + editStatus._id, editStatus);
+  }
+
 // cameras
   getCamera(cameraId) {
     console.log('request from camera-detail component:', cameraId);

@@ -7,6 +7,7 @@ module.exports = {
   index: async (req,res,next) => {
         const users = await User.find({})
             .populate('_visits')
+            .sort('-_visits -visited')
             .exec((err, users) => {
                 if(err){
                     console.log('error happened', err);

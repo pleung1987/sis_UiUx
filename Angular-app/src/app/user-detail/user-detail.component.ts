@@ -14,6 +14,7 @@ export class UserDetailComponent implements OnInit {
   success: any;
   fail: any;
   interval: any;
+  newStatus: number;
 
   constructor(
     private _route: ActivatedRoute,
@@ -23,6 +24,7 @@ export class UserDetailComponent implements OnInit {
 
   ngOnInit() {
     this.getVisit();
+    this.newStatus = 0;
   }
 
   getVisit() {
@@ -39,6 +41,7 @@ export class UserDetailComponent implements OnInit {
   editShow(user) {
     console.log('this is the user to edit: ', user);
     user.showEditForm = true;
+    user.showStatusForm = false;
   }
   cancelShow(user) {
     console.log('this is the user to edit: ', user);
@@ -55,4 +58,43 @@ export class UserDetailComponent implements OnInit {
       this.fail = data['Fail'];
     });
   }
+  statusShow(user) {
+    console.log('this is the status to edit: ', user);
+    user.showStatusForm = true;
+    user.showEditForm = false;
+  }
+
+  status(user) {
+    console.log(`status of ${user._id} submitting:`, this.newStatus );
+    if (this.newStatus === 1) {
+      user.vip = true;
+      user.blacklist = false;
+      const observable = this._httpService.editStatus(user);
+      observable.subscribe( data => {
+        console.log('Got data from editStatus service: ', data['user']);
+      });
+    }
+    if (this.newStatus === 2) {
+      user.vip = false;
+      user.blacklist = true;
+      const observable = this._httpService.editStatus(user);
+      observable.subscribe( data => {
+        console.log('Got data from editStatus service: ',  data['user']);
+      });
+    }
+    if (this.newStatus === 3) {
+      user.vip = false;
+      user.blacklist = false;
+      const observable = this._httpService.editStatus(user);
+      observable.subscribe( data => {
+        console.log('Got data from editStatus service: ',  data['user']);
+      });
+    }
+  }
+
+  cancelStatus(user) {
+    console.log('this is the status to edit: ', user);
+    user.showStatusForm = false;
+  }
+
 }

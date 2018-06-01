@@ -16,27 +16,75 @@
     </ng-template>
   </div>
 
-  <p *ngFor= "let visit of visits" > 
-    User: ' 
-    <a [routerLink]="['user-detail', visit._visitor._id]"> 
-      <span *ngIf= "visit._visitor.first_name; else otherUser"> 
-        {{visit._visitor.first_name}} {{visit._visitor.last_name}} 
-      </span> 
-      <ng-template #otherUser> 
-        {{visit._visitor._id}}  
-      </ng-template> 
-    </a>' 
-    has entered camera location: 
-    <a [routerLink]="['camera-detail', visit._camera._id]"> 
-        <span *ngIf= "visit._camera.location; else otherCam"> 
-            {{visit._camera.location}}
-        </span> 
-        <ng-template #otherCam> 
-          {{visit._camera.mac_addr}}
-        </ng-template> 
-    </a>  
-    on {{visit.visited | date:'y, MMM dd,  h:mm:ss a'}} 
-  </p>
+  <div class="visitLogs" *ngFor= "let visit of visits">
+      <b class="text-success" *ngIf="visit._visitor.vip ; else blacklist"> 
+          *** VIP Visitor: ' 
+          <a [routerLink]="['user-detail', visit._visitor._id]"> 
+            <span *ngIf= "visit._visitor.first_name; else otherUser"> 
+              {{visit._visitor.first_name}} {{visit._visitor.last_name}} 
+            </span> 
+            <ng-template #otherUser> 
+              {{visit._visitor._id}}  
+            </ng-template> 
+          </a>' 
+          has entered camera location: 
+          <a [routerLink]="['camera-detail', visit._camera._id]"> 
+              <span *ngIf= "visit._camera.location; else otherCam"> 
+                  {{visit._camera.location}}
+              </span> 
+              <ng-template #otherCam> 
+                {{visit._camera.mac_addr}}
+              </ng-template> 
+          </a>  
+          on {{visit.visited | date:'y, MMM dd,  h:mm:ss a'}} ***
+    </b>
+    <ng-template #blacklist>
+        <b class="text-danger" *ngIf="visit._visitor.blacklist ; else normal"> 
+            ***** Blacklisted Visitor: ' 
+            <a [routerLink]="['user-detail', visit._visitor._id]"> 
+              <span *ngIf= "visit._visitor.first_name; else otherUser"> 
+                {{visit._visitor.first_name}} {{visit._visitor.last_name}} 
+              </span> 
+              <ng-template #otherUser> 
+                {{visit._visitor._id}}  
+              </ng-template> 
+            </a>' 
+            has entered camera location: 
+            <a [routerLink]="['camera-detail', visit._camera._id]"> 
+                <span *ngIf= "visit._camera.location; else otherCam"> 
+                    {{visit._camera.location}}
+                </span> 
+                <ng-template #otherCam> 
+                  {{visit._camera.mac_addr}}
+                </ng-template> 
+            </a>  
+            on {{visit.visited | date:'y, MMM dd,  h:mm:ss a'}} *****
+      </b>
+    </ng-template>
+    <ng-template #normal>
+      <b> 
+        Visitor: ' 
+        <a [routerLink]="['user-detail', visit._visitor._id]"> 
+          <span *ngIf= "visit._visitor.first_name; else otherUser"> 
+            {{visit._visitor.first_name}} {{visit._visitor.last_name}} 
+          </span> 
+          <ng-template #otherUser> 
+            {{visit._visitor._id}}  
+          </ng-template> 
+        </a>' 
+        has entered camera location: 
+        <a [routerLink]="['camera-detail', visit._camera._id]"> 
+            <span *ngIf= "visit._camera.location; else otherCam"> 
+                {{visit._camera.location}}
+            </span> 
+            <ng-template #otherCam> 
+              {{visit._camera.mac_addr}}
+            </ng-template> 
+        </a>  
+        on {{visit.visited | date:'y, MMM dd,  h:mm:ss a'}} 
+      </b>
+    </ng-template>
+  </div>
 </div>
 
 <router-outlet></router-outlet>

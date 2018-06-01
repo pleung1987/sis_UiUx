@@ -25,7 +25,15 @@
             <span *ngIf="user.first_name ; else other">{{user.first_name}} {{user.last_name}}</span>
             <ng-template #other>{{user._id}}</ng-template>
           </td>
-          <td> set by VIP or blacklist</td>
+          <td> 
+              <b *ngIf="user.vip ; else blacklist" class="text-success">VIP</b>
+              <ng-template #blacklist>
+                  <b *ngIf="user.blacklist ; else normal" class="text-danger">Blacklisted</b>
+              </ng-template>
+              <ng-template #normal>
+                  <span>Normal</span>
+              </ng-template>
+          </td>
           <td> count total aggregate by day</td>
           <td> last element in _visit array</td>
           <td><button  [routerLink]="['user-detail', user._id]" id="btnEdit" class="btn btn-primary btn-md center-block" >Edit</button>
