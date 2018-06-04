@@ -1,6 +1,6 @@
 import { HomeComponent } from './home/home.component';
 import { SetComponent } from './set/set.component';
-import { InquireComponent } from './inquire/inquire.component';
+import { SetCameraComponent } from './setCamera/setCamera.component';
 import { FrequentComponent } from './frequent/frequent.component';
 import { SettingsComponent } from './settings/settings.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
@@ -28,7 +28,7 @@ const routes: Routes = [
       }
     ]
   },
-  { path: 'set',
+  { path: 'setCustomer',
   children: [
       {
         path: '',
@@ -40,7 +40,7 @@ const routes: Routes = [
       }
     ]
   },
-  { path: 'inquiring', component: InquireComponent },
+  { path: 'setCamera', component: SetCameraComponent },
   { path: 'frequent', component: FrequentComponent },
   { path: 'settings', component: SettingsComponent },
   { path: 'user-detail/:id', component: UserDetailComponent },

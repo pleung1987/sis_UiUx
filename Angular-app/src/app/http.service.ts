@@ -8,7 +8,6 @@ import 'rxjs/add/operator/map';
 export class HttpService {
 
   constructor(private _http: HttpClient) { }
-  userObserver = new BehaviorSubject([]);
   result: any;
   value = 0;
   coins = 0;

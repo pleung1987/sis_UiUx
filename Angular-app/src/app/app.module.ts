@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { SetComponent } from './set/set.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
-import { InquireComponent } from './inquire/inquire.component';
+import { SetCameraComponent } from './setCamera/setCamera.component';
 import { FrequentComponent } from './frequent/frequent.component';
 import { SettingsComponent } from './settings/settings.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
@@ -16,6 +16,8 @@ import { HttpModule } from '@angular/http';
 import { HttpService } from './http.service';
 import { FormsModule } from '@angular/forms';
 import { CameraDetailComponent } from './camera-detail/camera-detail.component';
+import { ShopComponent } from './shop/shop.component';
+import { ShopDatailComponent } from './shop/shop-datail/shop-datail.component';
 
 
 @NgModule({
@@ -24,11 +26,13 @@ import { CameraDetailComponent } from './camera-detail/camera-detail.component';
     HomeComponent,
     SetComponent,
     PagenotfoundComponent,
-    InquireComponent,
+    SetCameraComponent,
     FrequentComponent,
     SettingsComponent,
     UserDetailComponent,
-    CameraDetailComponent
+    CameraDetailComponent,
+    ShopComponent,
+    ShopDatailComponent
   ],
   imports: [
     BrowserModule,
