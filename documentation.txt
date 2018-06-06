@@ -13,3 +13,6 @@ bash: npm install --unsafe-perm=true
     -> spliting develop branch again
 
 3) create symbolic link from outside project folder uploads to inside project folder
+
+4) For deployment, delete /dist at Angular/.gitignore
+    -> add back /dist during development
