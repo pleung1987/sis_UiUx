@@ -12,9 +12,9 @@ app.use(express.static( __dirname + '/Angular-app/dist' ));
 app.use('/uploads', express.static('uploads'))
 
 // Set up body-parser to parse form data
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({extended: true, limit: '50mb'}));
 // JSON
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '50mb'}));
 //Middlewares
 app.use(logger('dev'));
 // Set up database connection, Schema, model
