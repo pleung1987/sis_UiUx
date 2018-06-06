@@ -4,7 +4,8 @@ import { SetCameraComponent } from './setCamera/setCamera.component';
 import { FrequentComponent } from './frequent/frequent.component';
 import { SettingsComponent } from './settings/settings.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
-
+import { ShopComponent } from './setCamera/shop/shop.component';
+import { CamerasComponent } from './setCamera/cameras/cameras.component';
 import { PagenotfoundComponent  } from './pagenotfound/pagenotfound.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -40,10 +41,30 @@ const routes: Routes = [
       }
     ]
   },
-  { path: 'setCamera', component: SetCameraComponent },
+  { path: 'setCamera',
+    component: SetCameraComponent,
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: '/setCamera/(setCamera:cameras)'
+      },
+      {
+        path: 'shop',
+        component: ShopComponent,
+        outlet: 'setCamera'
+      },
+      {
+        path: 'cameras',
+        component: CamerasComponent,
+        outlet: 'setCamera',
+      }
+    ],
+  },
   { path: 'frequent', component: FrequentComponent },
   { path: 'settings', component: SettingsComponent },
   { path: 'user-detail/:id', component: UserDetailComponent },
+  { path: 'camera-detail/:id', component: CameraDetailComponent },
   { path: '', pathMatch: 'full', redirectTo: '/home'},
   { path: '**', component: PagenotfoundComponent }
 ];

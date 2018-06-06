@@ -1,21 +1,68 @@
 
 <div class="info">
-    <h4>Camera Details</h4>
-    <h5>ID: {{camera._id}}</h5>
-    <h5>functional since:  {{camera.createdAt | date:'y, MMM dd,  h:mm:ss a'}} </h5>
-    <h5>mac address: {{camera.mac_addr}}</h5>
-    <h5>location: {{camera.location}}</h5>
-    <h5> Records entered: {{camera._visits.length}} </h5>
-    <form (submit)="editShow(camera)">
-      <input type="submit" value="Add/Edit Location">
-    </form>
+  <br>
+    <h4><b> Camera Details</b></h4>
+    <h5><b> ID:</b> {{camera._id}}</h5>
+    <h5><b> functional since:</b>  {{camera.createdAt | date:'y, MMM dd,  h:mm:ss a'}} </h5>
+    <h5><b> mac address: </b> {{camera.mac_addr}}</h5>
+    <h5><b> location: </b> {{camera.location}}</h5>
+    <h5> <b> Records entered: </b> {{camera._visits.length}} </h5>
+    <br>
+    <h4> <b> Shop Details of Camera </b></h4>
+    <h5><b> Brand: </b> {{camera._shop.brand}} </h5>
+    <h5><b> Branch:</b> {{camera._shop.branch}}</h5>
+    <h5><b> Address:</b> {{camera._shop.address}}</h5>
+    <h5><b> Updated:</b> {{camera._shop.createdAt | date:'y, MMM dd,  h:mm:ss a'}} </h5>
+    <div class="row">
+      <div class="col-sm-12 text-center">
+        <form (submit)="editShow(camera)" id="btnAddEdit">
+          <button type="submit" class="btn btn-secondary btn-md center-block">Add/Edit Location</button>
+        </form>
+        <form (submit)="associationShow(camera)" id="btnAllocate">
+          <button  type="submit"  class="btn btn-secondary">Allocate Shop </button>
+        </form>
+
+      </div>
+    </div>
 </div>
 <br>
 <div *ngIf="camera.showEditForm">
-  <form (submit)="edit(camera)">
+  <form (submit)="edit(camera)" id="showEditForm">
       <label> Location:
        <input type="text" name="editCamera.location" [(ngModel)]="camera.location">
       </label>
-      <input type="submit" value="Save">
+      <br>
   </form>
+  <div class="row">
+      <div class="col-sm-12 text-center">
+          <button id="btnSave" type="submit" class="btn btn-primary btn-md center-block" form="showEditForm">Save</button> 
+          <form id="btnCancel" (submit)="cancelShow(camera)">
+              <button id="btnCancel" type="submit" class="btn btn-danger btn-md center-block">Cancel</button>
+          </form> 
+       </div>
+  </div>
+</div>
+<div class='setCamera' *ngIf='showAssociation'>
+  <p><b>Current Camera Allocated:</b> {{camera._shop.brand}} - {{camera._shop.branch}} - {{camera._shop.address}}</p>
+  <form action="">
+
+  </form>
+  <div class="errorMsg" *ngIf="message">
+    {{message}}
+  </div>
+  <form (submit)="association(camera)" id="showAssociation">
+      <label> Shop allocation:
+          <select name="editCamera._shop" (ngModel)="camera._shop">
+              <option *ngFor="let shop of shops" type="text" value="{{shop._id}}">{{shop.brand}}: {{shop.branch}}</option>
+            </select>
+      </label>
+  </form>
+  <div class="row">
+      <div class="col-sm-12 text-center">
+          <button id="btnSave" type="submit" class="btn btn-primary btn-md center-block" form="showAssociation">Save</button> 
+          <form id="btnCancel" (submit)="cancelShowAssociation(camera)">
+              <button type="submit" class="btn btn-danger btn-md center-block">Cancel</button>
+          </form> 
+       </div>
+  </div>
 </div>

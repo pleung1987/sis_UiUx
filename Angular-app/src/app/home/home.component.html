@@ -28,7 +28,7 @@
             </ng-template> 
           </a>' 
           has entered camera location: 
-          <a [routerLink]="['camera-detail', visit._camera._id]"> 
+          <a [routerLink]= "['camera-detail', visit._camera._id]"> 
               <span *ngIf= "visit._camera.location; else otherCam"> 
                   {{visit._camera.location}}
               </span> 

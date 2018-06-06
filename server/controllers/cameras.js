@@ -53,13 +53,12 @@ module.exports = {
 },
 // setting camera association to shop
   setCamera:  (req, res, next) => {
-    const cameraId = req.params.cameraId
+    const cameraId = req.body._id
+    const shopId = req.body._shop
     console.log('cameraId handing: ', cameraId);
-    selectBranch = req.body.branch
-    selectAddress = req.body.address
     //shop will be found because exact String will be provided from DOM form select
-    console.log('passing form data to update: ', selectBranch, selectAddress)
-    Shop.findOne({branch: selectBranch, address:selectAddress}, (err,shop) =>{ 
+    console.log('passing form shop Id to update: ', shopId)
+    Shop.findOne({_id: shopId}, (err,shop) =>{ 
         if(err){
             console.log('error happened: ', err)
             res.json({message:'error occured finding shop to set', error: err})
@@ -104,7 +103,7 @@ module.exports = {
                 })
                } else {
                    console.log('camera already taken by shop: ', camResult.branch,'-',camResult.address)
-                    res.json({message: `camera already taken by shop: ${camResult.brand}'s ${camResult.branch} at ${camResult.address}, please remove camera at specific shop if allocated wrongly!`})
+                    res.json({message: `*camera already taken by shop: ${camResult.brand}'s ${camResult.branch} at ${camResult.address}, please remove camera allocation first if allocated wrongly!`})
                }
             })
         }

@@ -25,6 +25,10 @@ export class HttpService {
   shareUsers() {
     return this._http.get('/users');
   }
+
+  shareShops() {
+    return this._http.get('/shops');
+  }
 // users
   getUser(userId) {
     console.log('request from user-detail component:', userId);
@@ -49,6 +53,20 @@ export class HttpService {
   editCamera(editCamera) {
     console.log('request to server: ', editCamera);
     return this._http.patch('/cameras/' + editCamera._id, editCamera);
+  }
+
+  setCamera(setCamera) {
+    console.log('request to server: ', setCamera);
+    return this._http.put('/cameras/' + setCamera._id, setCamera);
+  }
+
+// shops
+  addShop(newShop) {
+    return this._http.post('/shops', newShop);
+  }
+
+  deleteShop(shopId) {
+    return this._http.delete('/shops/' + shopId);
   }
 
 // old code to get rid of:

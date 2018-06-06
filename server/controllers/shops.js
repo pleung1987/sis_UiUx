@@ -34,6 +34,7 @@ module.exports = {
         })
 },
   createShop: (req, res, next) => {
+    const errorMsg = [];
     const newShop = new Shop({
         _id: new mongoose.Types.ObjectId(),
         brand: req.body.brand,
@@ -49,8 +50,19 @@ module.exports = {
                 console.log('found no existing shop, creating shop...')
                 Shop.create(newShop, (err, result) =>{
                     if(err){
-                        console.log('error happened', err);
-                        res.json(err)
+                        console.log('error happened: ', err);
+                        for (field in err.errors) {
+                            if(field == 'brand'){
+                                errorMsg.push('*Brand Name is required')
+                            }
+                            if(field == 'branch'){
+                                errorMsg.push('*Branch name is required')
+                            }
+                            if(field == 'address'){
+                                errorMsg.push('* Address required & needs to be greater than 2 characters ')
+                            }  
+                        }
+                        res.json({Fail: errorMsg , error: err})
                     } else {
                         console.log('Successfully created new shop: ', result);
                         res.status(201).json({message:'create Success', shop: result})

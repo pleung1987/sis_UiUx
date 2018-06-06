@@ -16,8 +16,8 @@ import { HttpModule } from '@angular/http';
 import { HttpService } from './http.service';
 import { FormsModule } from '@angular/forms';
 import { CameraDetailComponent } from './camera-detail/camera-detail.component';
-import { ShopComponent } from './shop/shop.component';
-import { ShopDatailComponent } from './shop/shop-datail/shop-datail.component';
+import { ShopComponent } from './setCamera/shop/shop.component';
+import { CamerasComponent } from './setCamera/cameras/cameras.component';
 
 
 @NgModule({
@@ -32,7 +32,7 @@ import { ShopDatailComponent } from './shop/shop-datail/shop-datail.component';
     UserDetailComponent,
     CameraDetailComponent,
     ShopComponent,
-    ShopDatailComponent
+    CamerasComponent
   ],
   imports: [
     BrowserModule,
