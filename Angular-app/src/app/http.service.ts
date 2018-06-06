@@ -60,6 +60,11 @@ export class HttpService {
     return this._http.put('/cameras/' + setCamera._id, setCamera);
   }
 
+  removeCameraAssociation(camera) {
+    console.log('request to server: ', camera);
+    return this._http.put('/shops/' + camera._shop, camera);
+  }
+
 // shops
   addShop(newShop) {
     return this._http.post('/shops', newShop);

@@ -26,6 +26,7 @@
     </div>
 </div>
 <br>
+<!-- Edit Camera Detail -->
 <div *ngIf="camera.showEditForm">
   <form (submit)="edit(camera)" id="showEditForm">
       <label> Location:
@@ -42,27 +43,35 @@
        </div>
   </div>
 </div>
+<!-- Edit ShopCam. Associations -->
+  <!-- Remove Association -->
 <div class='setCamera' *ngIf='showAssociation'>
-  <p><b>Current Camera Allocated:</b> {{camera._shop.brand}} - {{camera._shop.branch}} - {{camera._shop.address}}</p>
-  <form (submit)="removeAllocation(camera)">
-    <button type="submit" class="btn btn-danger btn-md center-block">Remove Camera from Shop</button>
-  </form>
+  <div class="row">
+    <div class="col-sm-12 text-center">
+      <p><b>Current Camera Allocated:</b> {{camera._shop.brand}} - {{camera._shop.branch}} - {{camera._shop.address}}</p>
+      <form (submit)="removeAllocation(camera)">
+        <button type="submit" class="btn btn-danger btn-md center-block">Remove Camera from Shop</button>
+      </form>
+      <br>
+    </div>
+  </div>
+  <!-- Set Association -->
   <div class="errorMsg" *ngIf="message">
-    {{message}}
+    <p>{{message}}</p>
   </div>
   <form (submit)="association(camera)" id="showAssociation">
-      <label> Shop allocation:
-          <select name="editCamera._shop" (ngModel)="camera._shop">
-              <option *ngFor="let shop of shops" type="text" value="{{shop._id}}">{{shop.brand}}: {{shop.branch}}</option>
-            </select>
-      </label>
+    <label> Shop allocation:
+      <select name="editCamera._shop" [(ngModel)]="camera._shop">
+          <option *ngFor="let shop of shops" type="text" value="{{shop._id}}">{{shop.brand}}: {{shop.branch}}</option>
+        </select>
+    </label>
   </form>
   <div class="row">
       <div class="col-sm-12 text-center">
-          <button id="btnSave" type="submit" class="btn btn-primary btn-md center-block" form="showAssociation">Save</button> 
-          <form id="btnCancel" (submit)="cancelShowAssociation(camera)">
-              <button type="submit" class="btn btn-danger btn-md center-block">Cancel</button>
-          </form> 
-       </div>
+        <button id="btnSave" type="submit" class="btn btn-primary btn-md center-block" form="showAssociation">Save</button> 
+        <form id="btnCancel" (submit)="cancelShowAssociation(camera)">
+            <button id="btnCancel" type="submit" class="btn btn-danger btn-md center-block">Cancel</button>
+        </form> 
+      </div>
   </div>
 </div>

@@ -70,21 +70,32 @@ export class CameraDetailComponent implements OnInit {
     camera.showEditForm = false;
     observable.subscribe(data => {
       console.log('Got data from editCamera Service: ', data);
+      this.message = data['message'];
+      this.getCamera();
+      this.getShops();
     });
   }
 
   association(camera) {
-    const id = this._route.snapshot.params['id'];
-    console.log('this is the id page: ', this.cameraId);
+    const camId = this._route.snapshot.params['id'];
+    console.log('this is the id page: ', camId);
     console.log('this is the shop id passing to service: ', camera._shop);
     const cameraObservable = this._httpService.setCamera(camera);
     cameraObservable.subscribe( data => {
       console.log('data coming from setting Camera: ', data);
       this.message = data['message'];
+      this.getShops();
     });
   }
 
   removeAllocation(camera) {
-
+    console.log('this is the Camera Detail to remove: ', camera);
+    const cameraObservable = this._httpService.removeCameraAssociation(camera);
+    cameraObservable.subscribe( data => {
+      console.log('data back from removing CamAssociation:', data);
+      this.message = data['message'];
+      this.getCamera();
+      this.getShops();
+    });
   }
 }

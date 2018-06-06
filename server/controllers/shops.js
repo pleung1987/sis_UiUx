@@ -97,22 +97,22 @@ updateShop: (req, res, next) => {
     })
 },
 removeCam: (req, res, next) => {
-    const shopId = req.params.shopId,
+    const shopId = req.body._shop,
     //Cam will be found because exact String will be provided from DOM form select
-    selectCamMac = req.body.mac_addr
+    camId = req.body._id
     Shop.findOne({_id: shopId}, (err,shop) => {
         if(err){
             console.log('error happened finding shop: ', err);
             next(err)
         } else {
             console.log('found shop: ', shop)
-            Camera.findOne({mac_addr: selectCamMac}, (err, camera) => {
+            Camera.findOne({_id: camId}, (err, camera) => {
                 //back-check if paramters given retunrs back camera,in DOM form we will provide exact String
                 if(err){
                     console.log('error happened finding camera to update: ', err);
                     next(err)
                 } else {
-                    shop._cameras.pull(camera._id)
+                    shop._cameras.pull(camId)
                     shop.save((err, updateShop) =>{
                         if(err){
                             console.log('error happened updating shop: ', err)

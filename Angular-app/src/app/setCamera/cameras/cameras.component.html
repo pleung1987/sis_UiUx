@@ -14,7 +14,12 @@
           <tr *ngFor="let camera of cameras">
             <td><a [routerLink]= "['/camera-detail', camera._id]">{{camera.mac_addr}}</a> </td>
             <td>{{camera.location}}</td>
-            <td>camera shop allocation</td>
+            <td>
+              <p *ngIf="camera._shop; else normal">{{camera._shop.brand}} - {{camera._shop.branch}}</p>
+              <ng-template #normal>
+                <p>Unassigned</p>
+              </ng-template>
+            </td>
             <td>
                 <button [routerLink]="['/camera-detail', camera._id]" id="btnEdit" class="btn btn-primary btn-md center-block" >Edit</button>
                 <button id="btnDelete" class="btn btn-danger btn-md center-block">Delete</button>
