@@ -1,6 +1,6 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
-# compiled output (remove /dist and /dist-server for deployment)
+# compiled output (remove dist and dist-server for deployment)
 /tmp
 /out-tsc
 

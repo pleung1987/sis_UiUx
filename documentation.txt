@@ -12,7 +12,8 @@ bash: npm install --unsafe-perm=true
     -> added new feature!
     -> spliting develop branch again
 
-3) create symbolic link from outside project folder uploads to inside project folder
+3) create symbolic link from outside project folder uploads to inside project folder:
+bash: sudo ln -s /var/www/uploads/ /var/www/sis_UiUx/
 
-4) For deployment, delete /dist at Angular/.gitignore
-    -> add back /dist during development
+4) For deployment, delete /dist and /dist-server at Angular/.gitignore
+    -> add back during development
