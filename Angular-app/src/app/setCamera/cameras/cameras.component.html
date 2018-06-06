@@ -1,0 +1,27 @@
+<div class="container">
+    <p>Cameras...</p>
+    <div class="table vertical-center">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">MAC Address</th>
+            <th scope="col">Location</th>
+            <th scope="col">Shop</th>
+            <th scope="col">Edit / Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let camera of cameras">
+            <td><a [routerLink]= "['/camera-detail', camera._id]">{{camera.mac_addr}}</a> </td>
+            <td>{{camera.location}}</td>
+            <td>camera shop allocation</td>
+            <td>
+                <button [routerLink]="['/camera-detail', camera._id]" id="btnEdit" class="btn btn-primary btn-md center-block" >Edit</button>
+                <button id="btnDelete" class="btn btn-danger btn-md center-block">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <router-outlet></router-outlet>

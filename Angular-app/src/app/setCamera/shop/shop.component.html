@@ -1,0 +1,49 @@
+<p>Create Shop:</p>
+<div class="form-data">
+  <form (submit)="create()">
+    <label for="shopName">Brand Name:</label>
+    <input name="newShop.brand" type="text" [(ngModel)]="newShop.brand">
+    <br>
+    <label for="shopName">Branch Name:</label>
+    <input name="newShop.branch" type="text" [(ngModel)]="newShop.branch">
+    <br>
+    <label for="shopName">Address:</label>
+    <input name="newShop.address" type="text" [(ngModel)]="newShop.address">
+    <br>
+    <input type="submit" value="Submit">
+  </form>
+</div>
+<br>
+<div class="message" *ngIf='messages' style="color: red">
+  <div *ngFor= 'let message of messages'>
+    {{message}}
+  </div>
+</div>
+<div class="message" *ngIf='message' style="color: green">
+      {{message}}
+</div>
+<div class="table vertical-center">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Brand Name</th>
+          <th scope="col">Branch Name</th>
+          <th scope="col">Address</th>
+          <th scope="col">Edit / Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor= "let shop of shops">
+          <td><a [routerLink]= "['/shop-detail', shop._id]">{{shop.brand}}</a> </td>
+          <td>{{shop.branch}}</td>
+          <td>{{shop.address}}</td>
+          <td>
+              <button [routerLink]="['/shop-detail', shop._id]" id="btnEdit" class="btn btn-primary btn-md center-block" >Edit</button>
+              <form (submit)="delete(shop._id)">
+                <button id="btnDelete" class="btn btn-danger btn-md center-block">Delete</button>
+              </form>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
