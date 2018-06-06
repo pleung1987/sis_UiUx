@@ -44,8 +44,8 @@
 </div>
 <div class='setCamera' *ngIf='showAssociation'>
   <p><b>Current Camera Allocated:</b> {{camera._shop.brand}} - {{camera._shop.branch}} - {{camera._shop.address}}</p>
-  <form action="">
-
+  <form (submit)="removeAllocation(camera)">
+    <button type="submit" class="btn btn-danger btn-md center-block">Remove Camera from Shop</button>
   </form>
   <div class="errorMsg" *ngIf="message">
     {{message}}

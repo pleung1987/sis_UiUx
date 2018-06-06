@@ -83,4 +83,8 @@ export class CameraDetailComponent implements OnInit {
       this.message = data['message'];
     });
   }
+
+  removeAllocation(camera) {
+
+  }
 }
