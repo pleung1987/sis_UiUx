@@ -3,6 +3,7 @@ import { HttpService } from '../http.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
 
+
 @Component({
   selector: 'app-user-detail',
   templateUrl: './user-detail.component.html',
@@ -96,5 +97,7 @@ export class UserDetailComponent implements OnInit {
     console.log('this is the status to edit: ', user);
     user.showStatusForm = false;
   }
+
+  // front-end scripts
 
 }

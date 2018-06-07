@@ -12,6 +12,7 @@ export class ShopComponent implements OnInit {
   messages: string;
   shops: any;
   message: string;
+  showCreateForm: boolean;
 
   constructor(
     private _route: ActivatedRoute,
@@ -26,6 +27,7 @@ export class ShopComponent implements OnInit {
       branch: '',
       address: ''
     };
+    this.showCreateForm = false;
   }
 
   getShops() {
@@ -36,6 +38,13 @@ export class ShopComponent implements OnInit {
     });
   }
 
+  createShow() {
+    this.showCreateForm = true;
+  }
+
+  cancelShow() {
+    this.showCreateForm = false;
+  }
   create() {
     console.log('this is the shop created: ', this.newShop);
     const observable = this._httpService.addShop(this.newShop);
@@ -49,6 +58,7 @@ export class ShopComponent implements OnInit {
       this.messages = data['Fail'];
       this.message = data['message'];
       this.getShops();
+      this.showCreateForm = false;
     });
   }
 

@@ -17,3 +17,7 @@ bash: sudo ln -s /var/www/uploads/ /var/www/sis_UiUx/
 
 4) For deployment, delete /dist and /dist-server at Angular/.gitignore
     -> add back during development
+
+5) Solve 413 Errors loading images more than default 1mb (aware when creating a new servers):
+    -> Express Server-side: https://stackoverflow.com/questions/19917401/error-request-entity-too-large
+    -> NginX Server: https://stackoverflow.com/questions/28476643/default-nginx-client-max-body-size

@@ -1,27 +1,68 @@
-<h4>User Record</h4>
-<div *ngFor = "let img of user.faceImage">
-  <img src= "../../uploads/{{img}}" alt="Cannot Find faceimage">
-  <b> Entered at:</b> {{img | slice: 0:-14}}
-</div>
-
-<div class="info">
-  <h4>User Details</h4>
-  <h4>Status: 
-    <span *ngIf="user.vip ; else blacklist">VIP</span> 
-    <ng-template #blacklist>
-      <span *ngIf="user.blacklist ; else normal">Blacklisted</span>
-    </ng-template> 
-    <ng-template #normal>Normal</ng-template>
-  </h4>
-  <h5>ID: {{user._id}}</h5>
-  <h5>first name:  {{user.first_name}} </h5>
-  <h5>last name: {{user.last_name}}</h5>
-  <h5>gender: {{user.gender}}</h5>
-  <h5>email: {{user.email}}</h5>
-  <h5>phone: {{user.telephone}}</h5>
-  <h5>comment: {{user.comment}}</h5>
-  <h5> Number of times entered: {{user._visits.length}} </h5>
+<div class="container">
+  <br>
+  <div  class="row" >
+    <h4>Recent Visitor Entry</h4>
+  </div>
+  <div class="row" >
+    <div class="column"  *ngFor = "let img of (user.faceImage | slice:-8); last as isLast">
+      <img src="../../uploads/{{img}}" class="hover-shadow cursor" id="headshot">
+      <br>
+      <p *ngIf="isLast; else normal" style="color:red"><b> Most Recent Entry</b> <br> {{img | slice: 0:-14}}</p>
+      <ng-template #normal>
+          <p><b> Entery Date</b> <br> {{img | slice: 0:-14}}</p>
+      </ng-template>
+    </div>
+  </div>
+  
   <div class="row">
+    <h4>User Details</h4>
+    <table class="table table-hover">
+        <thead></thead>
+        <tbody>
+          <tr>
+            <td>Status:</td>
+            <td>    
+              <span *ngIf="user.vip ; else blacklist" style="color:green">VIP</span> 
+              <ng-template #blacklist>
+                <span *ngIf="user.blacklist ; else normal" style="color:red">Blacklisted</span>
+              </ng-template> 
+              <ng-template #normal>Normal</ng-template>
+            </td>
+          </tr>
+          <tr>
+            <td>ID:</td>
+            <td>{{user._id}}</td>
+          </tr>
+          <tr>
+            <td>First Name</td>
+            <td>{{user.first_name}}</td>
+          </tr>
+          <tr>
+            <td>Last Name:</td>
+            <td> {{user.last_name}}</td>
+          </tr>
+          <tr>
+            <td>Gender:</td>
+            <td> {{user.gender}}</td>
+          </tr>
+          <tr>
+            <td>Email:</td>
+            <td> {{user.email}}</td>
+          </tr>
+          <tr>
+            <td>Phone:</td>
+            <td> {{user.telephone}}</td>
+          </tr>
+          <tr>
+            <td>Visited times:</td>
+            <td> {{user._visits.length}}</td>
+          </tr>
+          <tr>
+            <td>comment:</td>
+            <td>{{user.comment}}</td>
+            </tr>
+        </tbody>
+      </table>
       <div class="col-sm-12 text-center">
           <form id="btnEdit" (submit)="editShow(user)">
               <button type="submit"  class="btn btn-secondary btn-md center-block">Edit User</button>
@@ -29,75 +70,75 @@
           <form id="btnStatus" (submit)="statusShow(user)">
               <button type="submit" class="btn btn-secondary btn-md center-block">Add Status</button>
           </form>
-       </div>
+        </div>
+      <br>
+    <div *ngIf="success" class="alert alert-success">
+      {{success}}
+    </div>
+    <div *ngIf="fail" class="alert alert-danger">
+      {{fail}}
+    </div>
   </div>
-    <br>
-  <div *ngIf="success" class="alert alert-success">
-    {{success}}
-  </div>
-  <div *ngIf="fail" class="alert alert-danger">
-    {{fail}}
-  </div>
-</div>
-<br>
-<!-- edit form -->
-<div *ngIf="user.showEditForm">
-  <form (submit)="edit(user)" id="editForm">
-      <label> First Name:
-       <input type="text" name="editUser.first_name" [(ngModel)]="user.first_name">
-      </label>
-      <label> Last Name: 
-        <input type="text" name="editUser.last_name" [(ngModel)]="user.last_name">
-      </label>
-      <label> Gender: 
-        <select name="editUser.gender" [(ngModel)]="user.gender">
-          <option type="text" value="male">male</option>
-          <option type="text" value="female">female</option>
-          <option type="text" value="other">other</option>
-        </select>
-      </label>
-      <label> Email: 
-        <input type="text" name="editUser.email" [(ngModel)]="user.email">
-      </label>
-      <label> Phone: 
-        <input type="text" name="editUser.telephone" [(ngModel)]="user.telephone">
-      </label>
-      <label> Comment: 
-          <textarea rows="4" cols="50" name="editUser.comment" [(ngModel)]="user.comment"></textarea>
+  <br>
+  <!-- edit form -->
+  <div *ngIf="user.showEditForm">
+    <form (submit)="edit(user)" id="editForm">
+        <label> First Name:
+         <input type="text" name="editUser.first_name" [(ngModel)]="user.first_name">
         </label>
-  </form>
-  <div class="row">
-      <div class="col-sm-12 text-center">
-          <button id="btnSave" type="submit" class="btn btn-primary btn-md center-block" form="editForm">Save</button> 
-          <form id="btnCancel" (submit)="cancelShow(user)">
-              <button type="submit" class="btn btn-danger btn-md center-block">Cancel</button>
-          </form> 
-       </div>
-  </div>
-</div>
-<!-- set status form -->
-<div *ngIf="user.showStatusForm">
-  <h5>Set visitor as:</h5>
-    <form (submit)="status(user)" id="statusForm">
-        <label>
-            <input type="radio" name="status" [(ngModel)]="newStatus" [value]="1">
-            VIP
-          </label><br/>
-            <label>
-            <input type="radio" name="status" [(ngModel)]="newStatus" [value]="2">
-            Blacklist
-          </label><br/>
-          <label>
-            <input type="radio" name="status" [(ngModel)]="newStatus" [value]="3">
-            Normal Visitor
-          </label><br/><br/>
+        <label> Last Name: 
+          <input type="text" name="editUser.last_name" [(ngModel)]="user.last_name">
+        </label>
+        <label> Gender: 
+          <select name="editUser.gender" [(ngModel)]="user.gender">
+            <option type="text" value="male">male</option>
+            <option type="text" value="female">female</option>
+            <option type="text" value="other">other</option>
+          </select>
+        </label>
+        <label> Email: 
+          <input type="text" name="editUser.email" [(ngModel)]="user.email">
+        </label>
+        <label> Phone: 
+          <input type="text" name="editUser.telephone" [(ngModel)]="user.telephone">
+        </label>
+        <label> Comment: 
+            <textarea rows="4" cols="50" name="editUser.comment" [(ngModel)]="user.comment"></textarea>
+          </label>
     </form>
     <div class="row">
         <div class="col-sm-12 text-center">
-            <button id="btnSave" type="submit" class="btn btn-primary btn-md center-block" form="statusForm">Save</button> 
-            <form id="btnCancel" (submit)="cancelStatus(user)">
+            <button id="btnSave" type="submit" class="btn btn-primary btn-md center-block" form="editForm">Save</button> 
+            <form id="btnCancel" (submit)="cancelShow(user)">
                 <button type="submit" class="btn btn-danger btn-md center-block">Cancel</button>
             </form> 
          </div>
     </div>
   </div>
+  <!-- set status form -->
+  <div *ngIf="user.showStatusForm">
+    <h5>Set visitor as:</h5>
+      <form (submit)="status(user)" id="statusForm">
+          <label>
+              <input type="radio" name="status" [(ngModel)]="newStatus" [value]="1">
+              VIP
+            </label><br/>
+              <label>
+              <input type="radio" name="status" [(ngModel)]="newStatus" [value]="2">
+              Blacklist
+            </label><br/>
+            <label>
+              <input type="radio" name="status" [(ngModel)]="newStatus" [value]="3">
+              Normal Visitor
+            </label><br/><br/>
+      </form>
+      <div class="row">
+          <div class="col-sm-12 text-center">
+              <button id="btnSave" type="submit" class="btn btn-primary btn-md center-block" form="statusForm">Save</button> 
+              <form id="btnCancel" (submit)="cancelStatus(user)">
+                  <button type="submit" class="btn btn-danger btn-md center-block">Cancel</button>
+              </form> 
+           </div>
+      </div>
+    </div>
+</div>

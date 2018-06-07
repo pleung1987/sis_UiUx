@@ -1,5 +1,13 @@
+#btnSubmit,
+#btnCancel,
 #btnEdit,
 #btnDelete{
+    display: inline-block;
+    vertical-align: top;
     width: 100px;
     margin: 2px;
+}
+
+.form-data{
+    margin-top: 10px;
 }

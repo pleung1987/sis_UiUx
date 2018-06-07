@@ -9,10 +9,10 @@
     <h5> <b> Records entered: </b> {{camera._visits.length}} </h5>
     <br>
     <h4> <b> Shop Details of Camera </b></h4>
-    <h5><b> Brand: </b> {{camera._shop.brand}} </h5>
-    <h5><b> Branch:</b> {{camera._shop.branch}}</h5>
-    <h5><b> Address:</b> {{camera._shop.address}}</h5>
-    <h5><b> Updated:</b> {{camera._shop.createdAt | date:'y, MMM dd,  h:mm:ss a'}} </h5>
+    <h5><b> Brand: </b> <span *ngIf="camera._shop">{{camera._shop.brand}}</span> </h5>
+    <h5><b> Branch:</b> <span *ngIf="camera._shop">{{camera._shop.branch}}</span></h5>
+    <h5><b> Address:</b> <span *ngIf="camera._shop">{{camera._shop.address}}</span></h5>
+    <h5><b> Updated:</b> <span *ngIf="camera._shop">{{camera._shop.createdAt | date:'y, MMM dd,  h:mm:ss a'}} </span></h5>
     <div class="row">
       <div class="col-sm-12 text-center">
         <form (submit)="editShow(camera)" id="btnAddEdit">
@@ -46,7 +46,7 @@
 <!-- Edit ShopCam. Associations -->
   <!-- Remove Association -->
 <div class='setCamera' *ngIf='showAssociation'>
-  <div class="row">
+  <div class="row" *ngIf="camera._shop">
     <div class="col-sm-12 text-center">
       <p><b>Current Camera Allocated:</b> {{camera._shop.brand}} - {{camera._shop.branch}} - {{camera._shop.address}}</p>
       <form (submit)="removeAllocation(camera)">
