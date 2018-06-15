@@ -9,7 +9,7 @@
       <br>
       <p *ngIf="isLast; else normal" style="color:red"><b> Most Recent Entry</b> <br> {{img | slice: 0:-14}}</p>
       <ng-template #normal>
-          <p><b> Entery Date</b> <br> {{img | slice: 0:-14}}</p>
+          <p><b> Entry Date</b> <br> {{img | slice: 0:-14}}</p>
       </ng-template>
     </div>
   </div>

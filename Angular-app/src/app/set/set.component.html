@@ -17,7 +17,7 @@
         <tr *ngFor="let user of users">
           <th scope="row">
             <a [routerLink]="['user-detail', user._id]">
-              <img src="../../uploads/{{user.faceImage[0]}}" alt="cannot find img">
+              <img src="../../uploads/{{user.faceImage[0]}}"  class="hover-shadow cursor" id="headshot" alt="cannot find img">
             </a>
           </th>
           <td>
