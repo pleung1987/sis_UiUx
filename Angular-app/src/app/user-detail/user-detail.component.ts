@@ -12,6 +12,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 export class UserDetailComponent implements OnInit {
   public userId;
   user: any;
+  images: any;
   success: any;
   fail: any;
   interval: any;
@@ -26,16 +27,22 @@ export class UserDetailComponent implements OnInit {
   ngOnInit() {
     this.getVisit();
     this.newStatus = 0;
+    this.images = [];
   }
 
   getVisit() {
     const id = this._route.snapshot.params['id'];
-    console.log('this is the id page: ', this.userId);
     this.userId = id;
     const observable = this._httpService.getUser(id);
     observable.subscribe( data => {
       console.log('this is the data from service: ', data['users']);
       this.user = data['users'];
+      for (let i = 0; i < data['users'].faceImage.length; i++) {
+        const imagePath: string = data['users'].faceImage[i];
+        const imageDate: any = data['users']._visits[i];
+        this.images.push({path: imagePath, date: imageDate});
+      }
+      console.log('this are the images:', this.images);
     });
   }
 

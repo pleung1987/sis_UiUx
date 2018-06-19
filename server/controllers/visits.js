@@ -15,9 +15,19 @@ module.exports = {
         .populate('_visitor _camera')
         .exec( function(err,results){
             if(err){
-                res.json({message: "Error happened", error: err});
+                res.json({message: "Error happened at _vistor _camera", error: err});
             } else {
-                res.json({message:"Success", data: results});
+               Visit.populate(results, 
+                {
+                    path: '_camera._shop',
+                    model: 'Shop'
+                }, function(err, endResult) {
+                        if(err) {
+                                res.json({message: "Error happened at _shop", error: err});
+                        } else {
+                            res.json({message:"Success", data: endResult});
+                        }
+               })
             }
         })
     },

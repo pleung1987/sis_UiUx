@@ -4,16 +4,16 @@
     <h4>Recent Visitor Entry</h4>
   </div>
   <div class="row" >
-    <div class="column"  *ngFor = "let img of (user.faceImage | slice:-8); last as isLast">
-      <img src="../../uploads/{{img}}" class="hover-shadow cursor" id="headshot">
+    <div class="column" *ngFor = "let img of images;  last as isLast" >
+      <img src="../../uploads/{{img.path}}" class="hover-shadow cursor" id="headshot">
       <br>
-      <p *ngIf="isLast; else normal" style="color:red"><b> Most Recent Entry</b> <br> {{img | slice: 0:-14}}</p>
+      <p *ngIf="isLast; else normal" style="color:red"><b> Most Recent Entry</b> <br>{{img.date.visited | date:'y, MMM dd,  h:mm a'}} </p>
       <ng-template #normal>
-          <p><b> Entry Date</b> <br> {{img | slice: 0:-14}}</p>
+          <p><b> Entry Date</b> <br>{{img.date.visited | date:'y, MMM dd,  h:mm a'}} </p>
       </ng-template>
     </div>
+   
   </div>
-  
   <div class="row">
     <h4>User Details</h4>
     <table class="table table-hover">
@@ -56,6 +56,10 @@
           <tr>
             <td>Visited times:</td>
             <td> {{user._visits.length}}</td>
+          </tr>
+          <tr>
+            <td>Last Visited:</td>
+            <td> {{user._visits[user._visits.length - 1].visited | date:'y, MMM dd,  h:mm:ss a'}}</td>
           </tr>
           <tr>
             <td>comment:</td>

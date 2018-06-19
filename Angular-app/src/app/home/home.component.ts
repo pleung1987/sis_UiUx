@@ -24,7 +24,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getVisits();
     this.resume();
-    // this.subscription = this.Refresh.subscribe(x => this.getVisits()); // auto updates
   }
   ngOnDestroy(): void {
     this.stop();
@@ -34,7 +33,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     const visitsObservable = this._httpService.shareVisits();
     visitsObservable.subscribe(data => {
       this.visits = data['data'];
-      console.log('this is the data: ', this.visits);
+      console.log('this is the visit data: ', this.visits);
     });
   }
 
