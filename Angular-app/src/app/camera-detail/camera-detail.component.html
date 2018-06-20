@@ -1,29 +1,67 @@
 
-<div class="info">
+<div class="container">
   <br>
+  <div class="row">
     <h4><b> Camera Details</b></h4>
-    <h5><b> ID:</b> {{camera._id}}</h5>
-    <h5><b> functional since:</b>  {{camera.createdAt | date:'y, MMM dd,  h:mm:ss a'}} </h5>
-    <h5><b> mac address: </b> {{camera.mac_addr}}</h5>
-    <h5><b> location: </b> {{camera.location}}</h5>
-    <h5> <b> Records entered: </b> {{camera._visits.length}} </h5>
-    <br>
-    <h4> <b> Shop Details of Camera </b></h4>
-    <h5><b> Brand: </b> <span *ngIf="camera._shop">{{camera._shop.brand}}</span> </h5>
-    <h5><b> Branch:</b> <span *ngIf="camera._shop">{{camera._shop.branch}}</span></h5>
-    <h5><b> Address:</b> <span *ngIf="camera._shop">{{camera._shop.address}}</span></h5>
-    <h5><b> Updated:</b> <span *ngIf="camera._shop">{{camera._shop.createdAt | date:'y, MMM dd,  h:mm:ss a'}} </span></h5>
-    <div class="row">
-      <div class="col-sm-12 text-center">
-        <form (submit)="editShow(camera)" id="btnAddEdit">
-          <button type="submit" class="btn btn-secondary btn-md center-block">Add/Edit Location</button>
-        </form>
-        <form (submit)="associationShow(camera)" id="btnAllocate">
-          <button  type="submit"  class="btn btn-secondary">Allocate Shop </button>
-        </form>
-
-      </div>
+  </div>
+  <div class="row">
+    <table class="table table-hover">
+      <thead></thead>
+      <tbody>
+        <tr>
+          <td><b> Functional since:</b> </td>
+          <td>{{camera.createdAt | date:'y, MMM dd,  h:mm:ss a'}} </td>
+        </tr>
+        <tr>
+          <td><b> Mac-address: </b></td>
+          <td>{{camera.mac_addr}} </td>
+        </tr>
+        <tr>
+          <td><b> Location: </b> </td>
+          <td> {{camera.location}} </td>
+        </tr>
+        <tr>
+          <td> <b> Records entered: </b> </td>
+          <td> {{camera._visits.length}} </td>
+        </tr>
+        <br>
+      </tbody>
+    </table>
+  </div>
+  <div class="row">
+      <h4> <b> Shop Details of Camera </b></h4>
+  </div>
+  <table class="table table-hover">
+    <thead></thead>
+    <tbody>
+      <tr>
+        <td><b> Brand: </b></td>
+        <td> <span *ngIf="camera._shop">{{camera._shop.brand}}</span></td>
+      </tr>
+      <tr>
+        <td><b> Branch:</b> </td>
+        <td><span *ngIf="camera._shop">{{camera._shop.branch}}</span></td>
+      </tr>
+      <tr>
+        <td><b> Address:</b> </td>
+        <td> <span *ngIf="camera._shop">{{camera._shop.address}}</span></td>
+      </tr>
+      <tr>
+        <td><b> Updated:</b> </td>
+        <td> <span *ngIf="camera._shop">{{camera._shop.createdAt | date:'y, MMM dd,  h:mm:ss a'}} </span> </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="row">
+    <div class="col-sm-12 text-center">
+      <form (submit)="editShow(camera)" id="btnAddEdit">
+        <button type="submit" class="btn btn-secondary btn-md center-block">Add/Edit Location</button>
+      </form>
+      <form (submit)="associationShow(camera)" id="btnAllocate">
+        <button  type="submit"  class="btn btn-secondary">Allocate Shop </button>
+      </form>
     </div>
+  </div>
 </div>
 <br>
 <!-- Edit Camera Detail -->

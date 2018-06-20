@@ -18,6 +18,7 @@ import { FormsModule } from '@angular/forms';
 import { CameraDetailComponent } from './camera-detail/camera-detail.component';
 import { ShopComponent } from './setCamera/shop/shop.component';
 import { CamerasComponent } from './setCamera/cameras/cameras.component';
+import { ShopDetailComponent } from './shop-detail/shop-detail.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { CamerasComponent } from './setCamera/cameras/cameras.component';
     UserDetailComponent,
     CameraDetailComponent,
     ShopComponent,
-    CamerasComponent
+    CamerasComponent,
+    ShopDetailComponent
   ],
   imports: [
     BrowserModule,

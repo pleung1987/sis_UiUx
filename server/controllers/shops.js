@@ -78,10 +78,10 @@ module.exports = {
 
 //updating shop details ie. brand, branch, address
 updateShop: (req, res, next) => {
-    const shopId = req.params.shopId
-    console.log('shopId handing: ', shopId);
+    // const shopId = req.params.shopId
+    console.log('shopId handing: ', req.body._id);
     console.log('form data to update: ', req.body)
-    Shop.findOne({_id: shopId}, (err,shop) => {
+    Shop.findOne({_id:  req.body._id}, (err,shop) => {
         shop.brand = req.body.brand,
         shop.branch = req.body.branch,
         shop.address = req.body.address

@@ -106,5 +106,4 @@ export class UserDetailComponent implements OnInit {
   }
 
   // front-end scripts
-
 }

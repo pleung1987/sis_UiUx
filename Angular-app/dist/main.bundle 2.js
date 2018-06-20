@@ -34,14 +34,12 @@ webpackEmptyAsyncContext.id = "../../../../../src/$$_lazy_route_resource lazy re
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__camera_detail_camera_detail_component__ = __webpack_require__("../../../../../src/app/camera-detail/camera-detail.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__shop_detail_shop_detail_component__ = __webpack_require__("../../../../../src/app/shop-detail/shop-detail.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
 
 
 
@@ -108,7 +106,6 @@ var routes = [
     { path: 'settings', component: __WEBPACK_IMPORTED_MODULE_4__settings_settings_component__["a" /* SettingsComponent */] },
     { path: 'user-detail/:id', component: __WEBPACK_IMPORTED_MODULE_5__user_detail_user_detail_component__["a" /* UserDetailComponent */] },
     { path: 'camera-detail/:id', component: __WEBPACK_IMPORTED_MODULE_11__camera_detail_camera_detail_component__["a" /* CameraDetailComponent */] },
-    { path: 'shop-detail/:id', component: __WEBPACK_IMPORTED_MODULE_12__shop_detail_shop_detail_component__["a" /* ShopDetailComponent */] },
     { path: '', pathMatch: 'full', redirectTo: '/home' },
     { path: '**', component: __WEBPACK_IMPORTED_MODULE_8__pagenotfound_pagenotfound_component__["a" /* PagenotfoundComponent */] }
 ];
@@ -227,14 +224,12 @@ var AppComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__camera_detail_camera_detail_component__ = __webpack_require__("../../../../../src/app/camera-detail/camera-detail.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__setCamera_shop_shop_component__ = __webpack_require__("../../../../../src/app/setCamera/shop/shop.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__setCamera_cameras_cameras_component__ = __webpack_require__("../../../../../src/app/setCamera/cameras/cameras.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__shop_detail_shop_detail_component__ = __webpack_require__("../../../../../src/app/shop-detail/shop-detail.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
 
 
 
@@ -269,8 +264,7 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_10__user_detail_user_detail_component__["a" /* UserDetailComponent */],
                 __WEBPACK_IMPORTED_MODULE_15__camera_detail_camera_detail_component__["a" /* CameraDetailComponent */],
                 __WEBPACK_IMPORTED_MODULE_16__setCamera_shop_shop_component__["a" /* ShopComponent */],
-                __WEBPACK_IMPORTED_MODULE_17__setCamera_cameras_cameras_component__["a" /* CamerasComponent */],
-                __WEBPACK_IMPORTED_MODULE_18__shop_detail_shop_detail_component__["a" /* ShopDetailComponent */]
+                __WEBPACK_IMPORTED_MODULE_17__setCamera_cameras_cameras_component__["a" /* CamerasComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -293,7 +287,7 @@ var AppModule = (function () {
 /***/ "../../../../../src/app/camera-detail/camera-detail.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"container\">\n  <br>\n  <div class=\"row\">\n    <h4><b> Camera Details</b></h4>\n  </div>\n  <div class=\"row\">\n    <table class=\"table table-hover\">\n      <thead></thead>\n      <tbody>\n        <tr>\n          <td><b> Functional since:</b> </td>\n          <td>{{camera.createdAt | date:'y, MMM dd,  h:mm:ss a'}} </td>\n        </tr>\n        <tr>\n          <td><b> Mac-address: </b></td>\n          <td>{{camera.mac_addr}} </td>\n        </tr>\n        <tr>\n          <td><b> Location: </b> </td>\n          <td> {{camera.location}} </td>\n        </tr>\n        <tr>\n          <td> <b> Records entered: </b> </td>\n          <td> {{camera._visits.length}} </td>\n        </tr>\n        <br>\n      </tbody>\n    </table>\n  </div>\n  <div class=\"row\">\n      <h4> <b> Shop Details of Camera </b></h4>\n  </div>\n  <table class=\"table table-hover\">\n    <thead></thead>\n    <tbody>\n      <tr>\n        <td><b> Brand: </b></td>\n        <td> <span *ngIf=\"camera._shop\">{{camera._shop.brand}}</span></td>\n      </tr>\n      <tr>\n        <td><b> Branch:</b> </td>\n        <td><span *ngIf=\"camera._shop\">{{camera._shop.branch}}</span></td>\n      </tr>\n      <tr>\n        <td><b> Address:</b> </td>\n        <td> <span *ngIf=\"camera._shop\">{{camera._shop.address}}</span></td>\n      </tr>\n      <tr>\n        <td><b> Updated:</b> </td>\n        <td> <span *ngIf=\"camera._shop\">{{camera._shop.createdAt | date:'y, MMM dd,  h:mm:ss a'}} </span> </td>\n      </tr>\n    </tbody>\n  </table>\n  <div class=\"row\">\n    <div class=\"col-sm-12 text-center\">\n      <form (submit)=\"editShow(camera)\" id=\"btnAddEdit\">\n        <button type=\"submit\" class=\"btn btn-secondary btn-md center-block\">Add/Edit Location</button>\n      </form>\n      <form (submit)=\"associationShow(camera)\" id=\"btnAllocate\">\n        <button  type=\"submit\"  class=\"btn btn-secondary\">Allocate Shop </button>\n      </form>\n    </div>\n  </div>\n</div>\n<br>\n<!-- Edit Camera Detail -->\n<div *ngIf=\"camera.showEditForm\">\n  <form (submit)=\"edit(camera)\" id=\"showEditForm\">\n      <label> Location:\n       <input type=\"text\" name=\"editCamera.location\" [(ngModel)]=\"camera.location\">\n      </label>\n      <br>\n  </form>\n  <div class=\"row\">\n      <div class=\"col-sm-12 text-center\">\n          <button id=\"btnSave\" type=\"submit\" class=\"btn btn-primary btn-md center-block\" form=\"showEditForm\">Save</button> \n          <form id=\"btnCancel\" (submit)=\"cancelShow(camera)\">\n              <button id=\"btnCancel\" type=\"submit\" class=\"btn btn-danger btn-md center-block\">Cancel</button>\n          </form> \n       </div>\n  </div>\n</div>\n<!-- Edit ShopCam. Associations -->\n  <!-- Remove Association -->\n<div class='setCamera' *ngIf='showAssociation'>\n  <div class=\"row\" *ngIf=\"camera._shop\">\n    <div class=\"col-sm-12 text-center\">\n      <p><b>Current Camera Allocated:</b> {{camera._shop.brand}} - {{camera._shop.branch}} - {{camera._shop.address}}</p>\n      <form (submit)=\"removeAllocation(camera)\">\n        <button type=\"submit\" class=\"btn btn-danger btn-md center-block\">Remove Camera from Shop</button>\n      </form>\n      <br>\n    </div>\n  </div>\n  <!-- Set Association -->\n  <div class=\"errorMsg\" *ngIf=\"message\">\n    <p>{{message}}</p>\n  </div>\n  <form (submit)=\"association(camera)\" id=\"showAssociation\">\n    <label> Shop allocation:\n      <select name=\"editCamera._shop\" [(ngModel)]=\"camera._shop\">\n          <option *ngFor=\"let shop of shops\" type=\"text\" value=\"{{shop._id}}\">{{shop.brand}}: {{shop.branch}}</option>\n        </select>\n    </label>\n  </form>\n  <div class=\"row\">\n      <div class=\"col-sm-12 text-center\">\n        <button id=\"btnSave\" type=\"submit\" class=\"btn btn-primary btn-md center-block\" form=\"showAssociation\">Save</button> \n        <form id=\"btnCancel\" (submit)=\"cancelShowAssociation(camera)\">\n            <button id=\"btnCancel\" type=\"submit\" class=\"btn btn-danger btn-md center-block\">Cancel</button>\n        </form> \n      </div>\n  </div>\n</div>"
+module.exports = "\n<div class=\"info\">\n  <br>\n    <h4><b> Camera Details</b></h4>\n    <h5><b> ID:</b> {{camera._id}}</h5>\n    <h5><b> functional since:</b>  {{camera.createdAt | date:'y, MMM dd,  h:mm:ss a'}} </h5>\n    <h5><b> mac address: </b> {{camera.mac_addr}}</h5>\n    <h5><b> location: </b> {{camera.location}}</h5>\n    <h5> <b> Records entered: </b> {{camera._visits.length}} </h5>\n    <br>\n    <h4> <b> Shop Details of Camera </b></h4>\n    <h5><b> Brand: </b> <span *ngIf=\"camera._shop\">{{camera._shop.brand}}</span> </h5>\n    <h5><b> Branch:</b> <span *ngIf=\"camera._shop\">{{camera._shop.branch}}</span></h5>\n    <h5><b> Address:</b> <span *ngIf=\"camera._shop\">{{camera._shop.address}}</span></h5>\n    <h5><b> Updated:</b> <span *ngIf=\"camera._shop\">{{camera._shop.createdAt | date:'y, MMM dd,  h:mm:ss a'}} </span></h5>\n    <div class=\"row\">\n      <div class=\"col-sm-12 text-center\">\n        <form (submit)=\"editShow(camera)\" id=\"btnAddEdit\">\n          <button type=\"submit\" class=\"btn btn-secondary btn-md center-block\">Add/Edit Location</button>\n        </form>\n        <form (submit)=\"associationShow(camera)\" id=\"btnAllocate\">\n          <button  type=\"submit\"  class=\"btn btn-secondary\">Allocate Shop </button>\n        </form>\n\n      </div>\n    </div>\n</div>\n<br>\n<!-- Edit Camera Detail -->\n<div *ngIf=\"camera.showEditForm\">\n  <form (submit)=\"edit(camera)\" id=\"showEditForm\">\n      <label> Location:\n       <input type=\"text\" name=\"editCamera.location\" [(ngModel)]=\"camera.location\">\n      </label>\n      <br>\n  </form>\n  <div class=\"row\">\n      <div class=\"col-sm-12 text-center\">\n          <button id=\"btnSave\" type=\"submit\" class=\"btn btn-primary btn-md center-block\" form=\"showEditForm\">Save</button> \n          <form id=\"btnCancel\" (submit)=\"cancelShow(camera)\">\n              <button id=\"btnCancel\" type=\"submit\" class=\"btn btn-danger btn-md center-block\">Cancel</button>\n          </form> \n       </div>\n  </div>\n</div>\n<!-- Edit ShopCam. Associations -->\n  <!-- Remove Association -->\n<div class='setCamera' *ngIf='showAssociation'>\n  <div class=\"row\" *ngIf=\"camera._shop\">\n    <div class=\"col-sm-12 text-center\">\n      <p><b>Current Camera Allocated:</b> {{camera._shop.brand}} - {{camera._shop.branch}} - {{camera._shop.address}}</p>\n      <form (submit)=\"removeAllocation(camera)\">\n        <button type=\"submit\" class=\"btn btn-danger btn-md center-block\">Remove Camera from Shop</button>\n      </form>\n      <br>\n    </div>\n  </div>\n  <!-- Set Association -->\n  <div class=\"errorMsg\" *ngIf=\"message\">\n    <p>{{message}}</p>\n  </div>\n  <form (submit)=\"association(camera)\" id=\"showAssociation\">\n    <label> Shop allocation:\n      <select name=\"editCamera._shop\" [(ngModel)]=\"camera._shop\">\n          <option *ngFor=\"let shop of shops\" type=\"text\" value=\"{{shop._id}}\">{{shop.brand}}: {{shop.branch}}</option>\n        </select>\n    </label>\n  </form>\n  <div class=\"row\">\n      <div class=\"col-sm-12 text-center\">\n        <button id=\"btnSave\" type=\"submit\" class=\"btn btn-primary btn-md center-block\" form=\"showAssociation\">Save</button> \n        <form id=\"btnCancel\" (submit)=\"cancelShowAssociation(camera)\">\n            <button id=\"btnCancel\" type=\"submit\" class=\"btn btn-danger btn-md center-block\">Cancel</button>\n        </form> \n      </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -478,8 +472,32 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var FrequentComponent = (function () {
     function FrequentComponent(_httpService) {
         this._httpService = _httpService;
+        this.sellNum = 0;
+        this.insufficient = false;
+        this.message = '';
     }
     FrequentComponent.prototype.ngOnInit = function () {
+        this.getNumbers();
+    };
+    FrequentComponent.prototype.getNumbers = function () {
+        this.numbers = this._httpService.shareVisits();
+    };
+    FrequentComponent.prototype.sell = function () {
+        console.log('this is the buyNum submited: ', this.sellNum);
+        if (this.sellNum < 0) {
+            this.insufficient = true;
+            this.message = 'sell cannot be negative';
+        }
+        else if (this.sellNum <= this.coins) {
+            this._httpService.sell(this.sellNum);
+            this.insufficient = false;
+            this.getNumbers();
+            this.sellNum = 0;
+        }
+        else {
+            this.insufficient = true;
+            this.message = 'insufficient coins...';
+        }
     };
     FrequentComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
@@ -667,19 +685,33 @@ var HttpService = (function () {
         return this._http.put('/shops/' + camera._shop, camera);
     };
     // shops
-    HttpService.prototype.getShop = function (shopId) {
-        console.log('request from camera-detail component:', shopId);
-        return this._http.get('/shops/' + shopId);
-    };
-    HttpService.prototype.editShop = function (editShop) {
-        console.log('request to server: ', editShop);
-        return this._http.patch('/shops/' + editShop._id, editShop);
-    };
     HttpService.prototype.addShop = function (newShop) {
         return this._http.post('/shops', newShop);
     };
     HttpService.prototype.deleteShop = function (shopId) {
         return this._http.delete('/shops/' + shopId);
+    };
+    // old code to get rid of:
+    HttpService.prototype.showTransactions = function () {
+        console.log('pulling all transactions: ', this.alltransactions);
+        return this.alltransactions;
+    };
+    HttpService.prototype.mine = function () {
+        this.value++;
+        console.log('value in service added: ', this.value);
+        this.alltransactions.push({ transId: Math.floor(Math.random() * 10000), action: 'Mined', amount: 1, value: this.value });
+    };
+    HttpService.prototype.buy = function (num) {
+        console.log('number of coins added: ', num);
+        this.coins += num;
+        this.value -= num;
+        this.alltransactions.push({ transId: Math.floor(Math.random() * 10000), action: 'Bought', amount: num, value: this.value });
+    };
+    HttpService.prototype.sell = function (num) {
+        console.log('number of coins deducted: ', num);
+        this.coins -= num;
+        this.value += num;
+        this.alltransactions.push({ transId: Math.floor(Math.random() * 10000), action: 'Sold', amount: num, value: this.value });
     };
     HttpService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
@@ -835,7 +867,7 @@ var SetComponent = (function () {
 /***/ "../../../../../src/app/setCamera/cameras/cameras.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <h3>Cameras</h3>\n    <div class=\"table vertical-center\">\n      <table class=\"table\">\n        <thead class=\"thead-dark\">\n          <tr>\n            <th scope=\"col\">MAC Address</th>\n            <th scope=\"col\">Location</th>\n            <th scope=\"col\">Shop</th>\n            <th scope=\"col\">Edit / Delete</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let camera of cameras\">\n            <td><a [routerLink]= \"['/camera-detail', camera._id]\">{{camera.mac_addr}}</a> </td>\n            <td>\n              <p *ngIf=\"camera.location ; else unassigned\">{{camera.location}}</p>\n              <ng-template #unassigned>\n                <p style='color:red'>Unassigned Location</p>\n              </ng-template>\n            </td>\n            <td>\n              <p *ngIf=\"camera._shop; else normal\">{{camera._shop.brand}} - {{camera._shop.branch}}</p>\n              <ng-template #normal>\n                <p style='color:red'>Unassigned Shop</p>\n              </ng-template>\n            </td>\n            <td>\n                <button [routerLink]=\"['/camera-detail', camera._id]\" id=\"btnEdit\" class=\"btn btn-primary btn-md center-block\" >Edit</button>\n                <button id=\"btnDelete\" class=\"btn btn-danger btn-md center-block\">Delete</button>\n            </td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n  </div>\n  <router-outlet></router-outlet>"
+module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <h3>Cameras</h3>\n    <div class=\"table vertical-center\">\n      <table class=\"table\">\n        <thead class=\"thead-dark\">\n          <tr>\n            <th scope=\"col\">MAC Address</th>\n            <th scope=\"col\">Location</th>\n            <th scope=\"col\">Shop</th>\n            <th scope=\"col\">Edit / Delete</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let camera of cameras\">\n            <td><a [routerLink]= \"['/camera-detail', camera._id]\">{{camera.mac_addr}}</a> </td>\n            <td>{{camera.location}}</td>\n            <td>\n              <p *ngIf=\"camera._shop; else normal\">{{camera._shop.brand}} - {{camera._shop.branch}}</p>\n              <ng-template #normal>\n                <p>Unassigned</p>\n              </ng-template>\n            </td>\n            <td>\n                <button [routerLink]=\"['/camera-detail', camera._id]\" id=\"btnEdit\" class=\"btn btn-primary btn-md center-block\" >Edit</button>\n                <button id=\"btnDelete\" class=\"btn btn-danger btn-md center-block\">Delete</button>\n            </td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n  </div>\n  <router-outlet></router-outlet>"
 
 /***/ }),
 
@@ -984,7 +1016,7 @@ var SetCameraComponent = (function () {
 /***/ "../../../../../src/app/setCamera/shop/shop.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n    <div class=\".col-md-3 .col-md-offset-3\">\n      <form (submit)=\"createShow()\" id=\"btnCreate\">\n        <button type=\"submit\" class=\"createBtn btn btn-secondary\">Add Location</button>\n      </form>\n    </div>\n  <div class=\"form-data\" *ngIf=\"showCreateForm\">\n    <p><b> Create Shop </b></p>\n    <form (submit)=\"create()\" id=\"shopCreate\">\n      <label for=\"shopName\">Brand Name:</label>\n      <input name=\"newShop.brand\" type=\"text\" [(ngModel)]=\"newShop.brand\">\n      <br>\n      <label for=\"shopName\">Branch Name:</label>\n      <input name=\"newShop.branch\" type=\"text\" [(ngModel)]=\"newShop.branch\">\n      <br>\n      <label for=\"shopName\">Address:</label>\n      <input name=\"newShop.address\" type=\"text\" [(ngModel)]=\"newShop.address\">\n      <br>\n    </form>\n    <div class=\"row\">\n        <div class=\"col-sm-12 text-center\">\n            <button id=\"btnSubmit\" type=\"submit\" class=\"btn btn-primary btn-md center-block\" form=\"shopCreate\">Submit</button> \n            <form (submit)=\"cancelShow()\"  id=\"btnCancel\">\n              <button class=\"btn btn-danger btn-md center-block\" id=\"btnCancel\">Cancel</button>\n            </form>\n          </div>\n    </div>\n  </div>\n  <br>\n  <div class=\"message\" *ngIf='messages' style=\"color: red\">\n    <div *ngFor= 'let message of messages'>\n      {{message}}\n    </div>\n  </div>\n  <div class=\"message\" *ngIf='message' style=\"color: green\">\n        {{message}}\n  </div>\n  <div class=\"row\">\n    <div class=\".col-md-4\"><h3>Shops</h3></div>\n  </div>\n  <div class=\"table vertical-center\">\n      <table class=\"table\">\n        <thead class=\"thead-dark\">\n          <tr>\n            <th scope=\"col\">Brand Name</th>\n            <th scope=\"col\">Branch Name</th>\n            <th scope=\"col\">Address</th>\n            <th scope=\"col\">Edit / Delete</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor= \"let shop of shops\">\n            <td><a [routerLink]= \"['/shop-detail', shop._id]\">{{shop.brand}}</a> </td>\n            <td>{{shop.branch}}</td>\n            <td>{{shop.address}}</td>\n            <td>\n                <button [routerLink]=\"['/shop-detail', shop._id]\" id=\"btnEdit\" class=\"btn btn-primary btn-md center-block\" >Edit</button>\n                <form (submit)=\"delete(shop._id)\">\n                  <button id=\"btnDelete\" class=\"btn btn-danger btn-md center-block\">Delete</button>\n                </form>\n            </td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n</div>"
+module.exports = "<div class=\"container\">\n    <div class=\".col-md-3 .col-md-offset-3\">\n      <form (submit)=\"createShow()\" id=\"btnCreate\">\n        <button type=\"submit\" class=\"createBtn btn btn-secondary\">Add/Edit Location</button>\n      </form>\n    </div>\n  <div class=\"form-data\" *ngIf=\"showCreateForm\">\n    <p><b> Create Shop </b></p>\n    <form (submit)=\"create()\" id=\"shopCreate\">\n      <label for=\"shopName\">Brand Name:</label>\n      <input name=\"newShop.brand\" type=\"text\" [(ngModel)]=\"newShop.brand\">\n      <br>\n      <label for=\"shopName\">Branch Name:</label>\n      <input name=\"newShop.branch\" type=\"text\" [(ngModel)]=\"newShop.branch\">\n      <br>\n      <label for=\"shopName\">Address:</label>\n      <input name=\"newShop.address\" type=\"text\" [(ngModel)]=\"newShop.address\">\n      <br>\n    </form>\n    <div class=\"row\">\n        <div class=\"col-sm-12 text-center\">\n            <button id=\"btnSubmit\" type=\"submit\" class=\"btn btn-primary btn-md center-block\" form=\"shopCreate\">Submit</button> \n            <form (submit)=\"cancelShow()\"  id=\"btnCancel\">\n              <button class=\"btn btn-danger btn-md center-block\" id=\"btnCancel\">Cancel</button>\n            </form>\n          </div>\n    </div>\n  </div>\n  <br>\n  <div class=\"message\" *ngIf='messages' style=\"color: red\">\n    <div *ngFor= 'let message of messages'>\n      {{message}}\n    </div>\n  </div>\n  <div class=\"message\" *ngIf='message' style=\"color: green\">\n        {{message}}\n  </div>\n  <div class=\"row\">\n    <div class=\".col-md-4\"><h3>Shops</h3></div>\n  </div>\n  <div class=\"table vertical-center\">\n      <table class=\"table\">\n        <thead class=\"thead-dark\">\n          <tr>\n            <th scope=\"col\">Brand Name</th>\n            <th scope=\"col\">Branch Name</th>\n            <th scope=\"col\">Address</th>\n            <th scope=\"col\">Edit / Delete</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor= \"let shop of shops\">\n            <td><a [routerLink]= \"['/shop-detail', shop._id]\">{{shop.brand}}</a> </td>\n            <td>{{shop.branch}}</td>\n            <td>{{shop.address}}</td>\n            <td>\n                <button [routerLink]=\"['/shop-detail', shop._id]\" id=\"btnEdit\" class=\"btn btn-primary btn-md center-block\" >Edit</button>\n                <form (submit)=\"delete(shop._id)\">\n                  <button id=\"btnDelete\" class=\"btn btn-danger btn-md center-block\">Delete</button>\n                </form>\n            </td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n</div>"
 
 /***/ }),
 
@@ -1144,8 +1176,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var SettingsComponent = (function () {
     function SettingsComponent(_httpService) {
         this._httpService = _httpService;
+        this.detailPressed = false;
+        this.detail = { transNumber: '', action: '' };
     }
     SettingsComponent.prototype.ngOnInit = function () {
+        this.getTransactions();
+    };
+    SettingsComponent.prototype.getTransactions = function () {
+        this.transactions = this._httpService.showTransactions();
+        console.log('obtaining transactions: ', this.transactions);
+    };
+    SettingsComponent.prototype.getTransDetails = function (Id) {
+        console.log('transaction ID clicked: ', Id);
+        console.log('All Ids: ', this.transactions[0].transId);
+        for (var _i = 0, _a = this.transactions; _i < _a.length; _i++) {
+            var trans = _a[_i];
+            if (Id === trans.transId) {
+                this.detail.transNumber = trans.transId;
+                this.detail.action = trans.action + " " + trans.amount;
+            }
+        }
+        this.detailPressed = true;
     };
     SettingsComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
@@ -1162,111 +1213,10 @@ var SettingsComponent = (function () {
 
 /***/ }),
 
-/***/ "../../../../../src/app/shop-detail/shop-detail.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"container\">\n  <br>\n  <div  class=\"row\" >\n    <h4>Shop Details:</h4>\n  </div>\n  <div class=\"row\">\n      <table class=\"table table-hover\">\n          <thead></thead>\n          <tbody>\n            <tr>\n              <td><b>Brand:</b></td>\n              <td>{{shop.brand}}</td>\n            </tr>\n            <tr>\n                <td><b> Branch:</b></td>\n                <td>{{shop.branch}}</td>\n            </tr>\n            <tr>\n                <td><b>Address:</b></td>\n                <td>{{shop.address}}</td>\n            </tr>\n            <tr>\n                <td><b>Cameras:</b></td>\n                <td *ngIf=\"shop._cameras.length > 0; else none\">\n                  <p *ngFor=\"let camera of shop._cameras\">\n                    * <span *ngIf=\"camera.location ; else unassigned\">{{camera.location}}</span>\n                    <ng-template #unassigned>\n                      <span style='color:red'>{{camera.mac_addr}} - unassigned location</span>\n                    </ng-template>\n                  </p>\n                </td>\n                <ng-template #none>\n                  <td><p style='color:red'>No assigned cameras</p></td>\n                </ng-template>\n            </tr>\n          </tbody>\n        </table>\n  </div>\n  <br>\n  <div class=\"col-sm-12 text-center\">\n      <form id=\"btnEdit\" (submit)=\"editShow(shop)\">\n          <button type=\"submit\"  class=\"btn btn-secondary btn-md center-block\">Edit Shop Detail</button>\n      </form>\n  </div>\n  <br>\n  <div *ngIf=\"message\" class=\"alert alert-success\">\n      {{message}}\n  </div>\n  <!-- Edit Shop Form -->\n  <div *ngIf=\"showEdit\" >\n    <br>\n    <form (submit)=\"edit(shop)\" id=\"showEditForm\">\n        <label> Brand:\n          <input type=\"text\" name=\"editShop.brand\" [(ngModel)]=\"shop.brand\">\n        </label>\n        <label> Branch:\n            <input type=\"text\" name=\"editCamera.location\" [(ngModel)]=\"shop.branch\">\n          </label>\n        <label> Address:\n            <input type=\"text\" name=\"editCamera.location\" [(ngModel)]=\"shop.address\">\n        </label>\n        <br>\n    </form>\n    <div class=\"row\">\n      <div class=\"col-sm-12 text-center\">\n          <button id=\"btnSave\" type=\"submit\" class=\"btn btn-primary btn-md center-block\" form=\"showEditForm\">Save</button> \n          <form id=\"btnCancel\" (submit)=\"cancelShow(shop)\">\n              <button id=\"btnCancel\" type=\"submit\" class=\"btn btn-danger btn-md center-block\">Cancel</button>\n          </form> \n      </div>\n    </div>\n  </div>\n</div>\n"
-
-/***/ }),
-
-/***/ "../../../../../src/app/shop-detail/shop-detail.component.scss":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "#btnSave,\n#btnCancel {\n  display: inline-block;\n  vertical-align: top;\n  width: 100px;\n  margin: 2px; }\n\n.errorMsg {\n  color: red; }\n", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/shop-detail/shop-detail.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ShopDetailComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__http_service__ = __webpack_require__("../../../../../src/app/http.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-var ShopDetailComponent = (function () {
-    function ShopDetailComponent(_route, _router, _httpService) {
-        this._route = _route;
-        this._router = _router;
-        this._httpService = _httpService;
-    }
-    ShopDetailComponent.prototype.ngOnInit = function () {
-        this.getShop();
-        this.showEdit = false;
-    };
-    ShopDetailComponent.prototype.getShop = function () {
-        var _this = this;
-        var id = this._route.snapshot.params['id'];
-        this.shopId = id;
-        var observable = this._httpService.getShop(this.shopId);
-        observable.subscribe(function (data) {
-            console.log('this is the data from service: ', data);
-            _this.shop = data;
-        });
-    };
-    ShopDetailComponent.prototype.editShow = function (shop) {
-        console.log('Edit pressed');
-        this.showEdit = true;
-    };
-    ShopDetailComponent.prototype.cancelShow = function (shop) {
-        console.log('Cancel pressed');
-        this.showEdit = false;
-    };
-    ShopDetailComponent.prototype.edit = function (shop) {
-        var _this = this;
-        console.log('shop to edit: ', shop);
-        var observable = this._httpService.editShop(shop);
-        this.showEdit = false;
-        observable.subscribe(function (data) {
-            console.log('Got data from editShop Service: ', data);
-            _this.message = data['message'];
-            _this.getShop();
-        });
-    };
-    ShopDetailComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'app-shop-detail',
-            template: __webpack_require__("../../../../../src/app/shop-detail/shop-detail.component.html"),
-            styles: [__webpack_require__("../../../../../src/app/shop-detail/shop-detail.component.scss")]
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */],
-            __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */],
-            __WEBPACK_IMPORTED_MODULE_1__http_service__["a" /* HttpService */]])
-    ], ShopDetailComponent);
-    return ShopDetailComponent;
-}());
-
-
-
-/***/ }),
-
 /***/ "../../../../../src/app/user-detail/user-detail.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <br>\n  <div  class=\"row\" >\n    <h4>Recent Visitor Entry</h4>\n  </div>\n  <div class=\"row\" >\n    <div class=\"column\" *ngFor = \"let img of images;  last as isLast\" >\n      <img src=\"../../uploads/{{img.path}}\" class=\"hover-shadow cursor\" id=\"headshot\">\n      <br>\n      <p *ngIf=\"isLast; else normal\" style=\"color:red\"><b> Most Recent Entry</b> <br>{{img.date.visited | date:'y, MMM dd,  h:mm a'}} </p>\n      <ng-template #normal>\n          <p><b> Entry Date</b> <br>{{img.date.visited | date:'y, MMM dd,  h:mm a'}} </p>\n      </ng-template>\n    </div>\n   \n  </div>\n  <div class=\"row\">\n    <h4>User Details</h4>\n    <table class=\"table table-hover\">\n        <thead></thead>\n        <tbody>\n          <tr>\n            <td>Status:</td>\n            <td>    \n              <span *ngIf=\"user.vip ; else blacklist\" style=\"color:green\">VIP</span> \n              <ng-template #blacklist>\n                <span *ngIf=\"user.blacklist ; else normal\" style=\"color:red\">Blacklisted</span>\n              </ng-template> \n              <ng-template #normal>Normal</ng-template>\n            </td>\n          </tr>\n          <tr>\n            <td>ID:</td>\n            <td>{{user._id}}</td>\n          </tr>\n          <tr>\n            <td>First Name</td>\n            <td>{{user.first_name}}</td>\n          </tr>\n          <tr>\n            <td>Last Name:</td>\n            <td> {{user.last_name}}</td>\n          </tr>\n          <tr>\n            <td>Gender:</td>\n            <td> {{user.gender}}</td>\n          </tr>\n          <tr>\n            <td>Email:</td>\n            <td> {{user.email}}</td>\n          </tr>\n          <tr>\n            <td>Phone:</td>\n            <td> {{user.telephone}}</td>\n          </tr>\n          <tr>\n            <td>Visited times:</td>\n            <td> {{user._visits.length}}</td>\n          </tr>\n          <tr>\n            <td>Last Visited:</td>\n            <td> {{user._visits[user._visits.length - 1].visited | date:'y, MMM dd,  h:mm:ss a'}}</td>\n          </tr>\n          <tr>\n            <td>comment:</td>\n            <td>{{user.comment}}</td>\n            </tr>\n        </tbody>\n      </table>\n      <div class=\"col-sm-12 text-center\">\n          <form id=\"btnEdit\" (submit)=\"editShow(user)\">\n              <button type=\"submit\"  class=\"btn btn-secondary btn-md center-block\">Edit User</button>\n          </form>\n          <form id=\"btnStatus\" (submit)=\"statusShow(user)\">\n              <button type=\"submit\" class=\"btn btn-secondary btn-md center-block\">Add Status</button>\n          </form>\n      </div>\n      <br>\n    <div *ngIf=\"success\" class=\"alert alert-success\">\n      {{success}}\n    </div>\n    <div *ngIf=\"fail\" class=\"alert alert-danger\">\n      {{fail}}\n    </div>\n  </div>\n  <br>\n  <!-- edit form -->\n  <div *ngIf=\"user.showEditForm\">\n    <form (submit)=\"edit(user)\" id=\"editForm\">\n        <label> First Name:\n         <input type=\"text\" name=\"editUser.first_name\" [(ngModel)]=\"user.first_name\">\n        </label>\n        <label> Last Name: \n          <input type=\"text\" name=\"editUser.last_name\" [(ngModel)]=\"user.last_name\">\n        </label>\n        <label> Gender: \n          <select name=\"editUser.gender\" [(ngModel)]=\"user.gender\">\n            <option type=\"text\" value=\"male\">male</option>\n            <option type=\"text\" value=\"female\">female</option>\n            <option type=\"text\" value=\"other\">other</option>\n          </select>\n        </label>\n        <label> Email: \n          <input type=\"text\" name=\"editUser.email\" [(ngModel)]=\"user.email\">\n        </label>\n        <label> Phone: \n          <input type=\"text\" name=\"editUser.telephone\" [(ngModel)]=\"user.telephone\">\n        </label>\n        <label> Comment: \n            <textarea rows=\"4\" cols=\"50\" name=\"editUser.comment\" [(ngModel)]=\"user.comment\"></textarea>\n          </label>\n    </form>\n    <div class=\"row\">\n        <div class=\"col-sm-12 text-center\">\n            <button id=\"btnSave\" type=\"submit\" class=\"btn btn-primary btn-md center-block\" form=\"editForm\">Save</button> \n            <form id=\"btnCancel\" (submit)=\"cancelShow(user)\">\n                <button type=\"submit\" class=\"btn btn-danger btn-md center-block\">Cancel</button>\n            </form> \n         </div>\n    </div>\n  </div>\n  <!-- set status form -->\n  <div *ngIf=\"user.showStatusForm\">\n    <h5>Set visitor as:</h5>\n      <form (submit)=\"status(user)\" id=\"statusForm\">\n          <label>\n              <input type=\"radio\" name=\"status\" [(ngModel)]=\"newStatus\" [value]=\"1\">\n              VIP\n            </label><br/>\n              <label>\n              <input type=\"radio\" name=\"status\" [(ngModel)]=\"newStatus\" [value]=\"2\">\n              Blacklist\n            </label><br/>\n            <label>\n              <input type=\"radio\" name=\"status\" [(ngModel)]=\"newStatus\" [value]=\"3\">\n              Normal Visitor\n            </label><br/><br/>\n      </form>\n      <div class=\"row\">\n          <div class=\"col-sm-12 text-center\">\n              <button id=\"btnSave\" type=\"submit\" class=\"btn btn-primary btn-md center-block\" form=\"statusForm\">Save</button> \n              <form id=\"btnCancel\" (submit)=\"cancelStatus(user)\">\n                  <button type=\"submit\" class=\"btn btn-danger btn-md center-block\">Cancel</button>\n              </form> \n           </div>\n      </div>\n    </div>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <br>\n  <div  class=\"row\" >\n    <h4>Recent Visitor Entry</h4>\n  </div>\n  <div class=\"row\" >\n    <div class=\"column\" *ngFor = \"let img of images;  last as isLast\" >\n      <img src=\"../../uploads/{{img.path}}\" class=\"hover-shadow cursor\" id=\"headshot\">\n      <br>\n      <p *ngIf=\"isLast; else normal\" style=\"color:red\"><b> Most Recent Entry</b> <br>{{img.date.visited | date:'y, MMM dd,  h:mm a'}} </p>\n      <ng-template #normal>\n          <p><b> Entry Date</b> <br>{{img.date.visited | date:'y, MMM dd,  h:mm a'}} </p>\n      </ng-template>\n    </div>\n   \n  </div>\n  <div class=\"row\">\n    <h4>User Details</h4>\n    <table class=\"table table-hover\">\n        <thead></thead>\n        <tbody>\n          <tr>\n            <td>Status:</td>\n            <td>    \n              <span *ngIf=\"user.vip ; else blacklist\" style=\"color:green\">VIP</span> \n              <ng-template #blacklist>\n                <span *ngIf=\"user.blacklist ; else normal\" style=\"color:red\">Blacklisted</span>\n              </ng-template> \n              <ng-template #normal>Normal</ng-template>\n            </td>\n          </tr>\n          <tr>\n            <td>ID:</td>\n            <td>{{user._id}}</td>\n          </tr>\n          <tr>\n            <td>First Name</td>\n            <td>{{user.first_name}}</td>\n          </tr>\n          <tr>\n            <td>Last Name:</td>\n            <td> {{user.last_name}}</td>\n          </tr>\n          <tr>\n            <td>Gender:</td>\n            <td> {{user.gender}}</td>\n          </tr>\n          <tr>\n            <td>Email:</td>\n            <td> {{user.email}}</td>\n          </tr>\n          <tr>\n            <td>Phone:</td>\n            <td> {{user.telephone}}</td>\n          </tr>\n          <tr>\n            <td>Visited times:</td>\n            <td> {{user._visits.length}}</td>\n          </tr>\n          <tr>\n            <td>Last Visited:</td>\n            <td> {{user._visits[user._visits.length - 1].visited | date:'y, MMM dd,  h:mm:ss a'}}</td>\n          </tr>\n          <tr>\n            <td>comment:</td>\n            <td>{{user.comment}}</td>\n            </tr>\n        </tbody>\n      </table>\n      <div class=\"col-sm-12 text-center\">\n          <form id=\"btnEdit\" (submit)=\"editShow(user)\">\n              <button type=\"submit\"  class=\"btn btn-secondary btn-md center-block\">Edit User</button>\n          </form>\n          <form id=\"btnStatus\" (submit)=\"statusShow(user)\">\n              <button type=\"submit\" class=\"btn btn-secondary btn-md center-block\">Add Status</button>\n          </form>\n        </div>\n      <br>\n    <div *ngIf=\"success\" class=\"alert alert-success\">\n      {{success}}\n    </div>\n    <div *ngIf=\"fail\" class=\"alert alert-danger\">\n      {{fail}}\n    </div>\n  </div>\n  <br>\n  <!-- edit form -->\n  <div *ngIf=\"user.showEditForm\">\n    <form (submit)=\"edit(user)\" id=\"editForm\">\n        <label> First Name:\n         <input type=\"text\" name=\"editUser.first_name\" [(ngModel)]=\"user.first_name\">\n        </label>\n        <label> Last Name: \n          <input type=\"text\" name=\"editUser.last_name\" [(ngModel)]=\"user.last_name\">\n        </label>\n        <label> Gender: \n          <select name=\"editUser.gender\" [(ngModel)]=\"user.gender\">\n            <option type=\"text\" value=\"male\">male</option>\n            <option type=\"text\" value=\"female\">female</option>\n            <option type=\"text\" value=\"other\">other</option>\n          </select>\n        </label>\n        <label> Email: \n          <input type=\"text\" name=\"editUser.email\" [(ngModel)]=\"user.email\">\n        </label>\n        <label> Phone: \n          <input type=\"text\" name=\"editUser.telephone\" [(ngModel)]=\"user.telephone\">\n        </label>\n        <label> Comment: \n            <textarea rows=\"4\" cols=\"50\" name=\"editUser.comment\" [(ngModel)]=\"user.comment\"></textarea>\n          </label>\n    </form>\n    <div class=\"row\">\n        <div class=\"col-sm-12 text-center\">\n            <button id=\"btnSave\" type=\"submit\" class=\"btn btn-primary btn-md center-block\" form=\"editForm\">Save</button> \n            <form id=\"btnCancel\" (submit)=\"cancelShow(user)\">\n                <button type=\"submit\" class=\"btn btn-danger btn-md center-block\">Cancel</button>\n            </form> \n         </div>\n    </div>\n  </div>\n  <!-- set status form -->\n  <div *ngIf=\"user.showStatusForm\">\n    <h5>Set visitor as:</h5>\n      <form (submit)=\"status(user)\" id=\"statusForm\">\n          <label>\n              <input type=\"radio\" name=\"status\" [(ngModel)]=\"newStatus\" [value]=\"1\">\n              VIP\n            </label><br/>\n              <label>\n              <input type=\"radio\" name=\"status\" [(ngModel)]=\"newStatus\" [value]=\"2\">\n              Blacklist\n            </label><br/>\n            <label>\n              <input type=\"radio\" name=\"status\" [(ngModel)]=\"newStatus\" [value]=\"3\">\n              Normal Visitor\n            </label><br/><br/>\n      </form>\n      <div class=\"row\">\n          <div class=\"col-sm-12 text-center\">\n              <button id=\"btnSave\" type=\"submit\" class=\"btn btn-primary btn-md center-block\" form=\"statusForm\">Save</button> \n              <form id=\"btnCancel\" (submit)=\"cancelStatus(user)\">\n                  <button type=\"submit\" class=\"btn btn-danger btn-md center-block\">Cancel</button>\n              </form> \n           </div>\n      </div>\n    </div>\n</div>\n"
 
 /***/ }),
 

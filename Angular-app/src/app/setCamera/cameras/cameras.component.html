@@ -14,11 +14,16 @@
         <tbody>
           <tr *ngFor="let camera of cameras">
             <td><a [routerLink]= "['/camera-detail', camera._id]">{{camera.mac_addr}}</a> </td>
-            <td>{{camera.location}}</td>
+            <td>
+              <p *ngIf="camera.location ; else unassigned">{{camera.location}}</p>
+              <ng-template #unassigned>
+                <p style='color:red'>Unassigned Location</p>
+              </ng-template>
+            </td>
             <td>
               <p *ngIf="camera._shop; else normal">{{camera._shop.brand}} - {{camera._shop.branch}}</p>
               <ng-template #normal>
-                <p>Unassigned</p>
+                <p style='color:red'>Unassigned Shop</p>
               </ng-template>
             </td>
             <td>

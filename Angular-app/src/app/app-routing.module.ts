@@ -10,6 +10,7 @@ import { PagenotfoundComponent  } from './pagenotfound/pagenotfound.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CameraDetailComponent } from './camera-detail/camera-detail.component';
+import { ShopDetailComponent } from './shop-detail/shop-detail.component';
 
 const routes: Routes = [
   {
@@ -65,6 +66,7 @@ const routes: Routes = [
   { path: 'settings', component: SettingsComponent },
   { path: 'user-detail/:id', component: UserDetailComponent },
   { path: 'camera-detail/:id', component: CameraDetailComponent },
+  { path: 'shop-detail/:id', component: ShopDetailComponent },
   { path: '', pathMatch: 'full', redirectTo: '/home'},
   { path: '**', component: PagenotfoundComponent }
 ];

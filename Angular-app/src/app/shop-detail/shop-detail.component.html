@@ -1,0 +1,73 @@
+<div class="container">
+  <br>
+  <div  class="row" >
+    <h4>Shop Details:</h4>
+  </div>
+  <div class="row">
+      <table class="table table-hover">
+          <thead></thead>
+          <tbody>
+            <tr>
+              <td><b>Brand:</b></td>
+              <td>{{shop.brand}}</td>
+            </tr>
+            <tr>
+                <td><b> Branch:</b></td>
+                <td>{{shop.branch}}</td>
+            </tr>
+            <tr>
+                <td><b>Address:</b></td>
+                <td>{{shop.address}}</td>
+            </tr>
+            <tr>
+                <td><b>Cameras:</b></td>
+                <td *ngIf="shop._cameras.length > 0; else none">
+                  <p *ngFor="let camera of shop._cameras">
+                    * <span *ngIf="camera.location ; else unassigned">{{camera.location}}</span>
+                    <ng-template #unassigned>
+                      <span style='color:red'>{{camera.mac_addr}} - unassigned location</span>
+                    </ng-template>
+                  </p>
+                </td>
+                <ng-template #none>
+                  <td><p style='color:red'>No assigned cameras</p></td>
+                </ng-template>
+            </tr>
+          </tbody>
+        </table>
+  </div>
+  <br>
+  <div class="col-sm-12 text-center">
+      <form id="btnEdit" (submit)="editShow(shop)">
+          <button type="submit"  class="btn btn-secondary btn-md center-block">Edit Shop Detail</button>
+      </form>
+  </div>
+  <br>
+  <div *ngIf="message" class="alert alert-success">
+      {{message}}
+  </div>
+  <!-- Edit Shop Form -->
+  <div *ngIf="showEdit" >
+    <br>
+    <form (submit)="edit(shop)" id="showEditForm">
+        <label> Brand:
+          <input type="text" name="editShop.brand" [(ngModel)]="shop.brand">
+        </label>
+        <label> Branch:
+            <input type="text" name="editCamera.location" [(ngModel)]="shop.branch">
+          </label>
+        <label> Address:
+            <input type="text" name="editCamera.location" [(ngModel)]="shop.address">
+        </label>
+        <br>
+    </form>
+    <div class="row">
+      <div class="col-sm-12 text-center">
+          <button id="btnSave" type="submit" class="btn btn-primary btn-md center-block" form="showEditForm">Save</button> 
+          <form id="btnCancel" (submit)="cancelShow(shop)">
+              <button id="btnCancel" type="submit" class="btn btn-danger btn-md center-block">Cancel</button>
+          </form> 
+      </div>
+    </div>
+  </div>
+</div>
