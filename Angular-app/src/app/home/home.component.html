@@ -12,8 +12,8 @@
         <div class="column">
           <label> Select Shop:
             <select [(ngModel)]="shopChosen" >
-                <option *ngFor="let shop of shops">
-                  {{shop.branch}}
+                <option *ngFor="let shop of shops" [value]="shop.branch">
+                  {{shop.brand}}: {{shop.branch}}
                 </option>
               </select>
           </label>

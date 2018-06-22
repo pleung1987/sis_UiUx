@@ -28,6 +28,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   filterVisits(searchString: string): void {
     console.log('this is the searchString: ', searchString);
+    if (searchString === 'All Branches') {
+      searchString = '';
+    }
     return this.visits.filter( visit =>
       visit._camera._shop.branch.toLowerCase().indexOf(searchString.toLowerCase()) !== -1);
   }
@@ -45,7 +48,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.stop();
-    console.log('this is the chosen: ', this.shopChosen);
   }
 
   getVisits(): void {
@@ -63,7 +65,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     const shopObservable = this._httpService.shareShops();
     shopObservable.subscribe(data => {
       this.shops = data;
-      this.shops.splice(0, 0, '');
+      const item = {brand: 'All Brands', branch: 'All Branches'};
+      this.shops.splice(0, 0, item);
       console.log('this is the shop data: ', this.shops);
     });
   }
