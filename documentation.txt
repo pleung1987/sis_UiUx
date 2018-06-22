@@ -8,10 +8,6 @@ https://askubuntu.com/questions/703672/permission-denied-when-writing-a-file-to-
 https://github.com/sass/node-sass/issues/2178
 bash: sudo npm install --unsafe-perm=true
 
-    * We are at the Develop Branch
-    -> added new feature!
-    -> spliting develop branch again
-
 3) create symbolic link from outside project folder uploads to inside project folder:
 bash: sudo ln -s /var/www/uploads/ /var/www/sis_UiUx/
 
