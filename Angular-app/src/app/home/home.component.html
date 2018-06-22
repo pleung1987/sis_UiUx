@@ -1,12 +1,4 @@
 <div class="container">
-  <!-- <div class="jumbotron">
-    <h2>
-      Black Book
-    </h2>
-    <h4>
-      Welcome to Black-Book, a tool by Sense in Silico, which helps you recognize important customers entering your stores.
-    </h4>
-  </div> -->
   <div>
     <br>
     <div>
@@ -15,12 +7,18 @@
         <button type="button" class="btn btn-success" (click)= "resume()">Continue Updates</button>
       </ng-template>
     </div>
+    <br>
     <div class="row" >
         <div class="column">
-          <p>Select Shops</p>
+          <label> Select Shop:
+            <select [(ngModel)]="shopChosen" >
+                <option *ngFor="let shop of shops">
+                  {{shop.branch}}
+                </option>
+              </select>
+          </label>
         </div>
     </div>
-
     <div>
       <table class="table table-hover">
         <thead class="thead-dark">
@@ -29,7 +27,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor= "let visit of visits">
+          <tr *ngFor= "let visit of filteredVisits">
             <td>
                 <b class="text-success" *ngIf="visit._visitor.vip ; else blacklist"> 
                     *** VIP Visitor: ' 
@@ -52,7 +50,6 @@
                   </a>  
                   on {{visit.visited | date:'y, MMM dd,  h:mm:ss a'}} ***
               </b>
-        
               <ng-template #blacklist>
                   <b class="text-danger" *ngIf="visit._visitor.blacklist ; else normal"> 
                       ***** Blacklisted Visitor: ' 
@@ -76,7 +73,6 @@
                       on {{visit.visited | date:'y, MMM dd,  h:mm:ss a'}} *****
                 </b>
               </ng-template>
-        
               <ng-template #normal>
                 <b> 
                   Visitor: ' 
@@ -104,7 +100,6 @@
           </tr>
         </tbody>
       </table>
-        
     </div>
   </div>
 </div>
