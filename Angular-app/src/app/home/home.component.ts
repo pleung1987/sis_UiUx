@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
     const filterFilters = this.visits.filter( visit => visit._camera._shop !== undefined).filter(visit =>
       visit._camera._shop.branch.indexOf(searchString) !== -1);
-    console.log('this is the filterFilters: ', filterFilters);
+    // console.log('this is the filterFilters: ', filterFilters);
     return filterFilters;
   }
 
@@ -59,8 +59,8 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.visits = data['data'];
       this.filteredVisits = this.visits;
       this.filteredVisits = this.filterVisits(this.shopChosen);
-      console.log('this is the visit data: ', this.visits);
-      console.log('this is the filterVisit data: ', this.filteredVisits);
+      // console.log('this is the visit data: ', this.visits);
+      // console.log('this is the filterVisit data: ', this.filteredVisits);
     });
   }
 
@@ -70,7 +70,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.shops = data;
       const item = {brand: 'All Brands', branch: 'All Branches'};
       this.shops.splice(0, 0, item);
-      console.log('this is the shop data: ', this.shops);
+      // console.log('this is the shop data: ', this.shops);
     });
   }
 
