@@ -28,11 +28,14 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   filterVisits(searchString: string): void {
     console.log('this is the searchString: ', searchString);
-    if (searchString === 'All Branches') {
+    if (searchString === 'All Branches' || searchString === undefined) {
       searchString = '';
+      return this.visits;
     }
-    return this.visits.filter( visit =>
-      visit._camera._shop.branch.toLowerCase().indexOf(searchString.toLowerCase()) !== -1);
+    const filterFilters = this.visits.filter( visit => visit._camera._shop !== undefined).filter(visit =>
+      visit._camera._shop.branch.indexOf(searchString) !== -1);
+    console.log('this is the filterFilters: ', filterFilters);
+    return filterFilters;
   }
 
   constructor(
