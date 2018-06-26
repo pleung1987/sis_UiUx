@@ -2,9 +2,9 @@
   <div>
     <br>
     <div>
-      <button *ngIf ="stopped ; else continue" type="button" class="btn btn-danger" (click)= "stop()">Stop Updates</button>
+      <button *ngIf ="stopped ; else continue" type="button" class="btn btn-danger" (click)= "stop()">Stop Live Updates</button>
       <ng-template #continue>
-        <button type="button" class="btn btn-success" (click)= "resume()">Continue Updates</button>
+        <button type="button" class="btn btn-success" (click)= "resume()">Continue Live Updates</button>
       </ng-template>
     </div>
     <br>
@@ -25,13 +25,14 @@
         <thead class="thead-dark">
           <tr>
             <th scope="col">Status</th>
-              <th scope="col">Name</th>
-              <th scope="col">Entered Location</th>
-              <th scope="col">Entered Time</th>
+            <th scope="col">Name</th>
+            <th scope="col">Entered Location</th>
+            <th scope="col">Entered Time</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor= "let visit of filteredVisits">
+            <!-- Status -->
             <td>
               <b class="text-success" *ngIf="visit._visitor.vip ; else blacklist"> 
                   *** VIP Visitor ***
@@ -47,7 +48,6 @@
                 </b>
               </ng-template>
             </td>
-
             <!-- Names -->
             <td>
               <b> 

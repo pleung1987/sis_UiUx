@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   filterVisits(searchString: string): void {
-    console.log('this is the searchString: ', searchString);
+    // console.log('this is the searchString: ', searchString);
     if (searchString === 'All Branches' || searchString === undefined) {
       searchString = '';
       return this.visits;
