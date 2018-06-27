@@ -242,7 +242,7 @@ module.exports = {
                                         })
                                     })
                                 }
-                            });//end of new code
+                            });
                         }
                     })
                 }

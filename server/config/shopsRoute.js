@@ -5,7 +5,7 @@ const mongoose = require('mongoose'),
     express = require('express'),
     // router = express.Router(),
     router = require('express-promise-router')(),
-//getter -gets the model
+    //getter -gets the model
     Shop = mongoose.model('Shop') ,
     shops = require('./../controllers/shops')
     

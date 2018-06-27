@@ -592,7 +592,7 @@ var HomeComponent = (function () {
             _this.filteredVisits = _this.visits;
             _this.filteredVisits = _this.filterVisits(_this.shopChosen);
             // console.log('this is the visit data: ', this.visits);
-            // console.log('this is the filterVisit data: ', this.filteredVisits);
+            console.log('this is the filterVisit data: ', _this.filteredVisits);
         });
     };
     HomeComponent.prototype.getShops = function () {

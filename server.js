@@ -4,25 +4,43 @@ bodyParser = require('body-parser'),
 mongoose = require('mongoose'),
 path = require('path'),
 port = 3000,
-logger = require('morgan')
+logger = require('morgan'),
+session = require('express-session'),
+passport = require('passport'),
 app = express();
 
 //Retrieve static pages
 app.use(express.static( __dirname + '/Angular-app/dist' ));
 app.use('/uploads', express.static('uploads'))
 
-// JSON
+
+//Middlewares
+// Body Paraser
 app.use(bodyParser.json({limit: '50mb'}));
 // Set up body-parser to parse form data
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
-//Middlewares
+//Session
+app.set('trust proxy', 1) // trust first proxy
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: false,    //create a cookie even if user didn't login
+    cookie: { maxAge: 60000 }
+    }))
+//Passport
+app.use(passport.initialize());
+app.use(passport.session());
+//morgan logger
 app.use(logger('dev'));
+
 // Set up database connection, Schema, model
 mongoose.Promise = global.Promise;
 //require your mongoose.js file connection
 require('./server/config/mongoose.js')
 
 // ROUTES:
+//session routes
+const sessions = require('./server/config/sessionsRoute')(app);
 //users routes
 const users = require('./server/config/usersRoute');
 app.use('/users', users);

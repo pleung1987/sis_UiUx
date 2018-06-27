@@ -1,6 +1,6 @@
 console.log('inside user.js models');
 var mongoose = require('mongoose');
-var Email = require('mongoose-type-mail')
+var Email = require('mongoose-type-mail');
 var Schema = mongoose.Schema;
 
 
