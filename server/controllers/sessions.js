@@ -2,7 +2,8 @@ console.log('got to controller sessions.js');
 
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
-const session = require('express-session')
+const session = require('express-session');
+const passport = require('passport');
 var Manager = mongoose.model('Manager');
 
 
@@ -24,9 +25,9 @@ module.exports = {
                 }
                 else {
                     console.log('user password fit, Success Login: ', manager)
+
                     res.json({message: "Success Login"})
                 }
-                
             }
         })
   },
@@ -39,7 +40,7 @@ module.exports = {
         newManager.email = req.body.email;
         newManager.password = newManager.generateHash(req.body.password);
 
-        console.log('req.body:', req.body);
+        console.log('form body:', req.body);
         Manager.findOne({email:req.body.email}, (err, manager) => {
             if (err) {
                 connsole.log('error happened finding Manager: ', err)

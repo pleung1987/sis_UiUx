@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 //Session
 app.set('trust proxy', 1) // trust first proxy
 app.use(session({
-    secret: 'keyboard cat',
+    secret: 'keyboard cat', //change to random string that can't be hacked
     resave: false,
     saveUninitialized: false,    //create a cookie even if user didn't login
     cookie: { maxAge: 60000 }

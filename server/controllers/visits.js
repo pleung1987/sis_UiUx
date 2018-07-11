@@ -55,6 +55,7 @@ module.exports = {
         fs.writeFileSync(`../uploads/${fileName}`, bitmap,{ encoding:'base64'});    //save it at path that is set up outside of project folder(back-up)
 
         var faces = [],
+        distances = [],
         new_face = req.body.byte_stream;
         //helper function(Euclidean distance)
         function innerLoop(a,b){
@@ -73,15 +74,20 @@ module.exports = {
                 } else {
                     for(i in users){
                         faces.push(users[i].byte_stream)
+                        distances.push(innerLoop(new_face, users[i].byte_stream))
                     }
-                    for(var i = 0; i < faces.length; i++){
-                        var old_face = faces[i];
-                        var distance = innerLoop(new_face, old_face);
-                        console.log(`this is the distance of face(${faces[i]}): `, distance);
-                        if(distance <= 0.6){
-                            return callback(faces[i])
-                        }
+                    // console.log('these are the distances: ', distances)
+                    var minDist = distances.indexOf(Math.min.apply(Math,distances));
+                    // console.log('this is the index for min distances: ', minDist)
+                    // for(var i = 0; i < faces.length; i++){
+                    //     // var old_face = faces[i];
+                    //     // var distance = innerLoop(new_face, old_face);
+                    //     // console.log(`this is the distance of face(${faces[i]}): `, distances[i]);
+                    //     // 
+                    if(distances[minDist] < 0.6) {
+                        return callback(faces[minDist]);
                     }
+                    // }
                     return callback(0)
                 }    
             })
