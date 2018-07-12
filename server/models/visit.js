@@ -11,7 +11,9 @@ var visitSchema = new mongoose.Schema({
         type: Schema.Types.ObjectId,
         ref: 'Camera'
     },
-    visited: { type: Date }
+    visited: { type: Date },
+    new_byte_stream: { type: [Number], required:true },
+    distance: { type: Number}
 }, { usePushEach: true });
 
 const Visit = mongoose.model('Visit', visitSchema);

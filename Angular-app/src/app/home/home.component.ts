@@ -60,7 +60,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.filteredVisits = this.visits;
       this.filteredVisits = this.filterVisits(this.shopChosen);
       // console.log('this is the visit data: ', this.visits);
-      console.log('this is the filterVisit data: ', this.filteredVisits);
+      // console.log('this is the filterVisit data: ', this.filteredVisits);
     });
   }
 
