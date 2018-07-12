@@ -7,9 +7,13 @@
     <div class="column" *ngFor = "let img of images;  last as isLast" >
       <img src="../../uploads/{{img.path}}" class="hover-shadow cursor" id="headshot">
       <br>
-      <p *ngIf="isLast; else normal" style="color:red"><b> Most Recent Entry</b> <br>{{img.date.visited | date:'y, MMM dd,  h:mm a'}} </p>
+      <p *ngIf="isLast; else normal" style="color:red"><b> Most Recent Entry</b> <br>{{img.date.visited | date:'y, MMM dd,  h:mm a'}} <br>
+      <b>  Distance: </b> <br>{{img.date.distance}} 
+      <!-- take distance out for production -->
+      </p>
       <ng-template #normal>
-          <p><b> Entry Date</b> <br>{{img.date.visited | date:'y, MMM dd,  h:mm a'}} </p>
+          <p><b> Entry Date</b> <br>{{img.date.visited | date:'y, MMM dd,  h:mm a'}} <br> <b>Distance: </b> <br>{{img.date.distance}} </p>
+          <!-- take distance out for production -->
       </ng-template>
     </div>
    
