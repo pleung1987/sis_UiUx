@@ -82,7 +82,7 @@ module.exports = {
                     // for(var i = 0; i < faces.length; i++){
                     //     // var old_face = faces[i];
                     //     // var distance = innerLoop(new_face, old_face);
-                    //     // console.log(`this is the distance of face(${faces[i]}): `, distances[i]);
+                    // console.log(`this is the distance of face(${faces[i]}): `, distances[i]);
                     //     // 
                     if(distances[minDist] < 0.6) {
                         return callback(faces[minDist]);
