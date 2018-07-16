@@ -35,8 +35,12 @@
           </td>
           <td> {{user._visits.length}}</td>
           <td> {{user._visits[user._visits.length-1].visited | date: 'y, MMM dd,  h:mm:ss a'}}</td>
-          <td><button  [routerLink]="['user-detail', user._id]" id="btnEdit" class="btn btn-primary btn-md center-block" >Edit</button>
-            <button id="btnDelete" class="btn btn-danger btn-md center-block">Delete</button></td>
+          <td>
+            <button  [routerLink]="['user-detail', user._id]" id="btnEdit" class="btn btn-primary btn-md center-block" >Edit</button>
+            <form (submit)="delete(user._id)">
+              <button id="btnDelete" class="btn btn-danger btn-md center-block">Delete</button>
+            </form>
+          </td>
         </tr>
       </tbody>
     </table>

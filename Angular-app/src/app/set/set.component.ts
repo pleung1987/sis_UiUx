@@ -31,4 +31,8 @@ export class SetComponent implements OnInit {
     });
   }
 
+  delete(user_id){
+    console.log('this is the user ID deleting: ', user_id);
+  }
+
 }
