@@ -77,7 +77,7 @@ module.exports = {
                     // console.log('these are the distances: ', distances)
                     var minDist = distances.indexOf(Math.min.apply(Math,distances));
                     
-                    if(distances[minDist] < 0.45) {
+                    if(distances[minDist] < 0.47) {
                         console.log('this is the min distance of post Face and databased face: ', distances[minDist])
                         return callback(users[minDist].byte_stream, distances[minDist]);
                     }
