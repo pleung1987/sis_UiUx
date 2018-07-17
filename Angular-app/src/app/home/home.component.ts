@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   visits: any;
   filteredVisits: any;
   shops: any;
-  Refresh = Observable.interval(500); // set refresh rate
+  Refresh = Observable.interval(1000); // set refresh rate
   subscription: any;
   stopped: Boolean = true;
 
