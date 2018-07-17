@@ -2,6 +2,7 @@ console.log('got to controller users.js');
 
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
+var Visit = mongoose.model('Visit');
 
 module.exports = {
   index: async (req,res,next) => {
@@ -87,6 +88,27 @@ module.exports = {
         })
     })
 },
+    deleteUser: (req, res) => {
+        const userId = req.params.userId
+        console.log('userId deleting: ', userId);
+        Visit.remove({_visitor: userId}, (err, visit) => {
+            if(err) {
+                console.log('error finding visit: ', err);
+                res.json({Message: 'error finding visit', error: err})
+            } else {
+                // console.log('visits to delete: ', visit);
+                User.remove({_id: userId}, (err, user) => {
+                    if(err) {
+                        console.log('error finding visitor: ', err);
+                        res.json({Message: 'error finding visitor', error: err}) 
+                    } else {
+                        res.json({Success:'Success clearing all user record', Visits: visit, User: user})
+                    }
+                })
+                // add logic of popping all the _visits id at CameraSchema, use for more accurate count of entries based on Unique visitors by day
+            }
+        })
+    }
   
 
 }

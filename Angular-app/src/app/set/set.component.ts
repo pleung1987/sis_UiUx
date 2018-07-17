@@ -31,8 +31,13 @@ export class SetComponent implements OnInit {
     });
   }
 
-  delete(user_id){
+  delete(user_id) {
     console.log('this is the user ID deleting: ', user_id);
+    const usersObservable = this._httpService.deleteUser(user_id);
+    usersObservable.subscribe (data => {
+      console.log('got data from deleteUser service:', data);
+      this.getUsers();
+    });
   }
 
 }

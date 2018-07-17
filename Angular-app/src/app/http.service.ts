@@ -40,6 +40,10 @@ export class HttpService {
     console.log('request to server: ', editStatus);
     return this._http.put('/users/' + editStatus._id, editStatus);
   }
+  deleteUser(userId) {
+    console.log('request to delete user with id from service: ', userId);
+    return this._http.delete('/users/' + userId);
+  }
 
 // cameras
   getCamera(cameraId) {

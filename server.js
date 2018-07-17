@@ -42,8 +42,9 @@ require('./server/config/mongoose.js')
 //session routes
 const sessions = require('./server/config/sessionsRoute')(app);
 //users routes
-const users = require('./server/config/usersRoute');
-app.use('/users', users);
+const users = require('./server/config/usersRoute')(app);
+// const users = require('./server/config/usersRoute');
+// app.use('/users', users);
 //camera routes
 const cameras = require('./server/config/camerasRoute');
 app.use('/cameras', cameras);
