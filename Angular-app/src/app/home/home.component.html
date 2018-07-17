@@ -24,6 +24,7 @@
       <table class="table table-hover">
         <thead class="thead-dark">
           <tr>
+            <th scope="col">Visitor</th>
             <th scope="col">Status</th>
             <th scope="col">Name</th>
             <th scope="col">Entered Location</th>
@@ -33,6 +34,11 @@
         <tbody>
           <tr *ngFor= "let visit of filteredVisits">
             <!-- Status -->
+            <td>
+                <a [routerLink]="['user-detail', visit._visitor._id]"> 
+                    <img src="../../uploads/{{visit._visitor.faceImage[visit._visitor.faceImage.length -1]}}"  class="hover-shadow cursor" id="headshot" alt="cannot find img">
+                </a>
+            </td>
             <td>
               <b class="text-success" *ngIf="visit._visitor.vip ; else blacklist"> 
                   *** VIP Visitor ***
