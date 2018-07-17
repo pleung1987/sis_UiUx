@@ -13,7 +13,8 @@ var visitSchema = new mongoose.Schema({
     },
     visited: { type: Date },
     new_byte_stream: { type: [Number], required:true },
-    distance: { type: Number}
+    distance: { type: Number},
+    imagePath: { type: String, required:true }
 }, { usePushEach: true });
 
 const Visit = mongoose.model('Visit', visitSchema);
