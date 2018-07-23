@@ -13,6 +13,7 @@ module.exports = {
         Visit.find({})
         .sort('-visited')
         .populate('_visitor _camera')
+        .limit(50)
         .exec( function(err,results){
             if(err){
                 res.json({message: "Error happened at _vistor _camera", error: err});
