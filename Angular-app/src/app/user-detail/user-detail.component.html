@@ -4,15 +4,23 @@
     <h4>Recent Visitor Entry</h4>
   </div>
   <div class="row" >
-    <div class="column" *ngFor = "let img of images;  last as isLast" >
+    <div class="column" *ngFor = "let img of images; first as isFirst; last as isLast" >
       <img src="../../uploads/{{img.path}}" class="hover-shadow cursor" id="headshot">
       <br>
-      <p *ngIf="isLast; else normal" style="color:red"><b> Most Recent Entry</b> <br>{{img.date.visited | date:'y, MMM dd,  h:mm a'}} <br>
-      <b>  Distance: </b> <br>{{img.date.distance}}  <br> <b>Minimum User: </b> <br>{{img.date.distUser}}
-      <!-- take distance and min user out for production -->
-      </p>
+      <p *ngIf="isFirst; else last" style="color:green"><b> Most Recent Entry</b> <br>{{img.date.visited | date:'y, MMM dd,  h:mm a'}} <br>
+        <b>  Distance: </b> <br>{{img.date.distance}}  <br> <b>Minimum User: </b> <br>{{img.date.distUser}}
+        <!-- take distance and min user out for production -->
+        </p>
+      <ng-template #last>
+        <p *ngIf="isLast; else normal" style="color:red"><b> Most Recent Entry</b> <br>{{img.date.visited | date:'y, MMM dd,  h:mm a'}} <br>
+          <b>  Distance: </b> <br>{{img.date.distance}} 
+          <!-- take distance and min user out for production -->
+        </p>
+      </ng-template>
       <ng-template #normal>
-          <p><b> Entry Date</b> <br>{{img.date.visited | date:'y, MMM dd,  h:mm a'}} <br> <b>Distance: </b> <br>{{img.date.distance}}  <br> <b>Minimum User: </b> <br>{{img.date.distUser}} </p>
+          <p>
+            <b> Entry Date</b> <br>{{img.date.visited | date:'y, MMM dd,  h:mm a'}} <br> <b>Distance: </b> <br>{{img.date.distance}}  <br> 
+          </p>
           <!-- take distance out for production -->
       </ng-template>
     </div>
