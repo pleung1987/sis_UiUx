@@ -13,7 +13,7 @@ module.exports = {
         Visit.find({})
         .sort('-visited')
         .populate('_visitor _camera')
-        .limit(50)
+        .limit(100)
         .exec( function(err,results){
             if(err){
                 res.json({message: "Error happened at _vistor _camera", error: err});
@@ -82,7 +82,7 @@ module.exports = {
                         console.log('this is the min distance of post Face and databased face: ', distances[minDist])
                         return callback(users[minDist].byte_stream, distances[minDist]);
                     }
-                    return callback(0,0)
+                    return callback(0,distances[minDist])
                 }    
             })
         }
