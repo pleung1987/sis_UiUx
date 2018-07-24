@@ -83,7 +83,7 @@ module.exports = {
                         valDistance = 0
                     }
                     
-                    if(!users[minDist]._id){
+                    if(!users[minDist]){
                         valUser = 0;
                     }else if (users[minDist].first_name){
                         valUser = users[minDist].first_name;
