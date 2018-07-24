@@ -77,12 +77,25 @@ module.exports = {
                     }
                     // console.log('these are the distances: ', distances)
                     var minDist = distances.indexOf(Math.min.apply(Math,distances));
+                    var valDistance = distances[minDist]
+                    var valUser;
+                    if(valDistance === undefined){
+                        valDistance = 0
+                    }
+                    
+                    if(!users[minDist]._id){
+                        valUser = 0;
+                    }else if (users[minDist].first_name){
+                        valUser = users[minDist].first_name;
+                    }else{
+                        valUser = users[minDist]._id;
+                    }
                     
                     if(distances[minDist] < 0.47) {
                         console.log('this is the min distance of post Face and databased face: ', distances[minDist])
-                        return callback(users[minDist].byte_stream, distances[minDist]);
+                        return callback(users[minDist].byte_stream, valDistance, valUser);
                     }
-                    return callback(0,distances[minDist])
+                    return callback(0,valDistance, valUser)
                 }    
             })
         }
@@ -124,7 +137,7 @@ module.exports = {
                         } else{
                             console.log('Successfully created new Camera : ', CamResult);
                             //check if User Exist (new code):
-                            validateUser(function(user, valDistance){
+                            validateUser(function(user, valDistance, userDetail){
                                 if(user === 0){
                                     //no user found
                                     console.log('no user found:', user)
@@ -136,7 +149,7 @@ module.exports = {
                                         }else{
                                             console.log('Successfully created new User : ', UserResult);
                                             //creating new Visit for new user new camera (event 10)
-                                            Visit.create({_id:newVisit._id, _visitor:newUser._id, _camera:newCamera._id, visited:newVisit.visited, new_byte_stream: newUser.byte_stream, distance: valDistance,imagePath: newVisit.imagePath}, (err,VisitResult) =>{
+                                            Visit.create({_id:newVisit._id, _visitor:newUser._id, _camera:newCamera._id, visited:newVisit.visited, new_byte_stream: newUser.byte_stream, distance: valDistance, distUser: userDetail, imagePath: newVisit.imagePath}, (err,VisitResult) =>{
                                                 if(err){
                                                     console.log('error creating new visit: ', err);
                                                     res.json({message:"error creating new visit", error: err})
@@ -165,7 +178,7 @@ module.exports = {
                                                 }else{
                                                     console.log('Successfully pushing Visit for User : ', pushVisit);
                                                     // // Create new Visit for old user new camera (event 9)
-                                                    Visit.create({_id:newVisit._id, _visitor: foundUser._id, _camera: newCamera._id, visited:newVisit.visited, new_byte_stream: newUser.byte_stream, distance: valDistance, imagePath: newVisit.imagePath}, (err,VisitResult) => {
+                                                    Visit.create({_id:newVisit._id, _visitor: foundUser._id, _camera: newCamera._id, visited:newVisit.visited, new_byte_stream: newUser.byte_stream, distance: valDistance, distUser: userDetail, imagePath: newVisit.imagePath}, (err,VisitResult) => {
                                                         if(err){
                                                             console.log('error creating new visit: ', err);
                                                             res.json({message:"error creating new Visit", error: err})
@@ -194,7 +207,7 @@ module.exports = {
                         }else{
                             console.log('Successfully saving camera with newVisit._id pushed: ', pushCamVisit);
                             //check if user exist (new code):
-                            validateUser(function(user, valDistance){
+                            validateUser(function(user, valDistance, userDetail){
                                 if(user === 0){
                                     console.log('no user found:', user)
                                     //creating new User (event 4):
@@ -205,7 +218,7 @@ module.exports = {
                                         }else{
                                             console.log('Successfully created User : ', UserResult);
                                             //creating new Visit for old camera new user (event 7)
-                                            Visit.create({_id:newVisit._id, _visitor:newUser._id, _camera:camera._id, visited:newVisit.visited, new_byte_stream: newUser.byte_stream, distance: valDistance,imagePath: newVisit.imagePath}, (err,VisitResult) =>{
+                                            Visit.create({_id:newVisit._id, _visitor:newUser._id, _camera:camera._id, visited:newVisit.visited, new_byte_stream: newUser.byte_stream, distance: valDistance, distUser: userDetail, imagePath: newVisit.imagePath}, (err,VisitResult) =>{
                                                 if(err){
                                                     console.log('error creating new visit: ', err);
                                                     res.json({message:"error creating new visit", error: err})
@@ -231,7 +244,7 @@ module.exports = {
                                             }else{
                                                 console.log('Successfully pushing Visit for User : ', pushUserVisit);
                                                 // // Create new Visit for old user old camera (event 7)
-                                                Visit.create({_id:newVisit._id, _visitor: foundUser._id, _camera: camera._id, visited:newVisit.visited, new_byte_stream: newUser.byte_stream, distance: valDistance, imagePath: newVisit.imagePath}, (err,VisitResult) => {
+                                                Visit.create({_id:newVisit._id, _visitor: foundUser._id, _camera: camera._id, visited:newVisit.visited, new_byte_stream: newUser.byte_stream, distance: valDistance, distUser: userDetail, imagePath: newVisit.imagePath}, (err,VisitResult) => {
                                                     if(err){
                                                         console.log('error creating new visit: ', err);
                                                         res.json({message:"error creating new Visit", error: err})

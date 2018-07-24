@@ -14,6 +14,7 @@ var visitSchema = new mongoose.Schema({
     visited: { type: Date },
     new_byte_stream: { type: [Number], required:true },
     distance: { type: Number},
+    distUser: { type: String },
     imagePath: { type: String, required:true }
 }, { usePushEach: true });
 

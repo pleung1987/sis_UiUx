@@ -8,11 +8,11 @@
       <img src="../../uploads/{{img.path}}" class="hover-shadow cursor" id="headshot">
       <br>
       <p *ngIf="isLast; else normal" style="color:red"><b> Most Recent Entry</b> <br>{{img.date.visited | date:'y, MMM dd,  h:mm a'}} <br>
-      <b>  Distance: </b> <br>{{img.date.distance}} 
-      <!-- take distance out for production -->
+      <b>  Distance: </b> <br>{{img.date.distance}}  <br> <b>Minimum User: </b> <br>{{img.date.distUser}}
+      <!-- take distance and min user out for production -->
       </p>
       <ng-template #normal>
-          <p><b> Entry Date</b> <br>{{img.date.visited | date:'y, MMM dd,  h:mm a'}} <br> <b>Distance: </b> <br>{{img.date.distance}} </p>
+          <p><b> Entry Date</b> <br>{{img.date.visited | date:'y, MMM dd,  h:mm a'}} <br> <b>Distance: </b> <br>{{img.date.distance}}  <br> <b>Minimum User: </b> <br>{{img.date.distUser}} </p>
           <!-- take distance out for production -->
       </ng-template>
     </div>
